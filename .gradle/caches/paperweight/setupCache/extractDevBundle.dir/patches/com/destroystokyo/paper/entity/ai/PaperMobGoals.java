@@ -28,7 +28,7 @@ public class PaperMobGoals implements MobGoals {
             getHandle(craftMob, goal.getTypes()).removeGoal(((PaperVanillaGoal<?>) goal).getHandle());
         } else {
             List<net.minecraft.world.entity.ai.goal.Goal> toRemove = new LinkedList<>();
-            for (WrappedGoal item : getHandle(craftMob, goal.getTypes()).availableGoals) {
+            for (WrappedGoal item : getHandle(craftMob, goal.getTypes()).getAvailableGoals()) {
                 if (item.getGoal() instanceof PaperCustomGoal) {
                     //noinspection unchecked
                     if (((PaperCustomGoal<T>) item.getGoal()).getHandle() == goal) {
@@ -108,7 +108,7 @@ public class PaperMobGoals implements MobGoals {
     public <T extends Mob> Collection<Goal<T>> getAllGoals(T mob, GoalType type) {
         CraftMob craftMob = (CraftMob) mob;
         Set<Goal<T>> goals = new HashSet<>();
-        for (WrappedGoal item : getHandle(craftMob, type).availableGoals) {
+        for (WrappedGoal item : getHandle(craftMob, type).getAvailableGoals()) {
             if (!item.getGoal().getFlags().hasElement(MobGoalHelper.paperToVanilla(type))) {
                 continue;
             }
@@ -131,7 +131,7 @@ public class PaperMobGoals implements MobGoals {
             if (internalType == type) {
                 continue;
             }
-            for (WrappedGoal item : getHandle(craftMob, internalType).availableGoals) {
+            for (WrappedGoal item : getHandle(craftMob, internalType).getAvailableGoals()) {
                 if (item.getGoal().getFlags().hasElement(MobGoalHelper.paperToVanilla(type))) {
                     continue;
                 }

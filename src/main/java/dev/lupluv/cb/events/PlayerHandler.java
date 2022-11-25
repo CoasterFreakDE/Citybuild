@@ -6,6 +6,8 @@ import com.plotsquared.core.PlotSquared;
 import com.plotsquared.core.player.PlotPlayer;
 import com.plotsquared.core.plot.Plot;
 import dev.lupluv.cb.Citybuild;
+import dev.lupluv.cb.clans.Clan;
+import dev.lupluv.cb.clans.User;
 import dev.lupluv.cb.commands.VanishCmd;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.elevators.ElevatorBlock;
@@ -51,6 +53,9 @@ public class PlayerHandler implements Listener {
 
         // Economy Registration
         Economy.correctName(p);
+
+        // Clans Registration
+        User.onJoin(e);
 
         // Editing Join Message
         e.setJoinMessage("§8[§2+§8] §7" + p.getName());

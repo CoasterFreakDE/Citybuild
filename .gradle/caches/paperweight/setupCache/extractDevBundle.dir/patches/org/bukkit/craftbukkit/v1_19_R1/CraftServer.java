@@ -2378,7 +2378,7 @@ public final class CraftServer implements Server {
 
         final net.minecraft.world.level.chunk.ChunkGenerator chunkGenerator;
         if (serverLevel.chunkSource.getGenerator() instanceof org.bukkit.craftbukkit.v1_19_R1.generator.CustomChunkGenerator bukkit) {
-            chunkGenerator = bukkit.delegate;
+            chunkGenerator = bukkit.getDelegate();
         } else {
             chunkGenerator = serverLevel.chunkSource.getGenerator();
         }

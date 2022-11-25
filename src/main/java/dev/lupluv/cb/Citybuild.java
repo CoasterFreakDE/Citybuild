@@ -1,5 +1,6 @@
 package dev.lupluv.cb;
 
+import dev.lupluv.cb.clans.Clan;
 import dev.lupluv.cb.commands.*;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.events.*;
@@ -47,6 +48,12 @@ public class Citybuild extends JavaPlugin {
         // MySQL Con
         reloadMysql();
 
+    }
+
+    @Override
+    public void onEnable() {
+
+
         if(getServer().getPluginManager().isPluginEnabled("Vault")) {
             try {
                 Plugin vault = getServer().getPluginManager().getPlugin("Vault");
@@ -56,10 +63,6 @@ public class Citybuild extends JavaPlugin {
                 plugin.getLogger().log(Level.SEVERE, "Exception occurred while hooking into vault", exception);
             }
         }
-    }
-
-    @Override
-    public void onEnable() {
 
         if(!getServer().getPluginManager().isPluginEnabled("Citizens")) {
             getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled");
@@ -118,6 +121,8 @@ public class Citybuild extends JavaPlugin {
         getCommand("sign").setExecutor(new SignCmd());
         getCommand("invsee").setExecutor(new InvseeCmd());
         getCommand("payall").setExecutor(new PayallCmd());
+        getCommand("clan").setExecutor(new ClanCmd());
+        getCommand("adminshop").setExecutor(new AdminshopCmd());
 
         // Events
 
@@ -173,6 +178,12 @@ public class Citybuild extends JavaPlugin {
             if(mySQL.isConnected()){
                 System.out.println("Successfull");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_economy (uuid VARCHAR(255),name VARCHAR(255),money DOUBLE(255,20));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_economy_banks (name VARCHAR(255),money DOUBLE(255,20));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_clan (id BIGINT(255),name VARCHAR(255),tag VARCHAR(255),color VARCHAR(255)" +
+                        ",open VARCHAR(255),chat VARCHAR(255),date BIGINT(255));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_user (id BIGINT(255),uuid VARCHAR(255),name VARCHAR(255));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_member (user_id BIGINT(255),clan_id BIGINT(255),role VARCHAR(255));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_requests (user_id BIGINT(255),clan_id BIGINT(255),type VARCHAR(255),date BIGINT(255));");
             }
         }
     }

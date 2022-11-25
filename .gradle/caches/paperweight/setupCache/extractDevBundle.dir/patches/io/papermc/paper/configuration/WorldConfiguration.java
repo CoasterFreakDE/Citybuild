@@ -74,6 +74,7 @@ public class WorldConfiguration extends ConfigurationPart {
             public class Items extends ConfigurationPart {
                 public boolean hideItemmeta = false;
                 public boolean hideDurability = false;
+                public boolean hideItemmetaWithVisualEffects = false;
             }
         }
 

@@ -109,8 +109,8 @@
      private static final Logger LOGGER = LogUtils.getLogger();
      private static final int EMPTY_TIME_NO_TICK = 300;
      private static final int MAX_SCHEDULED_TICKS_PER_TICK = 65536;
--    public final List<ServerPlayer> players = Lists.newArrayList();
-+    public final List<ServerPlayer> players;
+-    final List<ServerPlayer> players = Lists.newArrayList();
++    final List<ServerPlayer> players;
      public final ServerChunkCache chunkSource;
      private final MinecraftServer server;
 -    public final ServerLevelData serverLevelData;

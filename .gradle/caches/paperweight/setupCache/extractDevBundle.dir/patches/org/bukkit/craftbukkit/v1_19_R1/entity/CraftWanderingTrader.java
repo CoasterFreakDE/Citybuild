@@ -58,7 +58,7 @@ public class CraftWanderingTrader extends CraftAbstractVillager implements Wande
 
     @Override
     public org.bukkit.Location getWanderingTowards() {
-        net.minecraft.core.BlockPos pos = this.getHandle().wanderTarget;
+        net.minecraft.core.BlockPos pos = this.getHandle().getWanderTarget();
         if (pos == null) {
             return null;
         }
@@ -73,7 +73,7 @@ public class CraftWanderingTrader extends CraftAbstractVillager implements Wande
             pos = io.papermc.paper.util.MCUtil.toBlockPosition(location);
         }
 
-        this.getHandle().wanderTarget = pos;
+        this.getHandle().setWanderTarget(pos);
     }
     // Paper end
 }

@@ -196,7 +196,7 @@ public final class CraftPlayerProfile implements PlayerProfile, com.destroystoky
         return true;
     }
 
-    public static boolean equals(@Nonnull PropertyMap propertyMap, @Nonnull PropertyMap other) {
+    private static boolean equals(@Nonnull PropertyMap propertyMap, @Nonnull PropertyMap other) {
         if (propertyMap.size() != other.size()) return false;
         // We take the order of properties into account here, because it is
         // also relevant in the serialized and NBT forms of GameProfiles.
@@ -223,7 +223,7 @@ public final class CraftPlayerProfile implements PlayerProfile, com.destroystoky
         return result;
     }
 
-    public static int hashCode(PropertyMap propertyMap) {
+    private static int hashCode(PropertyMap propertyMap) {
         int result = 1;
         for (Property property : propertyMap.values()) {
             result = 31 * result + CraftProfileProperty.hashCode(property);

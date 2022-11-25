@@ -610,7 +610,7 @@ public final class MCUtil {
             JsonObject worldData = new JsonObject();
 
             ServerLevel world = ((org.bukkit.craftbukkit.v1_19_R1.CraftWorld)bukkitWorld).getHandle();
-            List<ServerPlayer> players = world.players;
+            List<ServerPlayer> players = world.players();
 
             worldData.addProperty("is-loaded", loadedWorlds.contains(bukkitWorld));
             worldData.addProperty("name", world.getWorld().getName());

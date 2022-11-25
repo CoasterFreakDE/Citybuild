@@ -1333,7 +1333,7 @@
  
 -    private void updateBookPages(List<FilteredText> messages, UnaryOperator<String> postProcessor, ItemStack book) {
 -        ListTag listTag = new ListTag();
-+    public void updateBookPages(List<FilteredText> list, UnaryOperator<String> unaryoperator, ItemStack itemstack, int slot, ItemStack handItem) { // CraftBukkit
++    private void updateBookPages(List<FilteredText> list, UnaryOperator<String> unaryoperator, ItemStack itemstack, int slot, ItemStack handItem) { // CraftBukkit
 +        ListTag nbttaglist = new ListTag();
 +
          if (this.player.isTextFilteringEnabled()) {

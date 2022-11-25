@@ -65,7 +65,7 @@
 -    private final Map<Property<?>, Comparable<?>> properties = Maps.newHashMap();
 +    private final Map<Property<?>, Comparable<?>> properties = Maps.newLinkedHashMap(); // CraftBukkit - stable
      private final Map<String, String> vagueProperties = Maps.newHashMap();
-     public ResourceLocation id = new ResourceLocation("");
+     private ResourceLocation id = new ResourceLocation("");
      @Nullable
 @@ -75,9 +79,10 @@
      private CompoundTag nbt;

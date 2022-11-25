@@ -84,11 +84,11 @@ public final class PoiAccess {
                                                       final Predicate<BlockPos> positionPredicate,
                                                       final BlockPos sourcePosition,
                                                       final int range, // distance on x y z axis
-                                                      final double maxDistance,
+                                                      final double maxDistanceSquared,
                                                       final PoiManager.Occupancy occupancy,
                                                       final boolean load) {
         final PoiRecord ret = findClosestPoiDataRecord(
-                poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistance, occupancy, load
+                poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistanceSquared, occupancy, load
         );
 
         return ret == null ? null : ret.getPos();
@@ -102,11 +102,11 @@ public final class PoiAccess {
                                                                              final Predicate<BlockPos> positionPredicate,
                                                                              final BlockPos sourcePosition,
                                                                              final int range, // distance on x y z axis
-                                                                             final double maxDistance,
+                                                                             final double maxDistanceSquared,
                                                                              final PoiManager.Occupancy occupancy,
                                                                              final boolean load) {
         final PoiRecord ret = findClosestPoiDataRecord(
-            poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistance, occupancy, load
+            poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistanceSquared, occupancy, load
         );
 
         return ret == null ? null : Pair.of(ret.getPoiType(), ret.getPos());
@@ -120,7 +120,7 @@ public final class PoiAccess {
                                                    final Predicate<BlockPos> positionPredicate,
                                                    final BlockPos sourcePosition,
                                                    final int range, // distance on x y z axis
-                                                   final double maxDistance,
+                                                   final double maxDistanceSquared,
                                                    final PoiManager.Occupancy occupancy,
                                                    final boolean load,
                                                    final Set<BlockPos> ret) {
@@ -135,7 +135,7 @@ public final class PoiAccess {
 
         final List<PoiRecord> toConvert = new ArrayList<>();
         findClosestPoiDataRecords(
-                poiStorage, villagePlaceType, newPredicate, sourcePosition, range, maxDistance, occupancy, load, toConvert
+                poiStorage, villagePlaceType, newPredicate, sourcePosition, range, maxDistanceSquared, occupancy, load, toConvert
         );
 
         for (final PoiRecord record : toConvert) {
@@ -151,12 +151,12 @@ public final class PoiAccess {
                                                      final Predicate<BlockPos> positionPredicate,
                                                      final BlockPos sourcePosition,
                                                      final int range, // distance on x y z axis
-                                                     final double maxDistance,
+                                                     final double maxDistanceSquared,
                                                      final PoiManager.Occupancy occupancy,
                                                      final boolean load) {
         final List<PoiRecord> ret = new ArrayList<>();
         findClosestPoiDataRecords(
-            poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistance, occupancy, load, ret
+            poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistanceSquared, occupancy, load, ret
         );
         return ret.isEmpty() ? null : ret.get(0);
     }
@@ -169,12 +169,12 @@ public final class PoiAccess {
                                                      final BiPredicate<Holder<PoiType>, BlockPos> predicate,
                                                      final BlockPos sourcePosition,
                                                      final int range, // distance on x y z axis
-                                                     final double maxDistance,
+                                                     final double maxDistanceSquared,
                                                      final PoiManager.Occupancy occupancy,
                                                      final boolean load) {
         final List<PoiRecord> ret = new ArrayList<>();
         findClosestPoiDataRecords(
-                poiStorage, villagePlaceType, predicate, sourcePosition, range, maxDistance, occupancy, load, ret
+                poiStorage, villagePlaceType, predicate, sourcePosition, range, maxDistanceSquared, occupancy, load, ret
         );
         return ret.isEmpty() ? null : ret.get(0);
     }
@@ -187,12 +187,12 @@ public final class PoiAccess {
                                                  final Predicate<BlockPos> positionPredicate,
                                                  final BlockPos sourcePosition,
                                                  final int range, // distance on x y z axis
-                                                 final double maxDistance,
+                                                 final double maxDistanceSquared,
                                                  final PoiManager.Occupancy occupancy,
                                                  final boolean load,
                                                  final List<PoiRecord> ret) {
         final BiPredicate<Holder<PoiType>, BlockPos> predicate = positionPredicate != null ? (type, pos) -> positionPredicate.test(pos) : null;
-        findClosestPoiDataRecords(poiStorage, villagePlaceType, predicate, sourcePosition, range, maxDistance, occupancy, load, ret);
+        findClosestPoiDataRecords(poiStorage, villagePlaceType, predicate, sourcePosition, range, maxDistanceSquared, occupancy, load, ret);
     }
 
     public static void findClosestPoiDataRecords(final PoiManager poiStorage,
@@ -201,14 +201,14 @@ public final class PoiAccess {
                                                  final BiPredicate<Holder<PoiType>, BlockPos> predicate,
                                                  final BlockPos sourcePosition,
                                                  final int range, // distance on x y z axis
-                                                 final double maxDistance,
+                                                 final double maxDistanceSquared,
                                                  final PoiManager.Occupancy occupancy,
                                                  final boolean load,
                                                  final List<PoiRecord> ret) {
         final Predicate<? super PoiRecord> occupancyFilter = occupancy.getTest();
 
         final List<PoiRecord> closestRecords = new ArrayList<>();
-        double closestDistanceSquared = maxDistance * maxDistance;
+        double closestDistanceSquared = maxDistanceSquared;
 
         final int lowerX = Mth.floor(sourcePosition.getX() - range) >> 4;
         final int lowerY = WorldUtil.getMinSection(poiStorage.world);
@@ -375,11 +375,11 @@ public final class PoiAccess {
                                                   final Predicate<BlockPos> positionPredicate,
                                                   final BlockPos sourcePosition,
                                                   final int range, // distance on x y z axis
-                                                  final double maxDistance,
+                                                  final double maxDistanceSquared,
                                                   final PoiManager.Occupancy occupancy,
                                                   final boolean load) {
         final PoiRecord ret = findNearestPoiRecord(
-                poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistance, occupancy, load
+                poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistanceSquared, occupancy, load
         );
         return ret == null ? null : ret.getPos();
     }
@@ -391,7 +391,7 @@ public final class PoiAccess {
                                                final Predicate<BlockPos> positionPredicate,
                                                final BlockPos sourcePosition,
                                                final int range, // distance on x y z axis
-                                               final double maxDistance,
+                                               final double maxDistanceSquared,
                                                final PoiManager.Occupancy occupancy,
                                                final boolean load,
                                                final int max,
@@ -407,7 +407,7 @@ public final class PoiAccess {
 
         final List<PoiRecord> toConvert = new ArrayList<>();
         findNearestPoiRecords(
-                poiStorage, villagePlaceType, newPredicate, sourcePosition, range, maxDistance, occupancy, load, max, toConvert
+                poiStorage, villagePlaceType, newPredicate, sourcePosition, range, maxDistanceSquared, occupancy, load, max, toConvert
         );
 
         for (final PoiRecord record : toConvert) {
@@ -422,12 +422,12 @@ public final class PoiAccess {
                                                  final Predicate<BlockPos> positionPredicate,
                                                  final BlockPos sourcePosition,
                                                  final int range, // distance on x y z axis
-                                                 final double maxDistance,
+                                                 final double maxDistanceSquared,
                                                  final PoiManager.Occupancy occupancy,
                                                  final boolean load) {
         final List<PoiRecord> ret = new ArrayList<>();
         findNearestPoiRecords(
-                poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistance, occupancy, load,
+                poiStorage, villagePlaceType, positionPredicate, sourcePosition, range, maxDistanceSquared, occupancy, load,
                 1, ret
         );
         return ret.isEmpty() ? null : ret.get(0);
@@ -440,14 +440,13 @@ public final class PoiAccess {
                                              final Predicate<BlockPos> positionPredicate,
                                              final BlockPos sourcePosition,
                                              final int range, // distance on x y z axis
-                                             final double maxDistance,
+                                             final double maxDistanceSquared,
                                              final PoiManager.Occupancy occupancy,
                                              final boolean load,
                                              final int max,
                                              final List<PoiRecord> ret) {
         final Predicate<? super PoiRecord> occupancyFilter = occupancy.getTest();
 
-        final double maxDistanceSquared = maxDistance * maxDistance;
         final Double2ObjectRBTreeMap<List<PoiRecord>> closestRecords = new Double2ObjectRBTreeMap<>();
         int totalRecords = 0;
         double furthestDistanceSquared = maxDistanceSquared;

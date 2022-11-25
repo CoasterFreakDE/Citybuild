@@ -183,7 +183,7 @@ public class EconomyHolder implements Economy {
 
     @Override
     public String getName() {
-        return null;
+        return "WonderbuildEconomy";
     }
 
     @Override
@@ -217,7 +217,7 @@ public class EconomyHolder implements Economy {
 
     @Override
     public boolean hasAccount(OfflinePlayer arg0) {
-        return new dev.lupluv.cb.economy.Economy(arg0.getUniqueId()).existsByName();
+        return new dev.lupluv.cb.economy.Economy(arg0.getUniqueId()).existsByUuid();
     }
 
     @Override
@@ -227,7 +227,7 @@ public class EconomyHolder implements Economy {
 
     @Override
     public boolean hasAccount(OfflinePlayer arg0, String arg1) {
-        return new dev.lupluv.cb.economy.Economy(arg0.getUniqueId()).existsByName();
+        return new dev.lupluv.cb.economy.Economy(arg0.getUniqueId()).existsByUuid();
     }
 
     @Override

@@ -382,7 +382,7 @@ public class ActivationRange
             return true;
         }
         // immunize leashed entities
-        if (entity instanceof Mob && ((Mob)entity).leashHolder instanceof Player) {
+        if (entity instanceof Mob && ((Mob)entity).getLeashHolder() instanceof Player) {
             return true;
         }
         // Paper end

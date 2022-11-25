@@ -1,4 +1,7 @@
 public net.minecraft.world.level.chunk.storage.ChunkSerializer BLOCK_STATE_CODEC
+public net.minecraft.world.entity.monster.warden.WardenSpawnTracker ticksSinceLastWarning
+public net.minecraft.world.entity.monster.warden.WardenSpawnTracker cooldownTicks
+public net.minecraft.world.entity.monster.warden.WardenSpawnTracker increaseWarningLevel()V
 public net.minecraft.server.PlayerAdvancements advancements
 public net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase destroySpeed
 public net.minecraft.world.entity.raid.Raids raidMap
@@ -10,7 +13,6 @@ public net.minecraft.world.entity.projectile.Projectile leftOwner
 public net.minecraft.world.entity.projectile.Projectile hasBeenShot
 public net.minecraft.network.protocol.game.ServerboundClientInformationPacket language
 public net.minecraft.network.protocol.game.ServerboundClientInformationPacket viewDistance
-public org.bukkit.craftbukkit.generator.CustomChunkGenerator delegate
 public net.minecraft.world.SimpleContainer items
 public net.minecraft.server.dedicated.Settings properties
 public net.minecraft.server.dedicated.Settings getStringRaw(Ljava/lang/String;)Ljava/lang/String;
@@ -29,10 +31,10 @@ public net.minecraft.world.food.FoodData saturationLevel
 public net.minecraft.world.food.FoodData foodLevel
 public net.minecraft.world.food.FoodData exhaustionLevel
 public org.bukkit.craftbukkit.profile.CraftPlayerTextures
-public org.bukkit.craftbukkit.profile.CraftPlayerTextures rebuildPropertyIfDirty()V
 public org.bukkit.craftbukkit.profile.CraftPlayerTextures copyFrom(Lorg/bukkit/profile/PlayerTextures;)V
+public org.bukkit.craftbukkit.profile.CraftPlayerTextures rebuildPropertyIfDirty()V
 public net.minecraft.world.inventory.DispenserMenu dispenser
-public net.minecraft.world.entity.ai.attributes.AttributeSupplier instances
+public net.minecraft.world.entity.ai.attributes.AttributeSupplier getAttributeInstance(Lnet/minecraft/world/entity/ai/attributes/Attribute;)Lnet/minecraft/world/entity/ai/attributes/AttributeInstance;
 public-f net.minecraft.world.level.saveddata.maps.MapItemSavedData unlimitedTracking
 public net.minecraft.world.level.saveddata.maps.MapItemSavedData carriedByPlayers
 public-f net.minecraft.world.level.saveddata.maps.MapItemSavedData trackingPosition
@@ -64,8 +66,8 @@ public net.minecraft.server.network.ServerLoginPacketListenerImpl state
 public net.minecraft.server.network.ServerLoginPacketListenerImpl gameProfile
 public net.minecraft.world.entity.animal.horse.SkeletonHorse trapTime
 public net.minecraft.world.level.block.entity.BarrelBlockEntity openersCounter
-public net.minecraft.world.level.block.entity.BarrelBlockEntity playSound(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/sounds/SoundEvent;)V
 public net.minecraft.world.level.block.entity.BarrelBlockEntity updateBlockState(Lnet/minecraft/world/level/block/state/BlockState;Z)V
+public net.minecraft.world.level.block.entity.BarrelBlockEntity playSound(Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/sounds/SoundEvent;)V
 public net.minecraft.world.entity.monster.Evoker setWololoTarget(Lnet/minecraft/world/entity/animal/Sheep;)V
 public net.minecraft.world.entity.monster.Evoker getWololoTarget()Lnet/minecraft/world/entity/animal/Sheep;
 public net.minecraft.world.level.levelgen.SurfaceRules$SurfaceRule
@@ -83,8 +85,6 @@ public net.minecraft.server.network.ServerLoginPacketListenerImpl$State
 public org.bukkit.craftbukkit.inventory.CraftMetaFirework
 public org.bukkit.craftbukkit.inventory.CraftMetaFirework getNBT(Lorg/bukkit/FireworkEffect$Type;)I
 public net.minecraft.world.level.storage.PrimaryLevelData settings
-public net.minecraft.world.item.SpawnEggItem BY_ID
-public net.minecraft.util.thread.BlockableEventLoop runAllTasks()V
 public net.minecraft.world.entity.projectile.AbstractArrow soundEvent
 public net.minecraft.world.entity.projectile.AbstractArrow inGround
 public net.minecraft.world.entity.projectile.AbstractArrow knockback
@@ -108,15 +108,15 @@ public net.minecraft.world.entity.vehicle.MinecartFurnace fuel
 public net.minecraft.world.entity.animal.horse.AbstractHorse inventory
 public net.minecraft.world.entity.animal.horse.AbstractHorse createInventory()V
 public net.minecraft.world.entity.animal.Turtle setGoingHome(Z)V
-public net.minecraft.world.entity.animal.Turtle getHomePos()Lnet/minecraft/core/BlockPos;
 public net.minecraft.world.entity.animal.Turtle setHasEgg(Z)V
-public net.minecraft.world.entity.animal.Turtle setTravelling(Z)V
+public net.minecraft.world.entity.animal.Turtle getHomePos()Lnet/minecraft/core/BlockPos;
 public net.minecraft.world.entity.animal.Turtle isGoingHome()Z
 public net.minecraft.world.entity.animal.Turtle isTravelling()Z
+public net.minecraft.world.entity.animal.Turtle setTravelling(Z)V
 public net.minecraft.world.scores.Objective displayName
 public net.minecraft.world.entity.monster.Endermite life
 public-f com.mojang.brigadier.tree.CommandNode requirement
-public net.minecraft.world.entity.npc.WanderingTrader wanderTarget
+public net.minecraft.world.entity.npc.WanderingTrader getWanderTarget()Lnet/minecraft/core/BlockPos;
 public net.minecraft.world.level.Level thunderLevel
 public net.minecraft.world.level.Level thread
 public net.minecraft.world.level.Level rainLevel
@@ -137,12 +137,11 @@ public org.bukkit.craftbukkit.scoreboard.CraftScoreboardTranslations fromBukkitS
 public org.bukkit.craftbukkit.scoreboard.CraftScoreboardTranslations toBukkitSlot(I)Lorg/bukkit/scoreboard/DisplaySlot;
 public net.minecraft.world.entity.animal.Fox DATA_TRUSTED_ID_0
 public net.minecraft.world.entity.animal.Fox DATA_TRUSTED_ID_1
+public net.minecraft.world.entity.animal.Fox setFaceplanted(Z)V
 public net.minecraft.world.entity.animal.Fox setDefending(Z)V
 public net.minecraft.world.entity.animal.Fox setSleeping(Z)V
-public net.minecraft.world.entity.animal.Fox setFoxType(Lnet/minecraft/world/entity/animal/Fox$Type;)V
-public net.minecraft.world.entity.animal.Fox isFaceplanted()Z
-public net.minecraft.world.entity.animal.Fox setFaceplanted(Z)V
 public net.minecraft.world.entity.animal.Fox isDefending()Z
+public net.minecraft.world.entity.animal.Fox setFoxType(Lnet/minecraft/world/entity/animal/Fox$Type;)V
 public net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager structureRepository
 public net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager loadFromGenerated(Lnet/minecraft/resources/ResourceLocation;)Ljava/util/Optional;
 public net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager createAndValidatePathToStructure(Ljava/nio/file/Path;Lnet/minecraft/resources/ResourceLocation;Ljava/lang/String;)Ljava/nio/file/Path;
@@ -171,7 +170,6 @@ public net.minecraft.world.level.levelgen.structure.placement.StructurePlacement
 public net.minecraft.world.level.levelgen.structure.placement.StructurePlacement exclusionZone
 public net.minecraft.world.level.levelgen.structure.placement.StructurePlacement locateOffset
 public net.minecraft.world.level.levelgen.structure.placement.StructurePlacement frequency
-public net.minecraft.server.level.Ticket createdTick
 public net.minecraft.server.level.Ticket key
 public net.minecraft.world.level.block.entity.BannerBlockEntity baseColor
 public net.minecraft.world.level.block.entity.BannerBlockEntity itemPatterns
@@ -222,11 +220,11 @@ public net.minecraft.world.entity.decoration.ArmorStand rightLegPose
 public net.minecraft.world.entity.decoration.ArmorStand headPose
 public net.minecraft.world.entity.decoration.ArmorStand leftLegPose
 public net.minecraft.world.entity.decoration.ArmorStand rightArmPose
+public net.minecraft.world.entity.decoration.ArmorStand setSmall(Z)V
+public net.minecraft.world.entity.decoration.ArmorStand setNoBasePlate(Z)V
 public net.minecraft.world.entity.decoration.ArmorStand setShowArms(Z)V
 public net.minecraft.world.entity.decoration.ArmorStand setMarker(Z)V
 public net.minecraft.world.entity.decoration.ArmorStand isDisabled(Lnet/minecraft/world/entity/EquipmentSlot;)Z
-public net.minecraft.world.entity.decoration.ArmorStand setSmall(Z)V
-public net.minecraft.world.entity.decoration.ArmorStand setNoBasePlate(Z)V
 public net.minecraft.world.level.block.entity.BedBlockEntity color
 public net.minecraft.world.entity.projectile.FishingHook timeUntilLured
 public net.minecraft.world.entity.projectile.FishingHook hookedIn
@@ -235,17 +233,16 @@ public net.minecraft.world.entity.projectile.FishingHook DATA_HOOKED_ENTITY
 public net.minecraft.world.entity.projectile.FishingHook pullEntity(Lnet/minecraft/world/entity/Entity;)V
 public net.minecraft.world.entity.projectile.FishingHook setHookedEntity(Lnet/minecraft/world/entity/Entity;)V
 public net.minecraft.world.entity.monster.Shulker DATA_COLOR_ID
+public net.minecraft.world.entity.monster.Shulker setAttachFace(Lnet/minecraft/core/Direction;)V
 public net.minecraft.world.entity.monster.Shulker setRawPeekAmount(I)V
 public net.minecraft.world.entity.monster.Shulker getRawPeekAmount()I
-public net.minecraft.world.entity.monster.Shulker setAttachFace(Lnet/minecraft/core/Direction;)V
 public net.minecraft.network.protocol.game.ServerboundInteractPacket$ActionType
-public net.minecraft.world.entity.ai.goal.GoalSelector availableGoals
 public net.minecraft.world.level.block.entity.BaseContainerBlockEntity name
 public net.minecraft.world.level.block.entity.BaseContainerBlockEntity lockKey
 public net.minecraft.world.level.NaturalSpawner SPAWNING_CATEGORIES
 public net.minecraft.world.entity.ExperienceOrb value
-public net.minecraft.world.entity.ExperienceOrb xpToDurability(I)I
 public net.minecraft.world.entity.ExperienceOrb durabilityToXp(I)I
+public net.minecraft.world.entity.ExperienceOrb xpToDurability(I)I
 public net.minecraft.world.entity.monster.hoglin.Hoglin cannotBeHunted
 public net.minecraft.world.entity.monster.hoglin.Hoglin timeInOverworld
 public net.minecraft.world.entity.monster.hoglin.Hoglin isImmuneToZombification()Z
@@ -256,15 +253,14 @@ public net.minecraft.world.entity.Entity onGround
 public net.minecraft.world.entity.Entity remainingFireTicks
 public net.minecraft.world.entity.Entity hasVisualFire
 public net.minecraft.world.entity.Entity wasTouchingWater
-public net.minecraft.world.entity.Entity getFireImmuneTicks()I
-public net.minecraft.world.entity.Entity getSharedFlag(I)Z
-public net.minecraft.world.entity.Entity getEncodeId()Ljava/lang/String;
 public net.minecraft.world.entity.Entity isInRain()Z
-public net.minecraft.world.entity.Entity isInBubbleColumn()Z
-public net.minecraft.world.entity.Entity setRot(FF)V
-public net.minecraft.world.entity.Entity unsetRemoved()V
+public net.minecraft.world.entity.Entity getFireImmuneTicks()I
 public net.minecraft.world.entity.Entity setSharedFlag(IZ)V
-public net.minecraft.commands.arguments.blocks.BlockStateParser id
+public net.minecraft.world.entity.Entity unsetRemoved()V
+public net.minecraft.world.entity.Entity isInBubbleColumn()Z
+public net.minecraft.world.entity.Entity getEncodeId()Ljava/lang/String;
+public net.minecraft.world.entity.Entity setRot(FF)V
+public net.minecraft.world.entity.Entity getSharedFlag(I)Z
 public-f net.minecraft.server.dedicated.DedicatedServer settings
 public net.minecraft.server.dedicated.DedicatedServer rconConsoleSource
 public net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket blockState
@@ -273,10 +269,9 @@ public net.minecraft.world.entity.projectile.Arrow setFixedColor(I)V
 public net.minecraft.world.level.block.entity.CampfireBlockEntity cookingTime
 public net.minecraft.world.level.block.entity.CampfireBlockEntity cookingProgress
 public net.minecraft.world.entity.npc.Villager numberOfRestocksToday
+public net.minecraft.world.entity.npc.Villager increaseMerchantCareer()V
 public net.minecraft.world.entity.npc.Villager setUnhappy()V
 public net.minecraft.world.entity.npc.Villager releaseAllPois()V
-public net.minecraft.world.entity.npc.Villager increaseMerchantCareer()V
-public net.minecraft.world.level.ServerTickList saveTickList(Ljava/util/function/Function;Ljava/lang/Iterable;J)Lnet/minecraft/nbt/ListTag;
 public net.minecraft.world.item.context.UseOnContext <init>(Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/phys/BlockHitResult;)V
 public net.minecraft.world.entity.monster.Ravager attackTick
 public net.minecraft.world.entity.monster.Ravager roarTick
@@ -284,7 +279,6 @@ public net.minecraft.world.entity.monster.Ravager stunnedTick
 public net.minecraft.world.level.block.state.properties.IntegerProperty min
 public net.minecraft.world.level.block.state.properties.IntegerProperty max
 public net.minecraft.server.network.ServerGamePacketListenerImpl internalTeleport(DDDFFLjava/util/Set;Z)V
-public net.minecraft.server.network.ServerGamePacketListenerImpl updateBookPages(Ljava/util/List;Ljava/util/function/UnaryOperator;Lnet/minecraft/world/item/ItemStack;ILnet/minecraft/world/item/ItemStack;)V
 public net.minecraft.world.level.chunk.LevelChunkSection states
 public net.minecraft.commands.CommandSourceStack source
 public net.minecraft.ChatFormatting code
@@ -302,13 +296,12 @@ public net.minecraft.world.level.dimension.end.EndDragonFight dragonUUID
 public net.minecraft.world.level.dimension.end.EndDragonFight level
 public net.minecraft.world.level.dimension.end.EndDragonFight dragonEvent
 public net.minecraft.world.level.dimension.end.EndDragonFight respawnStage
-public net.minecraft.world.level.dimension.end.EndDragonFight spawnExitPortal(Z)V
-public net.minecraft.world.level.dimension.end.EndDragonFight findExitPortal()Lnet/minecraft/world/level/block/state/pattern/BlockPattern$BlockPatternMatch;
-public net.minecraft.world.level.dimension.end.EndDragonFight findExitPortal()Lnet/minecraft/world/level/block/state/pattern/ShapeDetector$ShapeDetectorCollection;
 public net.minecraft.world.level.dimension.end.EndDragonFight setRespawnStage(Lnet/minecraft/world/level/dimension/end/DragonRespawnAnimation;)V
+public net.minecraft.world.level.dimension.end.EndDragonFight findExitPortal()Lnet/minecraft/world/level/block/state/pattern/BlockPattern$BlockPatternMatch;
+public net.minecraft.world.level.dimension.end.EndDragonFight spawnExitPortal(Z)V
+public net.minecraft.world.level.dimension.end.EndDragonFight findExitPortal()Lnet/minecraft/world/level/block/state/pattern/ShapeDetector$ShapeDetectorCollection;
 public net.minecraft.world.level.block.ComposterBlock$InputContainer
 public org.bukkit.craftbukkit.inventory.CraftItemStack handle
-public net.minecraft.server.level.ChunkMap$ChunkDistanceManager
 public net.minecraft.world.entity.animal.Ocelot isTrusting()Z
 public net.minecraft.world.entity.animal.Ocelot setTrusting(Z)V
 public net.minecraft.server.level.ServerChunkCache$MainThreadExecutor
@@ -322,8 +315,8 @@ public net.minecraft.world.level.BaseSpawner minSpawnDelay
 public net.minecraft.world.level.BaseSpawner spawnPotentials
 public net.minecraft.world.level.BaseSpawner spawnRange
 public net.minecraft.world.level.BaseSpawner nextSpawnData
-public net.minecraft.world.level.BaseSpawner isNearPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z
 public net.minecraft.world.level.BaseSpawner delay(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)V
+public net.minecraft.world.level.BaseSpawner isNearPlayer(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;)Z
 public-f net.minecraft.world.level.LevelSettings hardcore
 public-f net.minecraft.world.level.LevelSettings levelName
 public net.minecraft.world.entity.monster.piglin.AbstractPiglin timeInOverworld
@@ -350,7 +343,6 @@ public net.minecraft.network.protocol.game.ClientboundTabListPacket header
 public net.minecraft.world.entity.GlowSquid setDarkTicks(I)V
 public net.minecraft.server.Main forceUpgrade(Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;Lcom/mojang/datafixers/DataFixer;ZLjava/util/function/BooleanSupplier;Lnet/minecraft/world/level/levelgen/WorldGenSettings;)V
 public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity recipesUsed
-public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity recipeType
 public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity cookingTotalTime
 public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity litTime
 public net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity cookingProgress
@@ -366,7 +358,6 @@ public-f net.minecraft.world.entity.Mob targetSelector
 public net.minecraft.world.entity.Mob lootTable
 public-f net.minecraft.world.entity.Mob goalSelector
 public net.minecraft.world.entity.Mob handDropChances
-public net.minecraft.world.entity.Mob leashHolder
 public net.minecraft.world.entity.Mob armorDropChances
 public net.minecraft.world.entity.Mob lootTableSeed
 public net.minecraft.world.entity.Mob getDefaultLootTable()Lnet/minecraft/resources/MinecraftKey;
@@ -411,25 +402,23 @@ public net.minecraft.server.level.ServerPlayer lastSentExp
 public net.minecraft.server.level.ServerPlayer isChangingDimension
 public net.minecraft.server.level.ServerPlayer spawnInvulnerableTime
 public net.minecraft.server.level.ServerPlayer nextContainerCounter()V
-public net.minecraft.server.level.ServerPlayer initMenu(Lnet/minecraft/world/inventory/AbstractContainerMenu;)V
 public net.minecraft.server.level.ServerPlayer triggerDimensionChangeTriggers(Lnet/minecraft/server/level/ServerLevel;)V
 public net.minecraft.server.level.ServerPlayer fudgeSpawnLocation(Lnet/minecraft/server/level/ServerLevel;)V
+public net.minecraft.server.level.ServerPlayer initMenu(Lnet/minecraft/world/inventory/AbstractContainerMenu;)V
 public net.minecraft.world.entity.animal.axolotl.Axolotl setVariant(Lnet/minecraft/world/entity/animal/axolotl/Axolotl$Variant;)V
 public net.minecraft.world.entity.projectile.ThrowableItemProjectile getItemRaw()Lnet/minecraft/world/item/ItemStack;
 public net.minecraft.world.entity.animal.Bee stayOutOfHiveCountdown
 public net.minecraft.world.entity.animal.Bee ticksWithoutNectarSinceExitingHive
 public net.minecraft.world.entity.animal.Bee hivePos
 public net.minecraft.world.entity.animal.Bee numCropsGrownSincePollination
-public net.minecraft.world.entity.animal.Bee setHasNectar(Z)V
-public net.minecraft.world.entity.animal.Bee isRolling()Z
 public net.minecraft.world.entity.animal.Bee setRolling(Z)V
 public net.minecraft.world.entity.animal.Bee setHasStung(Z)V
+public net.minecraft.world.entity.animal.Bee isRolling()Z
+public net.minecraft.world.entity.animal.Bee setHasNectar(Z)V
 public net.minecraft.server.level.ServerChunkCache mainThread
 public net.minecraft.server.level.ServerChunkCache mainThreadProcessor
-public net.minecraft.server.level.ServerChunkCache CHUNK_STATUSES
 public net.minecraft.server.level.ServerChunkCache spawnFriendlies
 public net.minecraft.server.level.ServerChunkCache spawnEnemies
-public net.minecraft.server.level.ServerChunkCache runDistanceManagerUpdates()Z
 public net.minecraft.network.protocol.game.ServerboundResourcePackPacket action
 public net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity exactTeleport
 public net.minecraft.world.level.block.entity.TheEndGatewayBlockEntity exitPortal
@@ -441,7 +430,6 @@ public net.minecraft.world.item.MapItem createNewSavedData(Lnet/minecraft/world/
 public net.minecraft.world.level.block.DropperBlock dispenseFrom(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/core/BlockPos;)V
 public net.minecraft.world.entity.monster.SpellcasterIllager getCurrentSpell()Lnet/minecraft/world/entity/monster/EntityIllagerWizard$Spell;
 private-f net.minecraft.world.item.ItemStack item
-public net.minecraft.world.item.ItemStack tag
 public org.bukkit.craftbukkit.profile.CraftProfileProperty
 public net.minecraft.server.level.ChunkMap$TrackedEntity
 public net.minecraft.server.level.ChunkMap$TrackedEntity seenBy
@@ -453,11 +441,9 @@ public net.minecraft.world.entity.monster.Vindicator isJohnny
 public net.minecraft.world.entity.projectile.FireworkRocketEntity DATA_SHOT_AT_ANGLE
 public net.minecraft.world.entity.projectile.FireworkRocketEntity lifetime
 public net.minecraft.world.entity.projectile.FireworkRocketEntity attachedToEntity
-public net.minecraft.world.entity.projectile.FireworkRocketEntity life
 public net.minecraft.world.entity.projectile.FireworkRocketEntity DATA_ID_FIREWORKS_ITEM
 public net.minecraft.server.level.ServerLevel entityManager
 public net.minecraft.server.level.ServerLevel serverLevelData
-public net.minecraft.server.level.ServerLevel players
 public net.minecraft.server.level.ServerLevel chunkSource
 public net.minecraft.server.level.ServerLevel getEntities()Lnet/minecraft/world/level/entity/LevelEntityGetter;
 public net.minecraft.server.level.ServerLevel findLightningRod(Lnet/minecraft/core/BlockPos;)Ljava/util/Optional;
@@ -488,22 +474,21 @@ public net.minecraft.server.MinecraftServer LOGGER
 public-f net.minecraft.server.MinecraftServer storageSource
 public net.minecraft.server.MinecraftServer levels
 public net.minecraft.server.MinecraftServer playerDataStorage
-public net.minecraft.server.MinecraftServer doRunTask(Lnet/minecraft/server/TickTask;)V
-public net.minecraft.server.MinecraftServer wrapRunnable(Ljava/lang/Runnable;)Lnet/minecraft/server/TickTask;
 public net.minecraft.server.MinecraftServer prepareLevels(Lnet/minecraft/server/level/progress/ChunkProgressListener;)V
+public net.minecraft.server.MinecraftServer wrapRunnable(Ljava/lang/Runnable;)Lnet/minecraft/server/TickTask;
+public net.minecraft.server.MinecraftServer doRunTask(Lnet/minecraft/server/TickTask;)V
 public-f net.minecraft.world.level.chunk.storage.RegionFileStorage
 public net.minecraft.world.level.chunk.storage.RegionFileStorage regionCache
-public net.minecraft.world.level.chunk.storage.RegionFileStorage getFile(Lnet/minecraft/world/level/ChunkPos;Z)Lnet/minecraft/world/level/chunk/storage/RegionFile;
 public net.minecraft.Util onThreadException(Ljava/lang/Thread;Ljava/lang/Throwable;)V
 public net.minecraft.world.level.levelgen.SurfaceRules$Condition
 public net.minecraft.world.scores.criteria.ObjectiveCriteria CRITERIA_CACHE
 public net.minecraft.world.entity.player.Player DATA_PLAYER_MODE_CUSTOMISATION
 public net.minecraft.world.entity.player.Player sleepCounter
+public net.minecraft.world.entity.player.Player wardenSpawnTracker
 public-f net.minecraft.world.entity.player.Player gameProfile
-public net.minecraft.world.entity.player.Player checkRidingStatistics(DDD)V
-public net.minecraft.world.entity.player.Player getFireImmuneTicks()I
-public net.minecraft.world.entity.player.Player setShoulderEntityRight(Lnet/minecraft/nbt/CompoundTag;)V
 public net.minecraft.world.entity.player.Player setShoulderEntityLeft(Lnet/minecraft/nbt/CompoundTag;)V
+public net.minecraft.world.entity.player.Player setShoulderEntityRight(Lnet/minecraft/nbt/CompoundTag;)V
+public net.minecraft.world.entity.player.Player getFireImmuneTicks()I
 public net.minecraft.world.entity.player.Player removeEntitiesOnShoulder()V
 public net.minecraft.world.entity.player.Player closeContainer()V
 public net.minecraft.world.entity.LivingEntity lastHurtByPlayerTime
@@ -518,11 +503,10 @@ public net.minecraft.world.entity.LivingEntity effectsDirty
 public net.minecraft.world.entity.LivingEntity lastHurtByMobTimestamp
 public net.minecraft.world.entity.LivingEntity lastHurtByPlayer
 public net.minecraft.world.entity.LivingEntity activeEffects
-public net.minecraft.world.entity.LivingEntity detectEquipmentUpdates()V
 public net.minecraft.world.entity.LivingEntity getSoundVolume()F
 public net.minecraft.world.entity.LivingEntity getDeathSound()Lnet/minecraft/sounds/SoundEvent;
+public net.minecraft.world.entity.LivingEntity detectEquipmentUpdates()V
 public net.minecraft.world.level.chunk.ChunkGenerator structureOverrides
-public-f net.minecraft.world.level.chunk.ChunkGenerator strongholdSeed
 public net.minecraft.world.level.chunk.ChunkGenerator structureSets
 public net.minecraft.world.entity.ambient.Bat targetPosition
 public net.minecraft.world.entity.monster.Skeleton DATA_STRAY_CONVERSION_ID
@@ -537,27 +521,23 @@ public net.minecraft.world.entity.projectile.ShulkerBullet targetDeltaX
 public net.minecraft.world.entity.projectile.ShulkerBullet targetDeltaY
 public net.minecraft.world.entity.projectile.ShulkerBullet targetDeltaZ
 public net.minecraft.world.entity.projectile.ShulkerBullet currentMoveDirection
-public net.minecraft.world.level.chunk.storage.SectionStorage dirty
 public net.minecraft.advancements.AdvancementList advancements
 public net.minecraft.world.entity.boss.enderdragon.EnderDragon subEntities
-public org.spigotmc.SpigotWorldConfig getDouble(Ljava/lang/String;D)D
 public org.spigotmc.SpigotWorldConfig getList(Ljava/lang/String;Ljava/lang/Object;)Ljava/util/List;
-public org.spigotmc.SpigotWorldConfig getInt(Ljava/lang/String;I)I
 public org.spigotmc.SpigotWorldConfig getInt(Ljava/lang/String;)I
-public org.spigotmc.SpigotWorldConfig getBoolean(Ljava/lang/String;Z)Z
+public org.spigotmc.SpigotWorldConfig getDouble(Ljava/lang/String;D)D
 public org.spigotmc.SpigotWorldConfig getDouble(Ljava/lang/String;)D
 public org.spigotmc.SpigotWorldConfig getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+public org.spigotmc.SpigotWorldConfig getBoolean(Ljava/lang/String;Z)Z
+public org.spigotmc.SpigotWorldConfig getInt(Ljava/lang/String;I)I
 public net.minecraft.world.level.levelgen.SurfaceRules$LazyCondition
 public net.minecraft.world.inventory.Slot slot
-public net.minecraft.world.entity.animal.Panda getEatCounter()I
 public net.minecraft.world.entity.animal.Panda setEatCounter(I)V
+public net.minecraft.world.entity.animal.Panda getEatCounter()I
 public net.minecraft.world.entity.boss.wither.WitherBoss bossEvent
 public net.minecraft.server.level.ChunkMap progressListener
 public net.minecraft.server.level.ChunkMap entityMap
-public net.minecraft.server.level.ChunkMap mainThreadMailbox
 public net.minecraft.server.level.ChunkMap toDrop
-public net.minecraft.server.level.ChunkMap structureManager
-public net.minecraft.server.level.ChunkMap entitiesInLevel
 public net.minecraft.server.level.ChunkMap level
 public net.minecraft.server.level.ChunkMap distanceManager
 public net.minecraft.server.level.ChunkMap updatingChunkMap
@@ -565,13 +545,10 @@ public net.minecraft.server.level.ChunkMap visibleChunkMap
 public net.minecraft.server.level.ChunkMap generator
 public net.minecraft.server.level.ChunkMap overworldDataStorage
 public net.minecraft.server.level.ChunkMap getPoiManager()Lnet/minecraft/world/entity/ai/village/poi/PoiManager;
-public net.minecraft.server.level.ChunkMap addEntity(Lnet/minecraft/world/entity/Entity;)V
-public net.minecraft.server.level.ChunkMap save(Lnet/minecraft/world/level/chunk/ChunkAccess;)Z
-public net.minecraft.server.level.ChunkMap setViewDistance(I)V
-public net.minecraft.server.level.ChunkMap readChunk(Lnet/minecraft/world/level/ChunkPos;)Lnet/minecraft/nbt/CompoundTag;
-public net.minecraft.server.level.ChunkMap playerLoadedChunk(Lnet/minecraft/server/level/ServerPlayer;[Lnet/minecraft/network/protocol/Packet;Lnet/minecraft/world/level/chunk/LevelChunk;)V
 public net.minecraft.server.level.ChunkMap getVisibleChunkIfPresent(J)Lnet/minecraft/server/level/ChunkHolder;
-public net.minecraft.server.level.ChunkMap getUpdatingChunkIfPresent(J)Lnet/minecraft/server/level/ChunkHolder;
+public net.minecraft.server.level.ChunkMap save(Lnet/minecraft/world/level/chunk/ChunkAccess;)Z
+public net.minecraft.server.level.ChunkMap addEntity(Lnet/minecraft/world/entity/Entity;)V
+public net.minecraft.server.level.ChunkMap setViewDistance(I)V
 public net.minecraft.world.level.block.entity.StructureBlockEntity mode
 public net.minecraft.world.level.block.entity.StructureBlockEntity metaData
 public net.minecraft.world.level.block.entity.StructureBlockEntity mirror
@@ -585,10 +562,8 @@ public net.minecraft.world.level.block.entity.StructureBlockEntity showAir
 public net.minecraft.world.level.block.entity.StructureBlockEntity structurePos
 public net.minecraft.world.level.block.entity.StructureBlockEntity structureSize
 public org.bukkit.craftbukkit.profile.CraftPlayerProfile getProperty(Ljava/lang/String;)Lcom/mojang/authlib/properties/Property;
-public org.bukkit.craftbukkit.profile.CraftPlayerProfile setProperty(Ljava/lang/String;Lcom/mojang/authlib/properties/Property;)V
 public org.bukkit.craftbukkit.profile.CraftPlayerProfile toString(Lcom/mojang/authlib/properties/PropertyMap;)Ljava/lang/String;
-public org.bukkit.craftbukkit.profile.CraftPlayerProfile hashCode(Lcom/mojang/authlib/properties/PropertyMap;)I
-public org.bukkit.craftbukkit.profile.CraftPlayerProfile equals(Lcom/mojang/authlib/properties/PropertyMap;Lcom/mojang/authlib/properties/PropertyMap;)Z
+public org.bukkit.craftbukkit.profile.CraftPlayerProfile setProperty(Ljava/lang/String;Lcom/mojang/authlib/properties/Property;)V
 public net.minecraft.world.entity.monster.ZombieVillager DATA_CONVERTING_ID
 public net.minecraft.world.entity.monster.ZombieVillager villagerConversionTime
 public net.minecraft.world.entity.monster.ZombieVillager conversionStarter
@@ -609,7 +584,6 @@ public net.minecraft.world.BossEvent overlay
 public net.minecraft.world.BossEvent color
 public net.minecraft.world.BossEvent name
 public net.minecraft.world.level.entity.PersistentEntitySectionManager permanentStorage
-public net.minecraft.world.level.entity.PersistentEntitySectionManager storeChunkSections(JLjava/util/function/Consumer;)Z
 public net.minecraft.world.level.entity.PersistentEntitySectionManager ensureChunkQueuedForLoad(J)V
 public org.bukkit.craftbukkit.block.data.CraftBlockData toNMS(Ljava/lang/Enum;Ljava/lang/Class;)Ljava/lang/Enum;
 public net.minecraft.world.entity.monster.SpellcasterIllager$IllagerSpell

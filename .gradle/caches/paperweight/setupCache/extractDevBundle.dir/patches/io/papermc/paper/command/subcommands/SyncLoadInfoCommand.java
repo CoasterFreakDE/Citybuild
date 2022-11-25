@@ -10,9 +10,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.minecraft.server.MinecraftServer;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.framework.qual.DefaultQualifier;
@@ -21,6 +26,7 @@ import static net.kyori.adventure.text.Component.text;
 import static net.kyori.adventure.text.format.NamedTextColor.GRAY;
 import static net.kyori.adventure.text.format.NamedTextColor.GREEN;
 import static net.kyori.adventure.text.format.NamedTextColor.RED;
+import static net.kyori.adventure.text.format.NamedTextColor.WHITE;
 
 @DefaultQualifier(NonNull.class)
 public final class SyncLoadInfoCommand implements PaperSubcommand {
@@ -35,9 +41,15 @@ public final class SyncLoadInfoCommand implements PaperSubcommand {
         return CommandUtil.getListMatchingLast(sender, args, "clear");
     }
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss");
+
     private void doSyncLoadInfo(final CommandSender sender, final String[] args) {
         if (!SyncLoadFinder.ENABLED) {
-            sender.sendMessage(text("This command requires the server startup flag '-Dpaper.debug-sync-loads=true' to be set.", RED));
+            String systemFlag = "-Dpaper.debug-sync-loads=true";
+            sender.sendMessage(text().color(RED).append(text("This command requires the server startup flag '")).append(
+                text(systemFlag, WHITE).clickEvent(ClickEvent.copyToClipboard(systemFlag))
+                                       .hoverEvent(HoverEvent.showText(text("Click to copy the system flag")))).append(
+                text("' to be set.")));
             return;
         }
 
@@ -48,7 +60,7 @@ public final class SyncLoadInfoCommand implements PaperSubcommand {
         }
 
         File file = new File(new File(new File("."), "debug"),
-            "sync-load-info" + DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss").format(LocalDateTime.now()) + ".txt");
+            "sync-load-info" + FORMATTER.format(LocalDateTime.now()) + ".txt");
         file.getParentFile().mkdirs();
         sender.sendMessage(text("Writing sync load info to " + file, GREEN));
 
@@ -62,17 +74,15 @@ public final class SyncLoadInfoCommand implements PaperSubcommand {
             jsonWriter.setLenient(false);
             Streams.write(data, jsonWriter);
 
-            String fileData = stringWriter.toString();
-
             try (
-                PrintStream out = new PrintStream(new FileOutputStream(file), false, "UTF-8")
+                PrintStream out = new PrintStream(new FileOutputStream(file), false, StandardCharsets.UTF_8)
             ) {
-                out.print(fileData);
+                out.print(stringWriter);
             }
             sender.sendMessage(text("Successfully written sync load information!", GREEN));
         } catch (Throwable thr) {
-            sender.sendMessage(text("Failed to write sync load information!", RED));
-            thr.printStackTrace();
+            sender.sendMessage(text("Failed to write sync load information! See the console for more info.", RED));
+            MinecraftServer.LOGGER.warn("Error occurred while dumping sync chunk load info", thr);
         }
     }
 }
