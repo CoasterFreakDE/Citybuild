@@ -34,6 +34,9 @@ public class NeustartCmd implements CommandExecutor {
                 @Override
                 public void run() {
                     if(i == 60 || i == 30 || i == 15 || i <= 5){
+                        if(i == 10){
+                            Bukkit.getWorld("cb").save();
+                        }
                         if(i != 0){
                             Bukkit.broadcastMessage(Strings.prefix + "§c§lDer Server startet in " + i + " Sekunden neu!");
                         }else{
