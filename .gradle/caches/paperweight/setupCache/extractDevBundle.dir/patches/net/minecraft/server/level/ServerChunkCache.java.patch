@@ -19,7 +19,7 @@
  public class ServerChunkCache extends ChunkSource {
 +
 +    public static final org.slf4j.Logger LOGGER = com.mojang.logging.LogUtils.getLogger(); // Paper
-     public static final List<ChunkStatus> CHUNK_STATUSES = ChunkStatus.getStatusList();
+     private static final List<ChunkStatus> CHUNK_STATUSES = ChunkStatus.getStatusList();
      private final DistanceManager distanceManager;
      final ServerLevel level;
 @@ -65,12 +70,238 @@
@@ -625,7 +625,7 @@
 @@ -273,121 +579,262 @@
      }
  
-     public boolean runDistanceManagerUpdates() {
+     boolean runDistanceManagerUpdates() {
 -        boolean bl = this.distanceManager.runAllUpdates(this.chunkMap);
 -        boolean bl2 = this.chunkMap.promoteChunkMap();
 -        if (!bl && !bl2) {

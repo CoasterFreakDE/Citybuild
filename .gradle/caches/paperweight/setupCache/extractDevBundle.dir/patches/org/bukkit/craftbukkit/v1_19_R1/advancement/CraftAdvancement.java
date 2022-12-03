@@ -41,6 +41,11 @@ public class CraftAdvancement implements org.bukkit.advancement.Advancement {
     }
 
     @Override
+    public net.kyori.adventure.text.Component displayName() {
+        return io.papermc.paper.adventure.PaperAdventure.asAdventure(Advancement.constructDisplayComponent(this.handle.getId(), this.handle.getDisplay()));
+    }
+
+    @Override
     public org.bukkit.advancement.Advancement getParent() {
         return this.handle.getParent() == null ? null : this.handle.getParent().bukkit;
     }

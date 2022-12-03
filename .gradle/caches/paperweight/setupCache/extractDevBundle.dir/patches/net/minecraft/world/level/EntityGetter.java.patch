@@ -99,3 +99,15 @@
      default boolean hasNearbyAlivePlayer(double x, double y, double z, double range) {
          for(Player player : this.players()) {
              if (EntitySelector.NO_SPECTATORS.test(player) && EntitySelector.LIVING_ENTITY_STILL_ALIVE.test(player)) {
+@@ -190,4 +243,11 @@
+ 
+         return null;
+     }
++
++    // Paper start
++    @Nullable
++    default Player getGlobalPlayerByUUID(UUID uuid) {
++        return this.getPlayerByUUID(uuid);
++    }
++    // Paper end
+ }

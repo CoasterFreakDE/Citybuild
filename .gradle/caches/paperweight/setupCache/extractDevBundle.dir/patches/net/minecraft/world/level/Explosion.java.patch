@@ -220,7 +220,7 @@
                          }
                      }
                  }
-@@ -172,42 +208,77 @@
+@@ -172,42 +208,80 @@
          }
  
          this.toBlow.addAll(set);
@@ -280,8 +280,6 @@
 +                        double d13 = (1.0D - d7) * d12;
 +
 +                        // CraftBukkit start
-+                        CraftEventFactory.entityDamage = this.source;
-+                        entity.lastDamageCancelled = false;
 +
 +                        // Special case ender dragon only give knockback if no damage is cancelled
 +                        // Thinks to note:
@@ -292,6 +290,11 @@
 +                        if (entity instanceof EnderDragonPart) {
 +                            continue;
 +                        }
++
++                        // Paper start - moved from above
++                        CraftEventFactory.entityDamage = this.source;
++                        entity.lastDamageCancelled = false;
++                        // Paper end
 +
 +                        if (entity instanceof EnderDragon) {
 +                            for (EnderDragonPart entityComplexPart : ((EnderDragon) entity).subEntities) {
@@ -328,7 +331,7 @@
                              }
                          }
                      }
-@@ -222,58 +293,123 @@
+@@ -222,58 +296,123 @@
              this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level.random.nextFloat() - this.level.random.nextFloat()) * 0.2F) * 0.7F, false);
          }
  
@@ -479,7 +482,7 @@
                  }
              }
          }
-@@ -281,14 +417,17 @@
+@@ -281,14 +420,17 @@
      }
  
      private static void addBlockDrops(ObjectArrayList<Pair<ItemStack, BlockPos>> stacks, ItemStack stack, BlockPos pos) {
@@ -503,7 +506,7 @@
                  if (stack.isEmpty()) {
                      return;
                  }
-@@ -311,14 +450,15 @@
+@@ -311,14 +453,15 @@
          if (this.source == null) {
              return null;
          } else if (this.source instanceof PrimedTnt) {
@@ -523,7 +526,7 @@
                  }
              }
  
-@@ -335,8 +475,89 @@
+@@ -335,8 +478,89 @@
      }
  
      public static enum BlockInteraction {
@@ -534,7 +537,7 @@
 +        NONE, BREAK, DESTROY;
 +
 +        private BlockInteraction() {}
-     }
++    }
 +    // Paper start - Optimize explosions
 +    private float getBlockDensity(Vec3 vec3d, Entity entity) {
 +        if (!this.level.paperConfig().environment.optimizeExplosions) {
@@ -613,6 +616,6 @@
 +            result = 31 * result + (int) (temp ^ (temp >>> 32));
 +            return result;
 +        }
-+    }
+     }
 +    // Paper end
  }

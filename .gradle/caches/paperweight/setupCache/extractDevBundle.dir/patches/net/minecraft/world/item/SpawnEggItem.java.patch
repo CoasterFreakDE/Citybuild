@@ -5,7 +5,7 @@
  
  public class SpawnEggItem extends Item {
 +
-     public static final Map<EntityType<? extends Mob>, SpawnEggItem> BY_ID = Maps.newIdentityHashMap();
+     private static final Map<EntityType<? extends Mob>, SpawnEggItem> BY_ID = Maps.newIdentityHashMap();
      private final int backgroundColor;
      private final int highlightColor;
 @@ -45,44 +46,50 @@

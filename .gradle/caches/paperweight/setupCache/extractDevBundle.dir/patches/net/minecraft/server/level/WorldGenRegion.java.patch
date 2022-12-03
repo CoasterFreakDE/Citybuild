@@ -124,7 +124,7 @@
      @Override
      public BlockState getBlockState(BlockPos pos) {
          return this.getChunk(SectionPos.blockToSectionCoord(pos.getX()), SectionPos.blockToSectionCoord(pos.getZ())).getBlockState(pos);
-@@ -198,13 +222,15 @@
+@@ -198,13 +222,16 @@
  
      @Override
      public boolean destroyBlock(BlockPos pos, boolean drop, @Nullable Entity breakingEntity, int maxUpdateDepth) {
@@ -138,6 +138,7 @@
 -            if (drop) {
 -                BlockEntity blockEntity = blockState.hasBlockEntity() ? this.getBlockEntity(pos) : null;
 -                Block.dropResources(blockState, this.level, pos, blockEntity, breakingEntity, ItemStack.EMPTY);
++            if (drop) LOGGER.warn("Potential async entity add during worldgen", new Throwable()); // Paper - log when this happens
 +            if (false) { // CraftBukkit - SPIGOT-6833: Do not drop during world generation
 +                BlockEntity tileentity = iblockdata.hasBlockEntity() ? this.getBlockEntity(pos) : null;
 +
@@ -145,7 +146,7 @@
              }
  
              return this.setBlock(pos, Blocks.AIR.defaultBlockState(), 3, maxUpdateDepth);
-@@ -214,56 +240,69 @@
+@@ -214,56 +241,69 @@
      @Nullable
      @Override
      public BlockEntity getBlockEntity(BlockPos pos) {
@@ -237,7 +238,7 @@
              return false;
          }
      }
-@@ -273,30 +312,33 @@
+@@ -273,30 +313,33 @@
          if (!this.ensureCanWrite(pos)) {
              return false;
          } else {
@@ -288,7 +289,7 @@
              }
  
              if (state.hasPostProcess(this, pos)) {
-@@ -313,8 +355,16 @@
+@@ -313,8 +356,16 @@
  
      @Override
      public boolean addFreshEntity(Entity entity) {
@@ -305,7 +306,7 @@
          this.getChunk(i, j).addEntity(entity);
          return true;
      }
-@@ -402,20 +452,16 @@
+@@ -402,20 +453,16 @@
      }
  
      @Override
@@ -330,7 +331,7 @@
  
      @Override
      public DimensionType dimensionType() {
-@@ -461,4 +507,21 @@
+@@ -461,4 +508,21 @@
      public long nextSubTickCount() {
          return this.subTickCount.getAndIncrement();
      }

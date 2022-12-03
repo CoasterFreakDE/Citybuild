@@ -36,7 +36,7 @@ public class MoneyCmd implements CommandExecutor {
                                         eco.loadByUuid();
                                         eco.setMoney(amount);
                                         eco.update();
-                                        p.sendMessage(Strings.prefix + "Du hast " + t.getName() + "'s Kontostand auf " + amount + " wc gesetzt");
+                                        p.sendMessage(Strings.prefix + "Du hast " + t.getName() + "'s Kontostand auf " + amount + " Coins gesetzt");
                                     }else{
                                         p.sendMessage(Strings.prefix + "Du kannst den Kontostand nicht ins Minus setzen");
                                     }
@@ -48,9 +48,10 @@ public class MoneyCmd implements CommandExecutor {
                                     long amount = Long.parseLong(strings[2]);
                                     if(amount >= 1){
                                         Economy.depositPlayer(t.getUniqueId(), amount);
-                                        p.sendMessage(Strings.prefix + "Du hast " + t.getName() + " " + amount + " wc gegeben");
+                                        p.sendMessage(Strings.prefix + "Du hast " + t.getName() + " " + amount + " Coins gegeben");
+                                        t.sendMessage(Strings.prefix + "§aDu hast " + amount + " Coins erhalten.");
                                     }else{
-                                        p.sendMessage(Strings.prefix + "Du musst mindestens 1 ʷᶜ hinzufügen");
+                                        p.sendMessage(Strings.prefix + "Du musst mindestens 1 Coins hinzufügen");
                                     }
                                 }catch (NumberFormatException e){
                                     p.sendMessage(Strings.prefix + "Bitte gebe eine Zahl an");
@@ -61,12 +62,12 @@ public class MoneyCmd implements CommandExecutor {
                                     if(amount >= 1){
                                         if(Economy.getBalance(t.getUniqueId()) >= amount) {
                                             Economy.withdrawPlayer(t.getUniqueId(), amount);
-                                            p.sendMessage(Strings.prefix + "Du hast " + t.getName() + " " + amount + " wc entfernt!");
+                                            p.sendMessage(Strings.prefix + "Du hast " + t.getName() + " " + amount + " Coins entfernt!");
                                         }else{
                                             p.sendMessage(Strings.prefix + "Du kannst nicht mehr Geld entfernen als der Spieler hat");
                                         }
                                     }else{
-                                        p.sendMessage(Strings.prefix + "Du musst mindestens 1 ʷᶜ entfernen!");
+                                        p.sendMessage(Strings.prefix + "Du musst mindestens 1 Coins entfernen!");
                                     }
                                 }catch (NumberFormatException e){
                                     p.sendMessage(Strings.prefix + "Bitte gebe eine Zahl an!");
@@ -83,7 +84,7 @@ public class MoneyCmd implements CommandExecutor {
                                 eco.loadByUuid();
                                 eco.setMoney(100);
                                 eco.update();
-                                p.sendMessage(Strings.prefix + "Du hast " + t.getName() + "'s Kontostand auf 0 ʷᶜ gesetzt");
+                                p.sendMessage(Strings.prefix + "Du hast " + t.getName() + "'s Kontostand auf 0 Coins gesetzt");
                             }else{
                                 p.sendMessage(Strings.playerNotFound);
                             }
@@ -99,14 +100,14 @@ public class MoneyCmd implements CommandExecutor {
                     p.sendMessage(Strings.noPerms);
                 }else{
                     if(strings.length == 0){
-                        p.sendMessage(Strings.prefix + "Dein Kontostand: " + Economy.getBalance(p.getUniqueId()) + " wc");
+                        p.sendMessage(Strings.prefix + "Dein Kontostand: " + Economy.getBalance(p.getUniqueId()) + " Coins");
                     }else if(strings.length == 1){
                         OfflinePlayer t = Bukkit.getOfflinePlayer(strings[0]);
                         if(t != null){
                             if(new Economy(t.getUniqueId()).existsByUuid()){
-                                p.sendMessage(Strings.prefix + t.getName() + "'s Kontostand: " + Economy.getBalance(t.getUniqueId()) + " wc");
+                                p.sendMessage(Strings.prefix + t.getName() + "'s Kontostand: " + Economy.getBalance(t.getUniqueId()) + " Coins");
                             }else{
-                                p.sendMessage(Strings.prefix + t.getName() + "'s Kontostand: 0 wc");
+                                p.sendMessage(Strings.prefix + t.getName() + "'s Kontostand: 0 Coins");
                             }
                         }else{
                             p.sendMessage(Strings.playerNotFound);
@@ -119,6 +120,89 @@ public class MoneyCmd implements CommandExecutor {
                         }
                     }
                 }
+            }
+        }else{
+            if(strings.length > 1){
+                    if(strings.length == 3){
+                        Player t = Bukkit.getPlayer(strings[0]);
+                        if(t != null){
+                            if(strings[1].equalsIgnoreCase("set")){
+                                try {
+                                    double amount = Double.parseDouble(strings[2]);
+                                    if(amount >= 0){
+                                        Economy eco = new Economy(t.getUniqueId());
+                                        eco.loadByUuid();
+                                        eco.setMoney(amount);
+                                        eco.update();
+                                        commandSender.sendMessage(Strings.prefix + "Du hast " + t.getName() + "'s Kontostand auf " + amount + " Coins gesetzt");
+                                    }else{
+                                        commandSender.sendMessage(Strings.prefix + "Du kannst den Kontostand nicht ins Minus setzen");
+                                    }
+                                }catch (NumberFormatException e){
+                                    commandSender.sendMessage(Strings.prefix + "Bitte gebe eine Zahl an");
+                                }
+                            }else if(strings[1].equalsIgnoreCase("add")){
+                                try {
+                                    long amount = Long.parseLong(strings[2]);
+                                    if(amount >= 1){
+                                        Economy.depositPlayer(t.getUniqueId(), amount);
+                                        commandSender.sendMessage(Strings.prefix + "Du hast " + t.getName() + " " + amount + " Coins gegeben");
+                                        t.sendMessage(Strings.prefix + "§aDu hast " + amount + " Coins erhalten.");
+                                    }else{
+                                        commandSender.sendMessage(Strings.prefix + "Du musst mindestens 1 Coins hinzufügen");
+                                    }
+                                }catch (NumberFormatException e){
+                                    commandSender.sendMessage(Strings.prefix + "Bitte gebe eine Zahl an");
+                                }
+                            }else if(strings[1].equalsIgnoreCase("remove")){
+                                try {
+                                    long amount = Long.parseLong(strings[2]);
+                                    if(amount >= 1){
+                                        if(Economy.getBalance(t.getUniqueId()) >= amount) {
+                                            Economy.withdrawPlayer(t.getUniqueId(), amount);
+                                            commandSender.sendMessage(Strings.prefix + "Du hast " + t.getName() + " " + amount + " Coins entfernt!");
+                                        }else{
+                                            commandSender.sendMessage(Strings.prefix + "Du kannst nicht mehr Geld entfernen als der Spieler hat");
+                                        }
+                                    }else{
+                                        commandSender.sendMessage(Strings.prefix + "Du musst mindestens 1 Coins entfernen!");
+                                    }
+                                }catch (NumberFormatException e){
+                                    commandSender.sendMessage(Strings.prefix + "Bitte gebe eine Zahl an!");
+                                }
+                            }
+                        }else{
+                            commandSender.sendMessage(Strings.playerNotFound);
+                        }
+                    }else if(strings.length == 2){
+                        Player t = Bukkit.getPlayer(strings[0]);
+                        if(strings[1].equalsIgnoreCase("reset")){
+                            if(t != null){
+                                Economy eco = new Economy(t.getUniqueId());
+                                eco.loadByUuid();
+                                eco.setMoney(100);
+                                eco.update();
+                                commandSender.sendMessage(Strings.prefix + "Du hast " + t.getName() + "'s Kontostand auf 0 Coins gesetzt");
+                            }else{
+                                commandSender.sendMessage(Strings.playerNotFound);
+                            }
+                        }else{
+                            commandSender.sendMessage(Strings.prefix + "Nutze: /money [spieler] [add/remove/set/reset] [amount]");
+                        }
+                    }else{
+                        commandSender.sendMessage(Strings.prefix + "Nutze: /money [spieler] [add/remove/set/reset] [amount]");
+                    }
+            }else if(strings.length == 1){
+                        OfflinePlayer t = Bukkit.getOfflinePlayer(strings[0]);
+                        if(t != null){
+                            if(new Economy(t.getUniqueId()).existsByUuid()){
+                                commandSender.sendMessage(Strings.prefix + t.getName() + "'s Kontostand: " + Economy.getBalance(t.getUniqueId()) + " Coins");
+                            }else{
+                                commandSender.sendMessage(Strings.prefix + t.getName() + "'s Kontostand: 0 Coins");
+                            }
+                        }else{
+                            commandSender.sendMessage(Strings.playerNotFound);
+                        }
             }
         }
 

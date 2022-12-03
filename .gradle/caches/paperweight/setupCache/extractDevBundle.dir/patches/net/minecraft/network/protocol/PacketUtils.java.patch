@@ -45,7 +45,8 @@
  
      public static <T extends PacketListener> void ensureRunningOnSameThread(Packet<T> packet, T listener, BlockableEventLoop<?> engine) throws RunningOnDifferentThreadException {
          if (!engine.isSameThread()) {
-             engine.executeIfPossible(() -> {
+-            engine.executeIfPossible(() -> {
++            engine.execute(() -> { // Paper - Fix preemptive player kick on a server shutdown.
 +                packetProcessing.push(listener); // Paper - detailed watchdog information
 +                try { // Paper - detailed watchdog information
 +                if (MinecraftServer.getServer().hasStopped() || (listener instanceof ServerGamePacketListenerImpl && ((ServerGamePacketListenerImpl) listener).processedDisconnect)) return; // CraftBukkit, MC-142590
@@ -74,12 +75,12 @@
                  } else {
 -                    LOGGER.debug("Ignoring packet due to disconnection: {}", (Object)packet);
 +                    PacketUtils.LOGGER.debug("Ignoring packet due to disconnection: {}", packet);
-                 }
++                }
 +                // Paper start - detailed watchdog information
 +                } finally {
 +                    totalMainThreadPacketsProcessed.getAndIncrement();
 +                    packetProcessing.pop();
-+                }
+                 }
 +                // Paper end - detailed watchdog information
  
              });

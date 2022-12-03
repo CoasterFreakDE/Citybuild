@@ -43,7 +43,7 @@ import org.bukkit.generator.ChunkGenerator.ChunkData;
 
 public class CustomChunkGenerator extends InternalChunkGenerator {
 
-    public final net.minecraft.world.level.chunk.ChunkGenerator delegate;
+    private final net.minecraft.world.level.chunk.ChunkGenerator delegate;
     private final ChunkGenerator generator;
     private final ServerLevel world;
     private final Random random = new Random();

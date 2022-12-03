@@ -4,13 +4,39 @@ import dev.lupluv.cb.Citybuild;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 
 public class Crafting {
 
     public void loadRecipes(){
         loadPrivateElevator();
         loadPublicElevator();
+        loadLight();
+    }
+
+    public static void loadLight(){
+        ItemStack item = new ItemStack(Material.LIGHT);
+
+        // create a NamespacedKey for your recipe
+        NamespacedKey key = new NamespacedKey(Citybuild.getPlugin(), "light");
+
+        // Create our custom recipe variable
+        ShapelessRecipe recipe = new ShapelessRecipe(key, item);
+
+        recipe.addIngredient(Material.GLASS_BOTTLE);
+        recipe.addIngredient(Material.INK_SAC);
+
+        // Finally, add the recipe to the bukkit recipes
+        Bukkit.addRecipe(recipe);
+    }
+
+    public static ItemStack getPublicElevator(){
+        Item item = new Item(Material.WHITE_CONCRETE);
+        item.setDisplayName("§6§lAufzug");
+        item.setLore(Lore.create("§7Nutze diesen Block als Aufzug."));
+        return item.build();
     }
 
     public void loadPrivateElevator(){

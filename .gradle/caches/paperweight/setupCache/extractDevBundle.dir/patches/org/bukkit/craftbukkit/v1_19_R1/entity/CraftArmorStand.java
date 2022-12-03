@@ -313,6 +313,74 @@ public class CraftArmorStand extends CraftLivingEntity implements ArmorStand {
     }
 
     @Override
+    public io.papermc.paper.math.Rotations getBodyRotations() {
+        return fromNMSRotations(getHandle().bodyPose);
+    }
+
+    @Override
+    public void setBodyRotations(io.papermc.paper.math.Rotations rotations) {
+        getHandle().setBodyPose(toNMSRotations(rotations));
+    }
+
+    @Override
+    public io.papermc.paper.math.Rotations getLeftArmRotations() {
+        return fromNMSRotations(getHandle().leftArmPose);
+    }
+
+    @Override
+    public void setLeftArmRotations(io.papermc.paper.math.Rotations rotations) {
+        getHandle().setLeftArmPose(toNMSRotations(rotations));
+    }
+
+    @Override
+    public io.papermc.paper.math.Rotations getRightArmRotations() {
+        return fromNMSRotations(getHandle().rightArmPose);
+    }
+
+    @Override
+    public void setRightArmRotations(io.papermc.paper.math.Rotations rotations) {
+        getHandle().setRightArmPose(toNMSRotations(rotations));
+    }
+
+    @Override
+    public io.papermc.paper.math.Rotations getLeftLegRotations() {
+        return fromNMSRotations(getHandle().leftLegPose);
+    }
+
+    @Override
+    public void setLeftLegRotations(io.papermc.paper.math.Rotations rotations) {
+        getHandle().setLeftLegPose(toNMSRotations(rotations));
+    }
+
+    @Override
+    public io.papermc.paper.math.Rotations getRightLegRotations() {
+        return fromNMSRotations(getHandle().rightLegPose);
+    }
+
+    @Override
+    public void setRightLegRotations(io.papermc.paper.math.Rotations rotations) {
+        getHandle().setRightLegPose(toNMSRotations(rotations));
+    }
+
+    @Override
+    public io.papermc.paper.math.Rotations getHeadRotations() {
+        return fromNMSRotations(getHandle().headPose);
+    }
+
+    @Override
+    public void setHeadRotations(io.papermc.paper.math.Rotations rotations) {
+        getHandle().setHeadPose(toNMSRotations(rotations));
+    }
+
+    private static io.papermc.paper.math.Rotations fromNMSRotations(Rotations old) {
+        return io.papermc.paper.math.Rotations.ofDegrees(old.getX(), old.getY(), old.getZ());
+    }
+
+    private static Rotations toNMSRotations(io.papermc.paper.math.Rotations old) {
+        return new Rotations((float) old.x(), (float) old.y(), (float) old.z());
+    }
+
+    @Override
     public boolean canTick() {
         return this.getHandle().canTick;
     }

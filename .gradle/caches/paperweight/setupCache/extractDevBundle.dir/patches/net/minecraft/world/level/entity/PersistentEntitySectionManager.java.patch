@@ -251,7 +251,7 @@
  
      }
  
-     public boolean storeChunkSections(long chunkPos, Consumer<T> action) {
+     private boolean storeChunkSections(long chunkPos, Consumer<T> action) {
 -        PersistentEntitySectionManager.ChunkLoadStatus chunkLoadStatus = this.chunkLoadStatuses.get(chunkPos);
 -        if (chunkLoadStatus == PersistentEntitySectionManager.ChunkLoadStatus.PENDING) {
 +        // CraftBukkit start - add boolean for event call

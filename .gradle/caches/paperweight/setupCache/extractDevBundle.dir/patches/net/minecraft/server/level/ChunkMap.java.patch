@@ -78,7 +78,7 @@
 -    public final Long2ObjectLinkedOpenHashMap<ChunkHolder> updatingChunkMap = new Long2ObjectLinkedOpenHashMap<>();
 -    public volatile Long2ObjectLinkedOpenHashMap<ChunkHolder> visibleChunkMap = this.updatingChunkMap.clone();
 -    private final Long2ObjectLinkedOpenHashMap<ChunkHolder> pendingUnloads = new Long2ObjectLinkedOpenHashMap<>();
--    public final LongSet entitiesInLevel = new LongOpenHashSet();
+-    private final LongSet entitiesInLevel = new LongOpenHashSet();
 +    // Paper - rewrite chunk system
      public final ServerLevel level;
      private final ThreadedLevelLightEngine lightEngine;
@@ -93,7 +93,7 @@
      private boolean modified;
 -    private final ChunkTaskPriorityQueueSorter queueSorter;
 -    private final ProcessorHandle<ChunkTaskPriorityQueueSorter.Message<Runnable>> worldgenMailbox;
--    public final ProcessorHandle<ChunkTaskPriorityQueueSorter.Message<Runnable>> mainThreadMailbox;
+-    private final ProcessorHandle<ChunkTaskPriorityQueueSorter.Message<Runnable>> mainThreadMailbox;
 +    // Paper - rewrite chunk system
      public final ChunkProgressListener progressListener;
      private final ChunkStatusUpdateListener chunkStatusListener;
@@ -500,7 +500,7 @@
 @@ -225,368 +500,170 @@
  
      @Nullable
-     public ChunkHolder getUpdatingChunkIfPresent(long pos) {
+     protected ChunkHolder getUpdatingChunkIfPresent(long pos) {
 -        return this.updatingChunkMap.get(pos);
 +        // Paper start - rewrite chunk system
 +        io.papermc.paper.chunk.system.scheduling.NewChunkHolder holder = this.level.chunkTaskScheduler.chunkHolderManager.getChunkHolder(pos);
@@ -2107,7 +2107,7 @@
 -    class DistanceManager extends net.minecraft.server.level.DistanceManager {
 -        protected DistanceManager(Executor workerExecutor, Executor mainThreadExecutor) {
 -            super(workerExecutor, mainThreadExecutor);
-+    public class ChunkDistanceManager extends DistanceManager {
++    private class ChunkDistanceManager extends DistanceManager {
 +
 +        protected ChunkDistanceManager(Executor workerExecutor, Executor mainThreadExecutor) {
 +            super(workerExecutor, mainThreadExecutor, ChunkMap.this);

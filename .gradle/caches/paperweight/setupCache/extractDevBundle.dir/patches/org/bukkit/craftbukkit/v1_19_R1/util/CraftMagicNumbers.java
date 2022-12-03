@@ -99,6 +99,11 @@ public final class CraftMagicNumbers implements UnsafeValues {
     public net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer legacyComponentSerializer() {
         return net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection();
     }
+
+    @Override
+    public net.kyori.adventure.text.Component resolveWithContext(final net.kyori.adventure.text.Component component, final org.bukkit.command.CommandSender context, final org.bukkit.entity.Entity scoreboardSubject, final boolean bypassPermissions) throws IOException {
+        return io.papermc.paper.adventure.PaperAdventure.resolveWithContext(component, context, scoreboardSubject, bypassPermissions);
+    }
     // Paper end
 
     public static BlockState getBlock(MaterialData material) {

@@ -4,10 +4,9 @@ import com.plotsquared.core.PlotSquared;
 import com.plotsquared.core.plot.Plot;
 import com.plotsquared.core.plot.PlotId;
 import dev.lupluv.cb.Citybuild;
-import dev.lupluv.cb.utils.Home;
-import dev.lupluv.cb.utils.InventoryManager;
-import dev.lupluv.cb.utils.Strings;
-import dev.lupluv.cb.utils.Warp;
+import dev.lupluv.cb.economy.Economy;
+import dev.lupluv.cb.shop.Adminshop;
+import dev.lupluv.cb.utils.*;
 import dev.lupluv.cb.voting.VoteAPI;
 import dev.lupluv.cb.voting.VoteFetcher;
 import dev.lupluv.cb.voting.VoteSite;
@@ -19,6 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.checkerframework.checker.units.qual.C;
 
 import java.util.function.Consumer;
 
@@ -116,8 +116,153 @@ public class ClickHandler implements Listener {
                     p.sendMessage(Strings.prefix + "§7Vote jetzt unter: §6https://vote.wonderbuild.net");
                 }
             }
+        }else if(title.equalsIgnoreCase("§6§lAdminshop")){
+            e.setCancelled(true);
+            if(mat == Material.GRAY_STAINED_GLASS_PANE) return;
+
+            for(CbItem cbItem : CbItem.values()){
+                if(cbItem.getMaterial() == mat){
+                    if(e.isLeftClick()){
+                        new Adminshop(p).amountBuy(cbItem);
+                    }else if(e.isRightClick()){
+                        new Adminshop(p).amountSell(cbItem);
+                    }
+                }
+            }
+
+        }else if(title.endsWith(" §8» §7Kaufen")){
+            e.setCancelled(true);
+            if(mat == Material.GRAY_STAINED_GLASS_PANE) return;
+
+            String name = title.replace(" §8» §7Kaufen", "");
+            CbItem cbItem = null;
+            for(CbItem c : CbItem.values()){
+                if(c.getDisplayName().equalsIgnoreCase(name)){
+                    cbItem = c;
+                }
+            }
+            if(item.getItemMeta().getDisplayName().startsWith("§7Kaufe 1 ")){
+                // Buy 1
+                double price = Worth.getWorth(cbItem).getBuy();
+                if(Economy.getBalance(p.getUniqueId()) < price){
+                    p.sendMessage(Strings.prefix + "§cDazu hast du nicht genug Coins!");
+                    return;
+                }
+                if(!hasFree(p)){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cDu hast keinen Platz mehr in deinem Inventar!");
+                    return;
+                }
+                ItemStack is = new ItemStack(cbItem.getMaterial());
+                if(!Economy.withdrawPlayer(p.getUniqueId(), price).transactionSuccess()){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
+                    return;
+                }
+                p.getInventory().addItem(is);
+                p.sendMessage(Strings.prefix + "§7Du hast §a" + is.getAmount() + " " + cbItem.getDisplayName() + " §7gekauft.");
+            }else if(item.getItemMeta().getDisplayName().startsWith("§7Kaufe 32 ")){
+                // Buy 2
+                double price = Worth.getWorth(cbItem).getBuy()*32;
+                if(Economy.getBalance(p.getUniqueId()) < price){
+                    p.sendMessage(Strings.prefix + "§cDazu hast du nicht genug Coins!");
+                    return;
+                }
+                if(!hasFree(p)){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cDu hast keinen Platz mehr in deinem Inventar!");
+                    return;
+                }
+                ItemStack is = new ItemStack(cbItem.getMaterial(), 32);
+                if(!Economy.withdrawPlayer(p.getUniqueId(), price).transactionSuccess()){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
+                    return;
+                }
+                p.getInventory().addItem(is);
+                p.sendMessage(Strings.prefix + "§7Du hast §a" + is.getAmount() + " " + cbItem.getDisplayName() + " §7gekauft.");
+            }else if(item.getItemMeta().getDisplayName().startsWith("§7Kaufe 64 ")){
+                // Buy 3
+                double price = Worth.getWorth(cbItem).getBuy()*64;
+                if(Economy.getBalance(p.getUniqueId()) < price){
+                    p.sendMessage(Strings.prefix + "§cDazu hast du nicht genug Coins!");
+                    return;
+                }
+                if(!hasFree(p)){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cDu hast keinen Platz mehr in deinem Inventar!");
+                    return;
+                }
+                ItemStack is = new ItemStack(cbItem.getMaterial(), 64);
+                if(!Economy.withdrawPlayer(p.getUniqueId(), price).transactionSuccess()){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
+                    return;
+                }
+                p.getInventory().addItem(is);
+                p.sendMessage(Strings.prefix + "§7Du hast §a" + is.getAmount() + " " + cbItem.getDisplayName() + " §7gekauft.");
+            }else if(item.getItemMeta().getDisplayName().equalsIgnoreCase("§7➥ Zurück")){
+                new Adminshop(p).open();
+            }
+        }else if(title.endsWith(" §8» §7Verkaufen")){
+            e.setCancelled(true);
+            if(mat == Material.GRAY_STAINED_GLASS_PANE) return;
+
+            String name = title.replace(" §8» §7Verkaufen", "");
+            CbItem cbItem = null;
+            for(CbItem c : CbItem.values()){
+                if(c.getDisplayName().equalsIgnoreCase(name)){
+                    cbItem = c;
+                }
+            }
+            if(item.getItemMeta().getDisplayName().startsWith("§7Verkaufe 1 ")){
+                // Sell 1
+                double price = Worth.getWorth(cbItem).getSell();
+                ItemStack is = new ItemStack(cbItem.getMaterial());
+                if(!Economy.depositPlayer(p.getUniqueId(), price).transactionSuccess()){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
+                    return;
+                }
+            }else if(item.getItemMeta().getDisplayName().startsWith("§7Verkaufe 32 ")){
+                // Sell 2
+                double price = Worth.getWorth(cbItem).getSell()*32;
+                ItemStack is = new ItemStack(cbItem.getMaterial(), 32);
+                if(!Economy.depositPlayer(p.getUniqueId(), price).transactionSuccess()){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
+                    return;
+                }
+            }else if(item.getItemMeta().getDisplayName().startsWith("§7Verkaufe 64 ")){
+                // Sell 3
+                double price = Worth.getWorth(cbItem).getSell()*64;
+                ItemStack is = new ItemStack(cbItem.getMaterial(), 64);
+                if(!Economy.depositPlayer(p.getUniqueId(), price).transactionSuccess()){
+                    p.closeInventory();
+                    p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
+                    return;
+                }
+            }else if(item.getItemMeta().getDisplayName().equalsIgnoreCase("§7➥ Zurück")){
+                new Adminshop(p).open();
+            }
         }
 
+    }
+
+    public static boolean hasFree(Player p){
+        boolean hasFree = false;
+        for(int i = 0; i < 6*5+3; i++){
+            ItemStack is = p.getInventory().getItem(i);
+            if(is == null || is.getType() == Material.AIR){
+                hasFree = true;
+                break;
+            }
+        }
+        return hasFree;
+    }
+
+    public static boolean hasItems(Player p, ItemStack is){
+        return true;
     }
 
 }

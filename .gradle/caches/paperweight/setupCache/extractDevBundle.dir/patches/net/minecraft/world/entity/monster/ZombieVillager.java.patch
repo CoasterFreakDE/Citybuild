@@ -231,7 +231,7 @@
 -            if (player instanceof ServerPlayer) {
 -                CriteriaTriggers.CURED_ZOMBIE_VILLAGER.trigger((ServerPlayer)player, this, villager);
 -                world.onReputationEvent(ReputationEventType.ZOMBIE_VILLAGER_CURED, player, villager);
-+            Player entityhuman = world.getPlayerByUUID(this.conversionStarter);
++            Player entityhuman = world.getGlobalPlayerByUUID(this.conversionStarter); // Paper - check all players
 +
 +            if (entityhuman instanceof ServerPlayer) {
 +                CriteriaTriggers.CURED_ZOMBIE_VILLAGER.trigger((ServerPlayer) entityhuman, this, entityvillager);

@@ -1,6 +1,7 @@
 package dev.lupluv.cb.commands;
 
 import dev.lupluv.cb.utils.Strings;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,8 +18,12 @@ public class ReplyCmd implements CommandExecutor {
                 p.sendMessage(Strings.noPerms);
             }else{
                 if(args.length >= 1){
-                    Player t = MsgCmd.lastDiscussions.get(p);
-                    if(t != null && !t.isOnline()){
+                    if(!MsgCmd.lastDiscussions.containsKey(p.getUniqueId())){
+                        p.sendMessage(Strings.prefix + "§cKeine letzte Unterhaltung.");
+                        return true;
+                    }
+                    Player t = Bukkit.getPlayer(MsgCmd.lastDiscussions.get(p.getUniqueId()));
+                    if(t != null && t.isOnline()){
                         if(!p.getName().equalsIgnoreCase(t.getName())) {
                             String msg = String.join(" ", args);
                             p.sendMessage(Strings.prefix + "§e[§6Du §7-> §6" + t.getName() + "§e] " + msg);

@@ -123,7 +123,7 @@
 +            stringreader.setCursor(suggestionsbuilder.getStart());
 +            // Paper start
 +            final boolean permission = object instanceof CommandSourceStack stack
-+                    ? stack.hasPermission(2, "minecraft.command.selector")
++                    ? stack.bypassSelectorPermissions || stack.hasPermission(2, "minecraft.command.selector")
 +                    : icompletionprovider.hasPermission(2);
 +            EntitySelectorParser argumentparserselector = new EntitySelectorParser(stringreader, permission, true); // Paper
 +            // Paper end

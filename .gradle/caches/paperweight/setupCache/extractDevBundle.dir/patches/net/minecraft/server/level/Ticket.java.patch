@@ -4,7 +4,7 @@
      private final TicketType<T> type;
      private final int ticketLevel;
      public final T key;
--    public long createdTick;
+-    private long createdTick;
 +    // Paper start - rewrite chunk system
 +    public final long removalTick;
  

@@ -14,6 +14,7 @@ repositories {
         name = 'citizens-repo'
         url = 'https://maven.citizensnpcs.co/repo'
     }
+    maven { url 'https://repo.cloudnetservice.eu/repository/releases/' }
 }
 
 dependencies {
@@ -31,6 +32,8 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    implementation 'de.dytanic.cloudnet:cloudnet-driver:3.4.0-RELEASE'
 }
 
 compileJava.options.encoding = 'UTF-8'

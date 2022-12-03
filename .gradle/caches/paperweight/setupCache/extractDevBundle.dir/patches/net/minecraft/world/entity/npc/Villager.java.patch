@@ -800,7 +800,7 @@
          }).sum();
      }
  
-@@ -791,13 +919,16 @@
+@@ -791,15 +919,26 @@
  
      @Override
      protected void updateTrades() {
@@ -811,6 +811,12 @@
 -            if (itemListings != null) {
 -                MerchantOffers merchantOffers = this.getOffers();
 -                this.addOffersFromItemListings(merchantOffers, itemListings, 2);
++        // Paper start
++        updateTrades(TRADES_PER_LEVEL);
++    }
++
++    public boolean updateTrades(int amount) {
++        // Paper end
 +        VillagerData villagerdata = this.getVillagerData();
 +        Int2ObjectMap<VillagerTrades.ItemListing[]> int2objectmap = (Int2ObjectMap) VillagerTrades.TRADES.get(villagerdata.getProfession());
 +
@@ -820,11 +826,15 @@
 +            if (avillagertrades_imerchantrecipeoption != null) {
 +                MerchantOffers merchantrecipelist = this.getOffers();
 +
-+                this.addOffersFromItemListings(merchantrecipelist, avillagertrades_imerchantrecipeoption, 2);
++                this.addOffersFromItemListings(merchantrecipelist, avillagertrades_imerchantrecipeoption, amount); // Paper
++                return true; // Paper
              }
          }
++        return false; // Paper
      }
-@@ -812,24 +943,26 @@
+ 
+     public void gossip(ServerLevel world, Villager villager, long time) {
+@@ -812,24 +951,26 @@
      }
  
      private void maybeDecayGossip() {
@@ -861,7 +871,7 @@
                      list.forEach(GolemSensor::golemDetected);
                  }
              }
-@@ -837,16 +970,21 @@
+@@ -837,16 +978,21 @@
      }
  
      public boolean wantsToSpawnGolem(long time) {
@@ -888,7 +898,7 @@
              this.gossips.add(entity.getUUID(), GossipType.MAJOR_POSITIVE, 20);
              this.gossips.add(entity.getUUID(), GossipType.MINOR_POSITIVE, 25);
          } else if (interaction == ReputationEventType.TRADE) {
-@@ -878,7 +1016,7 @@
+@@ -878,7 +1024,7 @@
      }
  
      public void setGossips(Tag nbt) {
@@ -897,7 +907,7 @@
      }
  
      @Override
-@@ -890,7 +1028,7 @@
+@@ -890,7 +1036,7 @@
      @Override
      public void startSleeping(BlockPos pos) {
          super.startSleeping(pos);
@@ -906,7 +916,7 @@
          this.brain.eraseMemory(MemoryModuleType.WALK_TARGET);
          this.brain.eraseMemory(MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE);
      }
-@@ -898,15 +1036,12 @@
+@@ -898,15 +1044,12 @@
      @Override
      public void stopSleeping() {
          super.stopSleeping();

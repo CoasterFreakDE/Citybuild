@@ -34,9 +34,22 @@
  
      public Advancement(ResourceLocation id, @Nullable Advancement parent, @Nullable DisplayInfo display, AdvancementRewards rewards, Map<String, Criterion> criteria, String[][] requirements) {
          this.id = id;
-@@ -51,13 +56,14 @@
-         if (display == null) {
-             this.chatComponent = Component.literal(id.toString());
+@@ -48,16 +53,25 @@
+             parent.addChild(this);
+         }
+ 
+-        if (display == null) {
+-            this.chatComponent = Component.literal(id.toString());
++        // Paper start - moved to static method
++        this.chatComponent = constructDisplayComponent(this.id, this.display);
++    }
++
++    public static Component constructDisplayComponent(final @Nullable ResourceLocation id, final @Nullable DisplayInfo display) {
++        if (id == null && display == null) {
++            throw new IllegalArgumentException("can't both be null");
++        } else if (display == null) {
++            return Component.literal(id.toString());
++        // Paper end
          } else {
 -            Component component = display.getTitle();
 -            ChatFormatting chatFormatting = display.getFrame().getChatColor();
@@ -51,11 +64,11 @@
              });
 -            this.chatComponent = ComponentUtils.wrapInSquareBrackets(component3).withStyle(chatFormatting);
 +
-+            this.chatComponent = ComponentUtils.wrapInSquareBrackets(ichatmutablecomponent1).withStyle(enumchatformat);
++            return ComponentUtils.wrapInSquareBrackets(ichatmutablecomponent1).withStyle(enumchatformat); // Paper
          }
  
      }
-@@ -80,9 +86,10 @@
+@@ -80,9 +94,10 @@
          return this.rewards;
      }
  
@@ -68,7 +81,7 @@
      }
  
      public Iterable<Advancement> getChildren() {
-@@ -105,19 +112,18 @@
+@@ -105,19 +120,18 @@
          return this.id;
      }
  
@@ -90,7 +103,7 @@
      public int hashCode() {
          return this.id.hashCode();
      }
-@@ -131,19 +137,23 @@
+@@ -131,19 +145,23 @@
      }
  
      public static class Builder {
@@ -117,7 +130,7 @@
              this.parentId = parentId;
              this.display = display;
              this.rewards = rewards;
-@@ -152,6 +162,9 @@
+@@ -152,6 +170,9 @@
          }
  
          private Builder() {
@@ -127,7 +140,7 @@
          }
  
          public static Advancement.Builder advancement() {
-@@ -218,7 +231,7 @@
+@@ -218,7 +239,7 @@
                  return true;
              } else {
                  if (this.parent == null) {
@@ -136,7 +149,7 @@
                  }
  
                  return this.parent != null;
-@@ -226,7 +239,7 @@
+@@ -226,7 +247,7 @@
          }
  
          public Advancement build(ResourceLocation id) {
@@ -145,7 +158,7 @@
                  return null;
              })) {
                  throw new IllegalStateException("Tried to build incomplete advancement!");
-@@ -241,6 +254,7 @@
+@@ -241,6 +262,7 @@
  
          public Advancement save(Consumer<Advancement> exporter, String id) {
              Advancement advancement = this.build(new ResourceLocation(id));
@@ -153,7 +166,7 @@
              exporter.accept(advancement);
              return advancement;
          }
-@@ -250,39 +264,50 @@
+@@ -250,39 +272,50 @@
                  this.requirements = this.requirementsStrategy.createRequirements(this.criteria.keySet());
              }
  
@@ -221,7 +234,7 @@
          }
  
          public void serializeToNetwork(FriendlyByteBuf buf) {
-@@ -291,102 +316,143 @@
+@@ -291,102 +324,143 @@
              }
  
              buf.writeNullable(this.parentId, FriendlyByteBuf::writeResourceLocation);

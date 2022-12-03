@@ -1,5 +1,8 @@
 package dev.lupluv.cb;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import dev.lupluv.cb.clans.Clan;
 import dev.lupluv.cb.commands.*;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.events.*;
@@ -13,6 +16,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
@@ -47,6 +51,12 @@ public class Citybuild extends JavaPlugin {
         // MySQL Con
         reloadMysql();
 
+    }
+
+    @Override
+    public void onEnable() {
+
+
         if(getServer().getPluginManager().isPluginEnabled("Vault")) {
             try {
                 Plugin vault = getServer().getPluginManager().getPlugin("Vault");
@@ -56,10 +66,6 @@ public class Citybuild extends JavaPlugin {
                 plugin.getLogger().log(Level.SEVERE, "Exception occurred while hooking into vault", exception);
             }
         }
-    }
-
-    @Override
-    public void onEnable() {
 
         if(!getServer().getPluginManager().isPluginEnabled("Citizens")) {
             getLogger().log(Level.SEVERE, "Citizens 2.0 not found or not enabled");
@@ -118,6 +124,10 @@ public class Citybuild extends JavaPlugin {
         getCommand("sign").setExecutor(new SignCmd());
         getCommand("invsee").setExecutor(new InvseeCmd());
         getCommand("payall").setExecutor(new PayallCmd());
+        getCommand("clan").setExecutor(new ClanCmd());
+        getCommand("adminshop").setExecutor(new AdminshopCmd());
+        getCommand("givereward").setExecutor(new GiverewardCmd());
+        getCommand("neustart").setExecutor(new NeustartCmd());
 
         // Events
 
@@ -129,6 +139,8 @@ public class Citybuild extends JavaPlugin {
         statsNPC = new StatsNPC();
 
         Bukkit.getScheduler().runTaskLater(this, Citybuild::startNPCScheduler, 20*10);
+
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
 
     }
 
@@ -173,6 +185,12 @@ public class Citybuild extends JavaPlugin {
             if(mySQL.isConnected()){
                 System.out.println("Successfull");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_economy (uuid VARCHAR(255),name VARCHAR(255),money DOUBLE(255,20));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_economy_banks (name VARCHAR(255),money DOUBLE(255,20));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_clan (id BIGINT(255),name VARCHAR(255),tag VARCHAR(255),color VARCHAR(255)" +
+                        ",open VARCHAR(255),chat VARCHAR(255),date BIGINT(255));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_user (id BIGINT(255),uuid VARCHAR(255),name VARCHAR(255));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_member (user_id BIGINT(255),clan_id BIGINT(255),role VARCHAR(255));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_requests (user_id BIGINT(255),clan_id BIGINT(255),type VARCHAR(255),date BIGINT(255));");
             }
         }
     }
@@ -209,7 +227,7 @@ public class Citybuild extends JavaPlugin {
         if(cfg.getString("NPC.0.World") != null){
             Location loc = Util.getLocation(cfg, "NPC.0");
             if(eco1 != null) {
-                statsNPC.updateNpc(1, "§6§lPlatz 1 §8| §e§l" + eco1.getPlayerName() + " §8| §6§l" + eco1.getMoney() + " wc", eco1.getPlayerName());
+                statsNPC.updateNpc(1, "§6§lPlatz 1\n§e§l" + eco1.getPlayerName() + "\n§6§l" + eco1.getMoney() + " Coins", eco1.getPlayerName());
                 System.out.println("Appending 1");
             }
         }
@@ -218,7 +236,7 @@ public class Citybuild extends JavaPlugin {
         if(cfg.getString("NPC.1.World") != null){
             Location loc = Util.getLocation(cfg, "NPC.1");
             if(eco2 != null) {
-                statsNPC.updateNpc(2, "§6§lPlatz 2 §8| §e§l" + eco2.getPlayerName() + " §8| §6§l" + eco2.getMoney() + " wc", eco2.getPlayerName());
+                statsNPC.updateNpc(2, "§6§lPlatz 2\n§e§l" + eco2.getPlayerName() + "\n§6§l" + eco2.getMoney() + " Coins", eco2.getPlayerName());
                 System.out.println("Appending 2");
             }
         }
@@ -227,10 +245,18 @@ public class Citybuild extends JavaPlugin {
         if(cfg.getString("NPC.2.World") != null){
             Location loc = Util.getLocation(cfg, "NPC.2");
             if(eco3 != null) {
-                statsNPC.updateNpc(3, "§6§lPlatz 3 §8| §e§l" + eco3.getPlayerName() + " §8| §6§l" + eco3.getMoney() + " wc", eco3.getPlayerName());
+                statsNPC.updateNpc(3, "§6§lPlatz 3\n§e§l" + eco3.getPlayerName() + "\n§6§l" + eco3.getMoney() + " Coins", eco3.getPlayerName());
                 System.out.println("Appending 3");
             }
         }
+    }
+
+    public static void sendPlayerToLobby(Player player){
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Connect");
+        out.writeUTF("lobby-1");
+
+        player.sendPluginMessage(getPlugin(), "BungeeCord", out.toByteArray());
     }
 
 }

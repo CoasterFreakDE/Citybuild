@@ -301,7 +301,7 @@
                  this.disconnect(Component.translatable("multiplayer.disconnect.invalid_packet"));
              }
  
-@@ -158,92 +308,279 @@
+@@ -158,92 +308,287 @@
      }
  
      private static <T extends PacketListener> void genericsFtw(Packet<T> packet, PacketListener listener) {
@@ -548,11 +548,17 @@
 +        java.util.Iterator<PacketHolder> iterator = this.queue.iterator();
 +        while (iterator.hasNext()) {
 +            PacketHolder queued = iterator.next(); // poll -> peek
- 
++
 +            // Fix NPE (Spigot bug caused by handleDisconnection())
 +            if (false && queued == null) { // Paper - diff on change, this logic is redundant: iterator guarantees ret of an element - on change, hook the flush logic here
 +                return true;
 +            }
+ 
++            // Paper start - checking isConsumed flag and skipping packet sending
++            if (queued.isConsumed()) {
++                continue;
++            }
++            // Paper end - checking isConsumed flag and skipping packet sending
 +
 +            Packet<?> packet = queued.packet;
 +            if (!packet.isReady()) {
@@ -564,8 +570,10 @@
 +                return false;
 +            } else {
 +                iterator.remove();
-+                this.sendPacket(packet, queued.listener, (!iterator.hasNext() && (needsFlush || this.canFlush)) ? Boolean.TRUE : Boolean.FALSE); // Paper - make only one flush call per sendPacketQueue() call
-+                hasWrotePacket = true; // Paper - make only one flush call per sendPacketQueue() call
++                if (queued.tryMarkConsumed()) { // Paper - try to mark isConsumed flag for de-duplicating packet
++                    this.sendPacket(packet, queued.listener, (!iterator.hasNext() && (needsFlush || this.canFlush)) ? Boolean.TRUE : Boolean.FALSE); // Paper - make only one flush call per sendPacketQueue() call
++                    hasWrotePacket = true; // Paper - make only one flush call per sendPacketQueue() call
++                }
              }
          }
 +        return true;
@@ -613,7 +621,7 @@
          }
  
          if (!this.isConnected() && !this.disconnectionHandled) {
-@@ -251,7 +588,7 @@
+@@ -251,7 +596,7 @@
          }
  
          if (this.channel != null) {
@@ -622,7 +630,7 @@
          }
  
          if (this.tickCount++ % 20 == 0) {
-@@ -261,8 +598,8 @@
+@@ -261,8 +606,8 @@
      }
  
      protected void tickSecond() {
@@ -633,7 +641,7 @@
          this.sentPackets = 0;
          this.receivedPackets = 0;
      }
-@@ -271,9 +608,25 @@
+@@ -271,9 +616,25 @@
          return this.address;
      }
  
@@ -660,7 +668,7 @@
              this.disconnectedReason = disconnectReason;
          }
  
-@@ -292,45 +645,65 @@
+@@ -292,45 +653,65 @@
      }
  
      public static Connection connectToServer(InetSocketAddress address, boolean useEpoll) {
@@ -747,7 +755,7 @@
  
      public boolean isEncrypted() {
          return this.encrypted;
-@@ -359,17 +732,19 @@
+@@ -359,17 +740,19 @@
  
      public void setupCompression(int compressionThreshold, boolean rejectsBadPackets) {
          if (compressionThreshold >= 0) {
@@ -771,7 +779,7 @@
          } else {
              if (this.channel.pipeline().get("decompress") instanceof CompressionDecoder) {
                  this.channel.pipeline().remove("decompress");
-@@ -378,6 +753,7 @@
+@@ -378,6 +761,7 @@
              if (this.channel.pipeline().get("compress") instanceof CompressionEncoder) {
                  this.channel.pipeline().remove("compress");
              }
@@ -779,7 +787,7 @@
          }
  
      }
-@@ -385,7 +761,7 @@
+@@ -385,7 +769,7 @@
      public void handleDisconnection() {
          if (this.channel != null && !this.channel.isOpen()) {
              if (this.disconnectionHandled) {
@@ -788,7 +796,7 @@
              } else {
                  this.disconnectionHandled = true;
                  if (this.getDisconnectedReason() != null) {
-@@ -393,6 +769,27 @@
+@@ -393,6 +777,27 @@
                  } else if (this.getPacketListener() != null) {
                      this.getPacketListener().onDisconnect(Component.translatable("multiplayer.disconnect.generic"));
                  }
@@ -816,7 +824,7 @@
              }
  
          }
-@@ -406,7 +803,8 @@
+@@ -406,14 +811,39 @@
          return this.averageSentPackets;
      }
  
@@ -826,7 +834,21 @@
          final Packet<?> packet;
          @Nullable
          final PacketSendListener listener;
-@@ -416,4 +814,16 @@
+ 
++        // Paper start - isConsumed flag for the connection
++        private java.util.concurrent.atomic.AtomicBoolean isConsumed = new java.util.concurrent.atomic.AtomicBoolean(false);
++
++        public boolean tryMarkConsumed() {
++            return isConsumed.compareAndSet(false, true);
++        }
++
++        public boolean isConsumed() {
++            return isConsumed.get();
++        }
++        // Paper end - isConsumed flag for the connection
++
+         public PacketHolder(Packet<?> packet, @Nullable PacketSendListener callbacks) {
+             this.packet = packet;
              this.listener = callbacks;
          }
      }

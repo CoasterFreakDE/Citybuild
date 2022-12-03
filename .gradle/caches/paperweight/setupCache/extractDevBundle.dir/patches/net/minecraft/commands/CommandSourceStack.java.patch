@@ -28,11 +28,12 @@
      public static final SimpleCommandExceptionType ERROR_NOT_PLAYER = new SimpleCommandExceptionType(Component.translatable("permissions.requires.player"));
      public static final SimpleCommandExceptionType ERROR_NOT_ENTITY = new SimpleCommandExceptionType(Component.translatable("permissions.requires.entity"));
      public final CommandSource source;
-@@ -55,9 +59,10 @@
+@@ -55,9 +59,11 @@
      private final Vec2 rotation;
      private final CommandSigningContext signingContext;
      private final TaskChainer chatMessageChainer;
 +    public java.util.Map<Thread, CommandNode> currentCommand = new java.util.concurrent.ConcurrentHashMap<>(); // CraftBukkit // Paper
++    public boolean bypassSelectorPermissions = false; // Paper
  
      public CommandSourceStack(CommandSource output, Vec3 pos, Vec2 rot, ServerLevel world, int level, String name, Component displayName, MinecraftServer server, @Nullable Entity entity) {
 -        this(output, pos, rot, world, level, name, displayName, server, entity, false, (context, success, result) -> {
@@ -40,7 +41,7 @@
          }, EntityAnchorArgument.Anchor.FEET, CommandSigningContext.ANONYMOUS, TaskChainer.IMMEDIATE);
      }
  
-@@ -99,8 +104,9 @@
+@@ -99,8 +105,9 @@
      }
  
      public CommandSourceStack withCallback(ResultConsumer<CommandSourceStack> consumer, BinaryOperator<ResultConsumer<CommandSourceStack>> merger) {
@@ -52,7 +53,7 @@
      }
  
      public CommandSourceStack withSuppressedOutput() {
-@@ -123,9 +129,10 @@
+@@ -123,9 +130,10 @@
          if (world == this.level) {
              return this;
          } else {
@@ -66,7 +67,7 @@
          }
      }
  
-@@ -134,14 +141,15 @@
+@@ -134,14 +142,15 @@
      }
  
      public CommandSourceStack facing(Vec3 position) {
@@ -90,7 +91,7 @@
      }
  
      public CommandSourceStack withSigningContext(CommandSigningContext signedArguments) {
-@@ -164,11 +172,47 @@
+@@ -164,11 +173,47 @@
          return this.entity != null ? this.entity.asChatSender() : ChatSender.SYSTEM;
      }
  
@@ -138,7 +139,7 @@
      public Vec3 getPosition() {
          return this.worldPosition;
      }
-@@ -184,32 +228,38 @@
+@@ -184,32 +229,38 @@
  
      public Entity getEntityOrException() throws CommandSyntaxException {
          if (this.entity == null) {
@@ -188,7 +189,7 @@
      }
  
      public boolean isPlayer() {
-@@ -237,19 +287,17 @@
+@@ -237,19 +288,17 @@
      }
  
      public boolean shouldFilterMessageTo(ServerPlayer recipient) {
@@ -215,7 +216,7 @@
              } else {
                  this.source.sendSystemMessage(params.decorate(message.serverContent()));
              }
-@@ -259,9 +307,10 @@
+@@ -259,9 +308,10 @@
  
      public void sendSystemMessage(Component message) {
          if (!this.silent) {
@@ -229,7 +230,7 @@
              } else {
                  this.source.sendSystemMessage(message);
              }
-@@ -281,17 +330,22 @@
+@@ -281,17 +331,22 @@
      }
  
      private void broadcastToAdmins(Component message) {
@@ -258,7 +259,7 @@
          }
  
      }
-@@ -337,8 +391,8 @@
+@@ -337,8 +392,8 @@
  
      @Override
      public CompletableFuture<Suggestions> suggestRegistryElements(ResourceKey<? extends Registry<?>> registryRef, SharedSuggestionProvider.ElementSuggestionType suggestedIdType, SuggestionsBuilder builder, CommandContext<?> context) {
@@ -269,7 +270,7 @@
              return builder.buildFuture();
          }).orElseGet(Suggestions::empty);
      }
-@@ -352,4 +406,26 @@
+@@ -352,4 +407,26 @@
      public RegistryAccess registryAccess() {
          return this.server.registryAccess();
      }

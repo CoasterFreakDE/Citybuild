@@ -74,6 +74,7 @@ public class WorldConfiguration extends ConfigurationPart {
             public class Items extends ConfigurationPart {
                 public boolean hideItemmeta = false;
                 public boolean hideDurability = false;
+                public boolean hideItemmetaWithVisualEffects = false;
             }
         }
 
@@ -241,6 +242,9 @@ public class WorldConfiguration extends ConfigurationPart {
             public boolean enderDragonsDeathAlwaysPlacesDragonEgg = false;
             public boolean phantomsDoNotSpawnOnCreativePlayers = true;
             public boolean phantomsOnlyAttackInsomniacs = true;
+            public int playerInsomniaStartTicks = 72000;
+            public int phantomsSpawnAttemptMinSeconds = 60;
+            public int phantomsSpawnAttemptMaxSeconds = 119;
             public boolean parrotsAreUnaffectedByPlayerMovement = false;
             public double zombieVillagerInfectionChance = -1.0;
             public MobsCanAlwaysPickUpLoot mobsCanAlwaysPickUpLoot;

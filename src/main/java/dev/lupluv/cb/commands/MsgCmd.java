@@ -10,10 +10,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class MsgCmd implements CommandExecutor {
 
-    public static Map<Player, Player> lastDiscussions = new HashMap<>();
+    public static Map<UUID, UUID> lastDiscussions = new HashMap<>();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -29,11 +30,15 @@ public class MsgCmd implements CommandExecutor {
                         if(!p.getName().equalsIgnoreCase(t.getName())) {
                             args[0] = "";
                             String msg = String.join(" ", args);
-                            p.sendMessage(Strings.prefix + "§e[§6Du §7-> §6" + t.getName() + "§e] " + msg);
-                            t.sendMessage(Strings.prefix + "§e[§6" + p.getName() + " §7-> §6Du§e] " + msg);
-                            if (lastDiscussions.get(p) != t) {
-                                lastDiscussions.remove(p);
-                                lastDiscussions.put(p, t);
+                            p.sendMessage(Strings.prefix + "§e[§6Du §7-> §6" + t.getName() + "§e]" + msg);
+                            t.sendMessage(Strings.prefix + "§e[§6" + p.getName() + " §7-> §6Du§e]" + msg);
+                            if(lastDiscussions.containsKey(p.getUniqueId())) {
+                                if (lastDiscussions.get(p.getUniqueId()) != t.getUniqueId()) {
+                                    lastDiscussions.remove(p.getUniqueId());
+                                    lastDiscussions.put(p.getUniqueId(), t.getUniqueId());
+                                }
+                            }else{
+                                lastDiscussions.put(p.getUniqueId(), t.getUniqueId());
                             }
                         }else{
                             p.sendMessage(Strings.prefix + "§cDu kannst keine Unterhaltung mit dir selbst führen.");

@@ -21,7 +21,7 @@
  import net.minecraft.world.damagesource.DamageSource;
  import net.minecraft.world.entity.Entity;
  import net.minecraft.world.entity.EntityType;
-@@ -29,29 +25,51 @@
+@@ -29,29 +25,52 @@
  import net.minecraft.world.level.Level;
  import net.minecraft.world.level.gameevent.GameEvent;
  import net.minecraft.world.phys.Vec3;
@@ -56,6 +56,7 @@
 +    private int lastTick = MinecraftServer.currentTick - 1; // CraftBukkit
 +    public boolean canMobPickup = true; // Paper
 +    private int despawnRate = -1; // Paper
++    public net.kyori.adventure.util.TriState frictionState = net.kyori.adventure.util.TriState.NOT_SET; // Paper
  
      public ItemEntity(EntityType<? extends ItemEntity> type, Level world) {
          super(type, world);
@@ -76,7 +77,7 @@
      }
  
      public ItemEntity(Level world, double x, double y, double z, ItemStack stack, double velocityX, double velocityY, double velocityZ) {
-@@ -63,6 +81,7 @@
+@@ -63,6 +82,7 @@
  
      private ItemEntity(ItemEntity entity) {
          super(entity.getType(), entity.level);
@@ -84,7 +85,7 @@
          this.setItem(entity.getItem().copy());
          this.copyPosition(entity);
          this.age = entity.age;
-@@ -75,7 +94,11 @@
+@@ -75,7 +95,11 @@
      }
  
      public Entity getThrowingEntity() {
@@ -93,11 +94,11 @@
 +        Level world = this.level;
 +
 +        Objects.requireNonNull(this.level);
-+        return (Entity) Util.mapNullable(uuid, world::getPlayerByUUID);
++        return (Entity) Util.mapNullable(uuid, world::getGlobalPlayerByUUID); // Paper - check all players
      }
  
      @Override
-@@ -85,7 +108,7 @@
+@@ -85,7 +109,7 @@
  
      @Override
      protected void defineSynchedData() {
@@ -106,7 +107,7 @@
      }
  
      @Override
-@@ -94,18 +117,23 @@
+@@ -94,18 +118,23 @@
              this.discard();
          } else {
              super.tick();
@@ -136,7 +137,7 @@
                  this.setUnderLavaMovement();
              } else if (!this.isNoGravity()) {
                  this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.04D, 0.0D));
-@@ -120,64 +148,117 @@
+@@ -120,64 +149,121 @@
                  }
              }
  
@@ -144,10 +145,15 @@
 +            if (!this.onGround || this.getDeltaMovement().horizontalDistanceSqr() > 9.999999747378752E-6D || (this.tickCount + this.getId()) % 4 == 0) { // Paper - Diff on change
                  this.move(MoverType.SELF, this.getDeltaMovement());
 -                float g = 0.98F;
+-                if (this.onGround) {
+-                    g = this.level.getBlockState(new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ())).getBlock().getFriction() * 0.98F;
 +                float f1 = 0.98F;
 +
-                 if (this.onGround) {
--                    g = this.level.getBlockState(new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ())).getBlock().getFriction() * 0.98F;
++                // Paper start
++                if (frictionState == net.kyori.adventure.util.TriState.FALSE) {
++                    f1 = 1F;
++                } else if (this.onGround) {
++                    // Paper end
 +                    f1 = this.level.getBlockState(new BlockPos(this.getX(), this.getY() - 1.0D, this.getZ())).getBlock().getFriction() * 0.98F;
                  }
  
@@ -275,7 +281,7 @@
                      if (this.isRemoved()) {
                          break;
                      }
-@@ -188,50 +269,47 @@
+@@ -188,50 +274,47 @@
      }
  
      private boolean isMergable() {
@@ -348,7 +354,7 @@
          targetEntity.pickupDelay = Math.max(targetEntity.pickupDelay, sourceEntity.pickupDelay);
          targetEntity.age = Math.min(targetEntity.age, sourceEntity.age);
          if (sourceStack.isEmpty()) {
-@@ -256,8 +334,13 @@
+@@ -256,8 +339,13 @@
          } else if (this.level.isClientSide) {
              return true;
          } else {
@@ -363,32 +369,48 @@
              this.gameEvent(GameEvent.ENTITY_DAMAGE, source.getEntity());
              if (this.health <= 0) {
                  this.getItem().onDestroyed(this);
-@@ -270,9 +353,9 @@
+@@ -270,9 +358,14 @@
  
      @Override
      public void addAdditionalSaveData(CompoundTag nbt) {
 -        nbt.putShort("Health", (short)this.health);
 -        nbt.putShort("Age", (short)this.age);
 -        nbt.putShort("PickupDelay", (short)this.pickupDelay);
++        // Paper start
++        if (this.frictionState != net.kyori.adventure.util.TriState.NOT_SET) {
++            nbt.putString("Paper.FrictionState", this.frictionState.toString());
++        }
++        // Paper end
 +        nbt.putShort("Health", (short) this.health);
 +        nbt.putShort("Age", (short) this.age);
 +        nbt.putShort("PickupDelay", (short) this.pickupDelay);
          if (this.getThrower() != null) {
              nbt.putUUID("Thrower", this.getThrower());
          }
-@@ -303,8 +386,9 @@
+@@ -303,8 +396,20 @@
              this.thrower = nbt.getUUID("Thrower");
          }
  
 -        CompoundTag compoundTag = nbt.getCompound("Item");
 -        this.setItem(ItemStack.of(compoundTag));
++        // Paper start
++        if (nbt.contains("Paper.FrictionState")) {
++            String fs = nbt.getString("Paper.FrictionState");
++            try {
++                frictionState = net.kyori.adventure.util.TriState.valueOf(fs);
++            } catch (Exception ignored) {
++                com.mojang.logging.LogUtils.getLogger().error("Unknown friction state " + fs + " for " + this);
++            }
++        }
++        // Paper end
++
 +        CompoundTag nbttagcompound1 = nbt.getCompound("Item");
 +
 +        this.setItem(ItemStack.of(nbttagcompound1));
          if (this.getItem().isEmpty()) {
              this.discard();
          }
-@@ -314,14 +398,82 @@
+@@ -314,14 +419,82 @@
      @Override
      public void playerTouch(Player player) {
          if (!this.level.isClientSide) {
@@ -478,7 +500,7 @@
                  }
  
                  player.awardStat(Stats.ITEM_PICKED_UP.get(item), i);
-@@ -333,8 +485,9 @@
+@@ -333,8 +506,9 @@
  
      @Override
      public Component getName() {
@@ -490,7 +512,7 @@
      }
  
      @Override
-@@ -346,25 +499,29 @@
+@@ -346,25 +520,29 @@
      @Override
      public Entity changeDimension(ServerLevel destination) {
          Entity entity = super.changeDimension(destination);
@@ -524,7 +546,7 @@
              this.getItem().setEntityRepresentation(this);
          }
  
-@@ -422,11 +579,11 @@
+@@ -422,11 +600,11 @@
  
      public void makeFakeItem() {
          this.setNeverPickUp();
@@ -538,7 +560,7 @@
      }
  
      @Override
-@@ -445,6 +602,6 @@
+@@ -445,6 +623,6 @@
  
      @Override
      public float getVisualRotationYInDegrees() {

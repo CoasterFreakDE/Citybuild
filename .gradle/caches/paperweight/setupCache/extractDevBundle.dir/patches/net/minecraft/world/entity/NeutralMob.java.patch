@@ -8,7 +8,7 @@
      String TAG_ANGER_TIME = "AngerTime";
      String TAG_ANGRY_AT = "AngryAt";
  
-@@ -36,37 +37,29 @@
+@@ -36,37 +37,33 @@
          this.setRemainingPersistentAngerTime(nbt.getInt("AngerTime"));
          if (world instanceof ServerLevel) {
              if (!nbt.hasUUID("AngryAt")) {
@@ -31,6 +31,10 @@
 -                }
 +                this.setPersistentAngerTarget(uuid);
 +                // Paper - Moved diff to separate method
++                // If this entity already survived its first tick, e.g. is loaded and ticked in sync, actively
++                // tick the initial persistent anger.
++                // If not, let the first tick on the baseTick call the method later down the line.
++                if (this instanceof Entity entity && !entity.firstTick) this.tickInitialPersistentAnger(world);
              }
          }
      }
@@ -57,7 +61,7 @@
                  this.setRemainingPersistentAngerTime(this.getRemainingPersistentAngerTime() - 1);
                  if (this.getRemainingPersistentAngerTime() == 0) {
                      this.stopBeingAngry();
-@@ -77,11 +70,7 @@
+@@ -77,11 +74,7 @@
      }
  
      default boolean isAngryAt(LivingEntity entity) {
@@ -70,7 +74,7 @@
      }
  
      default boolean isAngryAtAllPlayers(Level world) {
-@@ -106,9 +95,9 @@
+@@ -106,9 +99,9 @@
      }
  
      default void stopBeingAngry() {
@@ -83,7 +87,7 @@
          this.setRemainingPersistentAngerTime(0);
      }
  
-@@ -121,8 +110,32 @@
+@@ -121,8 +114,32 @@
  
      void setTarget(@Nullable LivingEntity target);
  

@@ -390,8 +390,8 @@ public final class CraftItemFactory implements ItemFactory {
         Validate.isTrue(levels > 0 && levels <= 30, "Argument 'levels' must be in range [1, 30] (attempted " + levels + ")");
         Validate.notNull(random, "Argument 'random' must not be null");
         final net.minecraft.world.item.ItemStack internalStack = CraftItemStack.asNMSCopy(itemStack);
-        if (internalStack.tag != null) {
-            internalStack.tag.remove(net.minecraft.world.item.ItemStack.TAG_ENCH);
+        if (internalStack.getTag() != null) {
+            internalStack.getTag().remove(net.minecraft.world.item.ItemStack.TAG_ENCH);
         }
         final net.minecraft.world.item.ItemStack enchanted = net.minecraft.world.item.enchantment.EnchantmentHelper.enchantItem(new org.bukkit.craftbukkit.v1_19_R1.util.RandomSourceWrapper(random), internalStack, levels, allowTreasure);
         return CraftItemStack.asCraftMirror(enchanted);
@@ -470,7 +470,7 @@ public final class CraftItemFactory implements ItemFactory {
         String typeId = type.getKey().toString();
         net.minecraft.resources.ResourceLocation typeKey = new net.minecraft.resources.ResourceLocation(typeId);
         net.minecraft.world.entity.EntityType<?> nmsType = net.minecraft.core.Registry.ENTITY_TYPE.get(typeKey);
-        net.minecraft.world.item.SpawnEggItem eggItem = net.minecraft.world.item.SpawnEggItem.BY_ID.get(nmsType);
+        net.minecraft.world.item.SpawnEggItem eggItem = net.minecraft.world.item.SpawnEggItem.byId(nmsType);
         return eggItem == null ? null : new net.minecraft.world.item.ItemStack(eggItem).asBukkitMirror();
     }
     // Paper end

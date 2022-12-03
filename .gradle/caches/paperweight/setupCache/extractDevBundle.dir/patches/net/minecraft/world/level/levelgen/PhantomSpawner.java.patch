@@ -22,11 +22,16 @@
      @Override
      public int tick(ServerLevel world, boolean spawnMonsters, boolean spawnAnimals) {
          if (!spawnMonsters) {
-@@ -30,42 +35,60 @@
+@@ -30,42 +35,69 @@
          } else if (!world.getGameRules().getBoolean(GameRules.RULE_DOINSOMNIA)) {
              return 0;
          } else {
 -            RandomSource randomSource = world.random;
++            // Paper start
++            if (world.paperConfig().entities.behavior.phantomsSpawnAttemptMaxSeconds <= 0) {
++                return 0;
++            }
++            // Paper end
 +            RandomSource randomsource = world.random;
 +
              --this.nextTick;
@@ -34,7 +39,11 @@
                  return 0;
              } else {
 -                this.nextTick += (60 + randomSource.nextInt(60)) * 20;
-+                this.nextTick += (60 + randomsource.nextInt(60)) * 20;
++                // Paper start
++                int spawnAttemptMinSeconds = world.paperConfig().entities.behavior.phantomsSpawnAttemptMinSeconds;
++                int spawnAttemptMaxSeconds = world.paperConfig().entities.behavior.phantomsSpawnAttemptMaxSeconds;
++                this.nextTick += (spawnAttemptMinSeconds + randomsource.nextInt(spawnAttemptMaxSeconds - spawnAttemptMinSeconds + 1)) * 20;
++                // Paper end
                  if (world.getSkyDarken() < 5 && world.dimensionType().hasSkyLight()) {
                      return 0;
                  } else {
@@ -76,7 +85,7 @@
 +                                    int j = Mth.clamp(serverstatisticmanager.getValue(Stats.CUSTOM.get(Stats.TIME_SINCE_REST)), (int) 1, Integer.MAX_VALUE);
 +                                    boolean flag2 = true;
 +
-+                                    if (randomsource.nextInt(j) >= 72000) {
++                                    if (randomsource.nextInt(j) >= world.paperConfig().entities.behavior.playerInsomniaStartTicks) { // Paper
 +                                        BlockPos blockposition1 = blockposition.above(20 + randomsource.nextInt(15)).east(-10 + randomsource.nextInt(21)).south(-10 + randomsource.nextInt(21));
 +                                        BlockState iblockdata = world.getBlockState(blockposition1);
 +                                        FluidState fluid = world.getFluidState(blockposition1);

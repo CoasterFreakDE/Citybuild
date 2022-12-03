@@ -1,5 +1,6 @@
 package dev.lupluv.cb.utils;
 
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -24,6 +25,7 @@ public class FileManager {
         File elevatorFile = new File("plugins//Citybuild//elevators.yml");
         File randFile = new File("plugins//Citybuild//rand.yml");
         File statsFile = new File("plugins//Citybuild//stats.yml");
+        File worthFile = new File("plugins//Citybuild//worth.yml");
         if(!folder.exists()) folder.mkdir();
         if(!warpsFolder.exists()) warpsFolder.mkdir();
         if(!configFile.exists()){
@@ -68,6 +70,15 @@ public class FileManager {
             statsFile.createNewFile();
             FileConfiguration cfg = YamlConfiguration.loadConfiguration(statsFile);
         }
+        if(!worthFile.exists()){
+            worthFile.createNewFile();
+            FileConfiguration cfg = YamlConfiguration.loadConfiguration(worthFile);
+            for(CbItem cbItem : CbItem.values()){
+                cfg.set(cbItem.toString() + ".Buy", 2500.0);
+                cfg.set(cbItem.toString() + ".Sell", 2000.0);
+            }
+            cfg.save(worthFile);
+        }
     }
 
     public File getMysqlFile(){
@@ -82,6 +93,19 @@ public class FileManager {
         File configFile = new File("plugins//Citybuild//config.yml");
         FileConfiguration cfg = YamlConfiguration.loadConfiguration(configFile);
         return cfg.getString("Licence");
+    }
+
+    public FileConfiguration getWorthConf(){
+        File worthFile = new File("plugins//Citybuild//worth.yml");
+        return YamlConfiguration.loadConfiguration(worthFile);
+    }
+
+    public Worth getWorth(CbItem cbItem){
+        FileConfiguration cfg = getWorthConf();
+        if(cfg.get(cbItem.toString() + ".Buy") != null){
+            return new Worth(cbItem, cfg.getDouble(cbItem.toString() + ".Buy"), cfg.getDouble(cbItem.toString() + ".Sell"));
+        }
+        return null;
     }
 
 }

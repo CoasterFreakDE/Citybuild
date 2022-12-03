@@ -147,7 +147,7 @@
              this.addDataSlot(DataSlot.forContainer(propertyDelegate, i));
          }
  
-@@ -132,15 +184,17 @@
+@@ -132,69 +184,95 @@
      public void sendAllDataToRemote() {
          int i = 0;
  
@@ -169,7 +169,9 @@
          }
  
          if (this.synchronizer != null) {
-@@ -149,52 +203,75 @@
+             this.synchronizer.sendInitialData(this, this.remoteSlots, this.remoteCarried, this.remoteDataSlots.toIntArray());
++            this.synchronizer.sendOffHandSlotChange(); // Paper - update player's offhand since the offhand slot is not added to the slots for menus but can be changed by swapping from a menu slot
+         }
  
      }
  
@@ -267,7 +269,7 @@
              }
          }
  
-@@ -202,20 +279,29 @@
+@@ -202,20 +280,29 @@
      }
  
      private void updateDataSlotListeners(int index, int value) {
@@ -305,7 +307,7 @@
              }
          }
  
-@@ -223,12 +309,14 @@
+@@ -223,12 +310,14 @@
  
      private void synchronizeSlotToRemote(int slot, ItemStack stack, Supplier<ItemStack> copySupplier) {
          if (!this.suppressRemoteUpdates) {
@@ -325,7 +327,7 @@
                  }
              }
  
-@@ -237,8 +325,9 @@
+@@ -237,8 +326,9 @@
  
      private void synchronizeDataSlotToRemote(int id, int value) {
          if (!this.suppressRemoteUpdates) {
@@ -337,7 +339,7 @@
                  this.remoteDataSlots.set(id, value);
                  if (this.synchronizer != null) {
                      this.synchronizer.sendDataChange(this, id, value);
-@@ -268,7 +357,7 @@
+@@ -268,7 +358,7 @@
          if (slot >= 0 && slot < this.remoteSlots.size()) {
              this.remoteSlots.set(slot, stack);
          } else {
@@ -346,7 +348,7 @@
          }
      }
  
-@@ -281,7 +370,7 @@
+@@ -281,7 +371,7 @@
      }
  
      public Slot getSlot(int index) {
@@ -355,7 +357,7 @@
      }
  
      public abstract ItemStack quickMoveStack(Player player, int index);
-@@ -289,76 +378,126 @@
+@@ -289,76 +379,126 @@
      public void clicked(int slotIndex, int button, ClickType actionType, Player player) {
          try {
              this.doClick(slotIndex, button, actionType, player);
@@ -519,7 +521,7 @@
                  }
  
                  this.resetQuickCraft();
-@@ -367,136 +506,165 @@
+@@ -367,136 +507,165 @@
              }
          } else if (this.quickcraftStatus != 0) {
              this.resetQuickCraft();
@@ -802,7 +804,7 @@
                              }
                          }
                      }
-@@ -527,32 +695,37 @@
+@@ -527,32 +696,37 @@
  
      public void removed(Player player) {
          if (player instanceof ServerPlayer) {
@@ -854,7 +856,7 @@
              }
  
          }
-@@ -568,8 +741,8 @@
+@@ -568,8 +742,8 @@
      }
  
      public void initializeContents(int revision, List<ItemStack> stacks, ItemStack cursorStack) {
@@ -865,7 +867,7 @@
          }
  
          this.carried = cursorStack;
-@@ -577,92 +750,133 @@
+@@ -577,92 +751,133 @@
      }
  
      public void setData(int id, int value) {
@@ -1035,7 +1037,7 @@
      }
  
      public static int getQuickcraftType(int quickCraftData) {
-@@ -678,13 +892,7 @@
+@@ -678,13 +893,7 @@
      }
  
      public static boolean isValidQuickcraftType(int stage, Player player) {
@@ -1050,7 +1052,7 @@
      }
  
      protected void resetQuickCraft() {
-@@ -693,18 +901,15 @@
+@@ -693,18 +902,15 @@
      }
  
      public static boolean canItemQuickReplace(@Nullable Slot slot, ItemStack stack, boolean allowOverflow) {
@@ -1073,7 +1075,7 @@
                  break;
              case 1:
                  stack.setCount(1);
-@@ -721,7 +926,7 @@
+@@ -721,7 +927,7 @@
      }
  
      public static int getRedstoneSignalFromBlockEntity(@Nullable BlockEntity entity) {
@@ -1082,7 +1084,7 @@
      }
  
      public static int getRedstoneSignalFromContainer(@Nullable Container inventory) {
-@@ -731,15 +936,16 @@
+@@ -731,15 +937,16 @@
              int i = 0;
              float f = 0.0F;
  
@@ -1104,7 +1106,7 @@
              return Mth.floor(f * 14.0F) + (i > 0 ? 1 : 0);
          }
      }
-@@ -749,6 +955,11 @@
+@@ -749,6 +956,11 @@
      }
  
      public ItemStack getCarried() {
@@ -1116,7 +1118,7 @@
          return this.carried;
      }
  
-@@ -763,27 +974,32 @@
+@@ -763,27 +975,32 @@
      public void transferState(AbstractContainerMenu handler) {
          Table<Container, Integer, Integer> table = HashBasedTable.create();
  

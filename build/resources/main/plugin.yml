@@ -5,6 +5,8 @@ depend:
   - Votifier
   - Citizens
 softdepend: [ Vault, VaultAPI ]
+loadbefore:
+  - Roulette
 author: LUPLUV
 main: dev.lupluv.cb.Citybuild
 
@@ -92,3 +94,12 @@ commands:
     description: 'Sign a item'
   invsee:
     description: 'See a players inventory'
+  adminshop:
+    description: 'See adminshop'
+  clan:
+    aliases:
+      - clans
+    description: 'Use clans'
+  givereward:
+    description: 'Gives advent reward to player.'
+  neustart:
