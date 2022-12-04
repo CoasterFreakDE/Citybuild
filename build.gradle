@@ -34,6 +34,8 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     implementation 'de.dytanic.cloudnet:cloudnet-driver:3.4.0-RELEASE'
+
+    implementation files('F:\\Development\\java\\workspace\\WonderBuild\\Citybuild\\Checksystem-1.0-SNAPSHOT.jar')
 }
 
 compileJava.options.encoding = 'UTF-8'

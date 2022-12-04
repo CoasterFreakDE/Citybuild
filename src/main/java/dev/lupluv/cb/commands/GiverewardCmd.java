@@ -74,7 +74,7 @@ public class GiverewardCmd implements CommandExecutor {
                 return new ItemStack(Material.EMERALD, 32);
             }
             case FIRE_RESISTANCE_5_MIN -> {
-                return getFireRes(60*5);
+                return getFireRes(6000);
             }
             case GOLDEN_APPLE_3 -> {
                 return new ItemStack(Material.GOLDEN_APPLE, 3);

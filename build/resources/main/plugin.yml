@@ -103,3 +103,7 @@ commands:
   givereward:
     description: 'Gives advent reward to player.'
   neustart:
+  skull:
+    aliases:
+      - head
+      - kopf

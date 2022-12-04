@@ -11,6 +11,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.util.Mth;
 import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.LevelHeightAccessor;
@@ -116,21 +117,29 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 
     @Override
     public void createStructures(RegistryAccess registryManager, RandomState noiseConfig, StructureManager structureAccessor, ChunkAccess chunk, StructureTemplateManager structureTemplateManager, long seed) {
-        if (this.generator.shouldGenerateStructures()) {
+        WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
+        int x = chunk.getPos().x;
+        int z = chunk.getPos().z;
+
+        random.setSeed(Mth.getSeed(x, "should-structures".hashCode(), z) ^ seed);
+        if (this.generator.shouldGenerateStructures(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z)) {
             super.createStructures(registryManager, noiseConfig, structureAccessor, chunk, structureTemplateManager, seed);
         }
     }
 
     @Override
     public void buildSurface(WorldGenRegion region, StructureManager structures, RandomState noiseConfig, ChunkAccess chunk) {
-        if (this.generator.shouldGenerateSurface()) {
+        WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
+        int x = chunk.getPos().x;
+        int z = chunk.getPos().z;
+
+        random.setSeed(Mth.getSeed(x, "should-surface".hashCode(), z) ^ region.getSeed());
+        if (this.generator.shouldGenerateSurface(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z)) {
             this.delegate.buildSurface(region, structures, noiseConfig, chunk);
         }
 
         CraftChunkData chunkData = new CraftChunkData(this.world.getWorld(), chunk);
-        WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
-        int x = chunk.getPos().x;
-        int z = chunk.getPos().z;
+
         random.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
         this.generator.generateSurface(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z, chunkData);
 
@@ -221,15 +230,17 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 
     @Override
     public void applyCarvers(WorldGenRegion chunkRegion, long seed, RandomState noiseConfig, BiomeManager biomeAccess, StructureManager structureAccessor, ChunkAccess chunk, GenerationStep.Carving carverStep) {
-        if (this.generator.shouldGenerateCaves()) {
+        WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
+        int x = chunk.getPos().x;
+        int z = chunk.getPos().z;
+
+        random.setSeed(Mth.getSeed(x, "should-caves".hashCode(), z) ^ chunkRegion.getSeed());
+        if (this.generator.shouldGenerateCaves(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z)) {
             this.delegate.applyCarvers(chunkRegion, seed, noiseConfig, biomeAccess, structureAccessor, chunk, carverStep);
         }
 
         if (carverStep == GenerationStep.Carving.LIQUID) { // stage check ensures that the method is only called once
             CraftChunkData chunkData = new CraftChunkData(this.world.getWorld(), chunk);
-            WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
-            int x = chunk.getPos().x;
-            int z = chunk.getPos().z;
             random.setDecorationSeed(seed, 0, 0);
 
             this.generator.generateCaves(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z, chunkData);
@@ -240,15 +251,17 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
     @Override
     public CompletableFuture<ChunkAccess> fillFromNoise(Executor executor, Blender blender, RandomState noiseConfig, StructureManager structureAccessor, ChunkAccess chunk) {
         CompletableFuture<ChunkAccess> future = null;
-        if (this.generator.shouldGenerateNoise()) {
+        WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
+        int x = chunk.getPos().x;
+        int z = chunk.getPos().z;
+
+        random.setSeed(Mth.getSeed(x, "should-noise".hashCode(), z) ^ this.world.getSeed());
+        if (this.generator.shouldGenerateNoise(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z)) {
             future = this.delegate.fillFromNoise(executor, blender, noiseConfig, structureAccessor, chunk);
         }
 
         java.util.function.Function<ChunkAccess, ChunkAccess> function = (ichunkaccess1) -> {
             CraftChunkData chunkData = new CraftChunkData(this.world.getWorld(), ichunkaccess1);
-            WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
-            int x = ichunkaccess1.getPos().x;
-            int z = ichunkaccess1.getPos().z;
             random.setSeed((long) x * 341873128712L + (long) z * 132897987541L);
 
             this.generator.generateNoise(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z, chunkData);
@@ -284,7 +297,12 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 
     @Override
     public void applyBiomeDecoration(WorldGenLevel world, ChunkAccess chunk, StructureManager structureAccessor) {
-        super.applyBiomeDecoration(world, chunk, structureAccessor, this.generator.shouldGenerateDecorations());
+        WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
+        int x = chunk.getPos().x;
+        int z = chunk.getPos().z;
+
+        random.setSeed(Mth.getSeed(x, "should-decoration".hashCode(), z) ^ world.getSeed());
+        super.applyBiomeDecoration(world, chunk, structureAccessor, this.generator.shouldGenerateDecorations(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z));
     }
 
     @Override
@@ -294,7 +312,12 @@ public class CustomChunkGenerator extends InternalChunkGenerator {
 
     @Override
     public void spawnOriginalMobs(WorldGenRegion region) {
-        if (this.generator.shouldGenerateMobs()) {
+        WorldgenRandom random = CustomChunkGenerator.getSeededRandom();
+        int x = region.getCenter().x;
+        int z = region.getCenter().z;
+
+        random.setSeed(Mth.getSeed(x, "should-mobs".hashCode(), z) ^ region.getSeed());
+        if (this.generator.shouldGenerateMobs(this.world.getWorld(), new RandomSourceWrapper.RandomWrapper(random), x, z)) {
             this.delegate.spawnOriginalMobs(region);
         }
     }

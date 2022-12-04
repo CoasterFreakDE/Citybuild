@@ -128,6 +128,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("adminshop").setExecutor(new AdminshopCmd());
         getCommand("givereward").setExecutor(new GiverewardCmd());
         getCommand("neustart").setExecutor(new NeustartCmd());
+        getCommand("skull").setExecutor(new SkullCmd());
 
         // Events
 
