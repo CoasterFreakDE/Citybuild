@@ -11,6 +11,7 @@ import dev.lupluv.cb.clans.User;
 import dev.lupluv.cb.commands.VanishCmd;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.elevators.ElevatorBlock;
+import dev.lupluv.cb.scorebaord.ScoreboardManager;
 import dev.lupluv.cb.utils.*;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -94,6 +95,20 @@ public class PlayerHandler implements Listener {
         // Updating Vanished players to not see him
         VanishCmd.updateVanished();
     }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e){
+        if(!e.getPlayer().hasPermission("cb.can.hex")) {
+            e.setFormat(ScoreboardManager.format(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
+                    + e.getPlayer().getName() + " §8: §r"
+                    + ScoreboardManager.format(e.getMessage()));
+        }else{
+            e.setFormat(ScoreboardManager.format(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
+                    + e.getPlayer().getName() + " §8: §r"
+                    + e.getMessage());
+        }
+    }
+
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
         Player p = e.getPlayer();

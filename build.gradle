@@ -35,6 +35,7 @@ dependencies {
 
     implementation 'de.dytanic.cloudnet:cloudnet-driver:3.4.0-RELEASE'
 
+    implementation 'de.dytanic.cloudnet:cloudnet-bridge:3.4.0-RELEASE'
 }
 
 compileJava.options.encoding = 'UTF-8'

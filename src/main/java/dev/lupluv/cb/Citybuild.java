@@ -2,12 +2,15 @@ package dev.lupluv.cb;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import de.dytanic.cloudnet.driver.CloudNetDriver;
 import dev.lupluv.cb.clans.Clan;
 import dev.lupluv.cb.commands.*;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.events.*;
 import dev.lupluv.cb.licence.LicenceManager;
+import dev.lupluv.cb.listeners.CloudNetSimpleNameTagsListener;
 import dev.lupluv.cb.mysql.MySQL;
+import dev.lupluv.cb.scorebaord.ScoreboardManager;
 import dev.lupluv.cb.stats.StatsNPC;
 import dev.lupluv.cb.utils.*;
 import dev.lupluv.cb.voting.VoteListener;
@@ -17,6 +20,7 @@ import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.ServicePriority;
@@ -26,11 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 
-/**
- * Ich
- * bin
- * LUPLUV
- */
+
 
 
 public class Citybuild extends JavaPlugin {
@@ -149,6 +149,13 @@ public class Citybuild extends JavaPlugin {
         Bukkit.getScheduler().runTaskLater(this, Citybuild::startNPCScheduler, 20*10);
 
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+
+        Listener listener = new CloudNetSimpleNameTagsListener();
+
+        this.getServer().getPluginManager().registerEvents(new CloudNetSimpleNameTagsListener(), this);
+        CloudNetDriver.getInstance().getEventManager().registerListener(listener);
+
+        ScoreboardManager.getInstance().startScoreboardTask();
 
     }
 
