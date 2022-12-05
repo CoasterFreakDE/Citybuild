@@ -107,3 +107,4 @@ commands:
     aliases:
       - head
       - kopf
+  ranginfo:
