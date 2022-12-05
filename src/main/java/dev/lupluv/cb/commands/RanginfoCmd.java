@@ -33,9 +33,9 @@ public class RanginfoCmd implements CommandExecutor, Listener {
         ArrayList<String> lore1 = new ArrayList<>();
         lore1.add(" ");
         lore1.add("§7§lBefehle:");
-        lore1.add("§7• §8/werkbank §7öffne jederzeit die Werkbank");
-        lore1.add("§7• §8/invsee §7lässt dich in andere Inventare schauen");
-        lore1.add("§7• §8/payall §7erlaubt dir allen Spielern jede Stunde Coins zu zahlen");
+        lore1.add("§7• §a/werkbank §7öffne jederzeit die Werkbank");
+        lore1.add("§7• §a/invsee §7lässt dich in andere Inventare schauen");
+        lore1.add("§7• §a/payall §7erlaubt dir allen Spielern jede Stunde Coins zu zahlen");
         lore1.add(" ");
         lore1.add("§7§lAnderes:");
         lore1.add("§7• Du erhälst den §6§lPremium §8Prefix");
@@ -54,12 +54,12 @@ public class RanginfoCmd implements CommandExecutor, Listener {
         amtclustermeta.setLore(Lore.create(
                 " ",
                 "§7§lBefehle:",
-                "§7• §8/msgtoggle §7Schalte Direktnachrichten aus",
-                "§7• §8/amboss §7Öffne jederzeit den Amboss",
-                "§7• §8/heal §7Heile dich alle 3 Stunden",
-                "§7• §8/repair §7Repariere alle 3 Stunden ein Item",
-                "§7• §8/startmute §7Mute böse Spieler",
-                "§7• §8/p time §7Setze deine eigene Zeit",
+                "§7• §a/msgtoggle §7Schalte Direktnachrichten aus",
+                "§7• §a/amboss §7Öffne jederzeit den Amboss",
+                "§7• §a/heal §7Heile dich alle 3 Stunden",
+                "§7• §a/repair §7Repariere alle 3 Stunden ein Item",
+                "§7• §a/startmute §7Mute böse Spieler",
+                "§7• §a/p time §7Setze deine eigene Zeit",
                 " ",
                 "§7§lAnderes:",
                 "§7• Du erhälst den §9§lTitan §7Prefix",
@@ -80,21 +80,18 @@ public class RanginfoCmd implements CommandExecutor, Listener {
         emerladmeta.setLore(Lore.create(
                 " ",
                 "§7§lBefehle:",
-                "§7• §8/msgtoggle §7Schaltet Direktnachrichten aus",
-                "§7• §8/amboss §7Öffne jederzeit den Amboss",
-                "§7• §8/heal §7Heile dich alle 3 Stunden",
-                "§7• §8/repair §7Repariere alle 3 Stunden ein Item",
-                "§7• §8/startmute §7Mute böse Spieler",
-                "§7• §8/p time §7Setzte deine eigene Zeit",
+                "§7• §a/tpahere §7Erlaubt dir andere Spieler zu dir zu teleportieren",
+                "§7• §a/sign §7Signiere/Unterschreibe Items mit deiner Unterschrift",
+                "§7• §a/tpatoggle §7Schalte Teleportierungsanfragen aus",
                 " ",
                 "§7§lAnderes:",
-                "§7• Du erhälst den §2§lTitan §7Prefix",
-                "§7• Du erhälst mehr Pot, Ränder & Wände",
-                "§7• Du erhälst den Schnelligkeit & kein Hunger Perk",
+                "§7• Du erhälst den §2§lPlatin §7Prefix",
+                "§7• Du erhälst mehr Plot, Ränder & Wände",
+                "§7• Du erhälst den kein Fallschaden Perk",
                 "§7• (Bestimmte Effekte)",
                 "§7• (Bestimmte Haustiere)",
-                "§7• Du kannst 7 Homes setzen",
-                "§7• Du kannst 7 Plots besitzen",
+                "§7• Du kannst 5 Homes setzen",
+                "§7• Du kannst 5 Plots besitzen",
                 "§7• §lDu erhälst alle Funktionen vom Premium und Platin Rang"
 
         ));
@@ -106,11 +103,11 @@ public class RanginfoCmd implements CommandExecutor, Listener {
         diamondmeta.setLore(Lore.create(
                 " ",
                 "§7§lBefehle:",
-                "§7• §8/startkick §7Kicke einen bösen Spieler vom Server",
-                "§7• §8/plotholo §7Erstelle dir ein eigenes Hologram auf deinem Plot",
-                "§7• §8/paytoggle §7Deaktiviere Zahlungen an dich",
-                "§7• §8/premium §7Verschenke Premium 7 Tage",
-                "§7• §8/skull §7Gebe dir alle 4 Tage einen Spielerkopf",
+                "§7• §a/startkick §7Kicke einen bösen Spieler vom Server",
+                "§7• §a/plotholo §7Erstelle dir ein eigenes Hologram auf deinem Plot",
+                "§7• §a/paytoggle §7Deaktiviere Zahlungen an dich",
+                "§7• §a/premium §7Verschenke Premium 7 Tage",
+                "§7• §a/skull §7Gebe dir alle 4 Tage einen Spielerkopf",
                 " ",
                 "§7§lAnderes:",
                 "§7• Du erhälst den §c§lWonder §7Prefix",
@@ -148,9 +145,8 @@ public class RanginfoCmd implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        Player player = (Player) sender;
-
         if(!(sender instanceof  Player)) return true;
+        Player player = (Player) sender;
 
 
     if(args.length == 0){

@@ -107,3 +107,8 @@ commands:
     aliases:
       - head
       - kopf
+  ranginfo:
+    description: 'Ranginfo GUI'
+    aliases:
+      - rankinfo
+      - rinfo
