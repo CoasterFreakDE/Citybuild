@@ -20,7 +20,7 @@ public class Crafting {
         ItemStack item = new ItemStack(Material.LIGHT);
 
         // create a NamespacedKey for your recipe
-        NamespacedKey key = new NamespacedKey(Citybuild.getPlugin(), "light");
+        NamespacedKey key = new NamespacedKey(Citybuild.getPlugin(), "light_custom");
 
         // Create our custom recipe variable
         ShapelessRecipe recipe = new ShapelessRecipe(key, item);
