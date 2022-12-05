@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class RanginfoCmd implements CommandExecutor, Listener {
 
     private Inventory inv;
-    public static String invname = "§a§lRanginfo";
+    public static String invname = "§6§lRanginfo";
 
     public void createInv(Player player){
 
@@ -110,7 +110,7 @@ public class RanginfoCmd implements CommandExecutor, Listener {
                 "§7• §a/skull §7Gebe dir alle 4 Tage einen Spielerkopf",
                 " ",
                 "§7§lAnderes:",
-                "§7• Du erhälst den §c§lWonder §7Prefix",
+                "§7• Du erhälst den §d§lWonder §7Prefix",
                 "§7• Du erhälst alle Plot Ränder & Wände",
                 "§7• (Bestimmte Effekte)",
                 "§7• (Bestimmte Haustiere)",
