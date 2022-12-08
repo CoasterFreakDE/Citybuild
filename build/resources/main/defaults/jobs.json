@@ -1,0 +1,18 @@
+{
+  "cool": "no",
+  "settings": {
+    "digger": {
+      "name": "<#2c6129>Gräber</#559c51>",
+      "salary": "100.0",
+      "levels": [
+        {
+          "multiplier": "2.4",
+          "commands": [
+            "money {%player%} add 100",
+            "say {%player%} has reached Level {%level%} on his job {%job.name%}"
+          ]
+        }
+      ]
+    }
+  }
+}

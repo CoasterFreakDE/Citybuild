@@ -1,4 +1,4 @@
 package dev.lupluv.cb.jobs;
 
-public class Fisher {
+public class Fisher extends Job {
 }

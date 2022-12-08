@@ -1,4 +1,4 @@
 package dev.lupluv.cb.jobs;
 
-public class Magician {
+public class Magician extends Job {
 }

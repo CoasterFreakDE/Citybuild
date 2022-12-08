@@ -1,4 +1,4 @@
 package dev.lupluv.cb.jobs;
 
-public class Hunter {
+public class Hunter extends Job {
 }

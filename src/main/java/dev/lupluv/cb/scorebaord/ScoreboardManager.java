@@ -10,6 +10,7 @@ import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.economy.Economy;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.melion.rgbchat.api.RGBApi;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -65,7 +66,7 @@ public class ScoreboardManager {
         if(scoreboard.getTeam("online") != null) online = scoreboard.getTeam("online"); else online = scoreboard.registerNewTeam("online");
 
 
-        profile.setPrefix("§e" + format(getPrefix(p) + getColor(p)) + p.getName());
+        profile.setPrefix("§e" + RGBApi.INSTANCE.toColoredMessage(getPrefix(p) + getColor(p)) + p.getName());
         playTime.setPrefix("§6coming soon");
         server.setPrefix("§b" + serverName);
         coins.setPrefix("§e" + Economy.getBalance(p.getUniqueId()) + " §6❂");
@@ -213,13 +214,13 @@ public class ScoreboardManager {
             exception.printStackTrace();
         }
 
-        team.setPrefix(format(prefix));
+        team.setPrefix(RGBApi.INSTANCE.toColoredMessage(prefix));
 
-        team.setSuffix(format(suffix));
+        team.setSuffix(RGBApi.INSTANCE.toColoredMessage(suffix));
 
         team.addEntry(target.getName());
 
-        target.setDisplayName(format(permissionGroup.getDisplay() + target.getName()));
+        target.setDisplayName(RGBApi.INSTANCE.toColoredMessage(permissionGroup.getDisplay() + target.getName()));
     }
 
     private void initScoreboard(Player all) {
@@ -227,7 +228,7 @@ public class ScoreboardManager {
             Scoreboard scoreboard = all.getServer().getScoreboardManager().getNewScoreboard();
             Objective objective = scoreboard.registerNewObjective("citybuild", "dummy");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            objective.setDisplayName("§6§lWONDERBUILD§8.§6§lNET");
+            objective.setDisplayName(RGBApi.INSTANCE.toColoredMessage("WONDERBUILD.NET"));
             Team profile;
             Team playTime;
             Team server;
@@ -239,7 +240,7 @@ public class ScoreboardManager {
             if(scoreboard.getTeam("coins") != null) coins = scoreboard.getTeam("coins"); else coins = scoreboard.registerNewTeam("coins");
             if(scoreboard.getTeam("online") != null) online = scoreboard.getTeam("online"); else online = scoreboard.registerNewTeam("online");
             objective.getScore(" ").setScore(14);
-            objective.getScore("§fProfile§7:").setScore(13);
+            objective.getScore("§fProfil§7:").setScore(13);
             objective.getScore("§1").setScore(12);
             objective.getScore("  ").setScore(11);
             objective.getScore("§fSpielzeit§7:").setScore(10);

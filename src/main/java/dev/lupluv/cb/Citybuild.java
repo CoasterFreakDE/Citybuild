@@ -137,6 +137,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("neustart").setExecutor(new NeustartCmd());
         getCommand("skull").setExecutor(new SkullCmd());
         getCommand("ranginfo").setExecutor(new RanginfoCmd());
+        getCommand("social").setExecutor(new SocialCmd());
 
         // Events
 
@@ -145,6 +146,8 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new ClickHandler(), this);
         pm.registerEvents(new VoteListener(), this);
         pm.registerEvents(new RanginfoCmd(), this);
+        pm.registerEvents(new SocialCmd(), this);
+
 
         statsNPC = new StatsNPC();
 

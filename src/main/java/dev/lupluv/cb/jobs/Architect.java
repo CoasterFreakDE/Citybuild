@@ -1,4 +1,4 @@
 package dev.lupluv.cb.jobs;
 
-public class Architect {
+public class Architect extends Job {
 }
