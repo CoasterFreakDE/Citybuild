@@ -10,7 +10,7 @@ import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.economy.Economy;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.melion.rgbchat.api.RGBApi;
+//import net.melion.rgbchat.api.RGBApi;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -66,7 +66,7 @@ public class ScoreboardManager {
         if(scoreboard.getTeam("online") != null) online = scoreboard.getTeam("online"); else online = scoreboard.registerNewTeam("online");
 
 
-        profile.setPrefix("§e" + RGBApi.INSTANCE.toColoredMessage(getPrefix(p) + getColor(p)) + p.getName());
+        profile.setPrefix("§e" + getPrefix(p).replaceAll("&", "§") + getColor(p).replaceAll("&", "§") + p.getName());
         playTime.setPrefix("§6coming soon");
         server.setPrefix("§b" + serverName);
         coins.setPrefix("§e" + Economy.getBalance(p.getUniqueId()) + " §6❂");
@@ -185,9 +185,9 @@ public class ScoreboardManager {
             team = all.getScoreboard().registerNewTeam(teamName);
         }
 
-        String prefix = permissionGroup.getPrefix();
+        String prefix = permissionGroup.getPrefix().replaceAll("&", "§");
         String color = permissionGroup.getColor();
-        String suffix = permissionGroup.getSuffix();
+        String suffix = permissionGroup.getSuffix().replaceAll("&", "§");
 
         try {
             Method method = team.getClass().getDeclaredMethod("setColor", ChatColor.class);
@@ -214,13 +214,13 @@ public class ScoreboardManager {
             exception.printStackTrace();
         }
 
-        team.setPrefix(RGBApi.INSTANCE.toColoredMessage(prefix));
+        team.setPrefix(prefix);
 
-        team.setSuffix(RGBApi.INSTANCE.toColoredMessage(suffix));
+        team.setSuffix(suffix);
 
         team.addEntry(target.getName());
 
-        target.setDisplayName(RGBApi.INSTANCE.toColoredMessage(permissionGroup.getDisplay() + target.getName()));
+        target.setDisplayName(permissionGroup.getDisplay() + target.getName());
     }
 
     private void initScoreboard(Player all) {
@@ -228,7 +228,7 @@ public class ScoreboardManager {
             Scoreboard scoreboard = all.getServer().getScoreboardManager().getNewScoreboard();
             Objective objective = scoreboard.registerNewObjective("citybuild", "dummy");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            objective.setDisplayName(RGBApi.INSTANCE.toColoredMessage("WONDERBUILD.NET"));
+            objective.setDisplayName("§e§lWONDERBUILD.NET");
             Team profile;
             Team playTime;
             Team server;

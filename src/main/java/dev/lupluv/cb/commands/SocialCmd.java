@@ -5,7 +5,7 @@ import dev.lupluv.cb.utils.Lore;
 import dev.lupluv.cb.utils.Strings;
 import dev.lupluv.cb.utils.Util;
 import net.md_5.bungee.api.ChatColor;
-import net.melion.rgbchat.api.RGBApi;
+//import net.melion.rgbchat.api.RGBApi;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;

@@ -37,7 +37,7 @@ dependencies {
 
     implementation 'de.dytanic.cloudnet:cloudnet-bridge:3.4.0-RELEASE'
 
-    implementation 'com.github.CoasterFreakDE:minecraft-spigot-rgb-chat-support:1.0.5'
+    //implementation 'com.github.CoasterFreakDE:minecraft-spigot-rgb-chat-support:1.0.5'
 }
 
 compileJava.options.encoding = 'UTF-8'
