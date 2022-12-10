@@ -24,7 +24,7 @@ public class LicenceManager {
 
     public void doOnEnable(){
         try {
-            checkLicence(new URL("https://nightpixel.net/licensesystem"));
+            checkLicence(new URL("https://wonderbuild.net/licensesystem"));
         } catch (IOException e) {
         }
         if(licence.contains(Citybuild.getFileManager().getLicence())){

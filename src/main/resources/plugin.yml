@@ -7,6 +7,7 @@ depend:
 softdepend: [ Vault, VaultAPI ]
 loadbefore:
   - Roulette
+  - ChestShop
 author: LUPLUV
 main: dev.lupluv.cb.Citybuild
 

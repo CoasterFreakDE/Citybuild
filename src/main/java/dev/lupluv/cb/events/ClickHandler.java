@@ -134,7 +134,7 @@ public class ClickHandler implements Listener {
             e.setCancelled(true);
             if(mat == Material.GRAY_STAINED_GLASS_PANE) return;
 
-            String name = title.replace(" §8» §7Kaufen", "");
+            String name = title.replace(" §8» §7Kaufen", "").replace("§7", "");
             CbItem cbItem = null;
             for(CbItem c : CbItem.values()){
                 if(c.getDisplayName().equalsIgnoreCase(name)){
@@ -208,7 +208,7 @@ public class ClickHandler implements Listener {
             e.setCancelled(true);
             if(mat == Material.GRAY_STAINED_GLASS_PANE) return;
 
-            String name = title.replace(" §8» §7Verkaufen", "");
+            String name = title.replace(" §8» §7Verkaufen", "").replace("§7", "");
             CbItem cbItem = null;
             for(CbItem c : CbItem.values()){
                 if(c.getDisplayName().equalsIgnoreCase(name)){

@@ -99,11 +99,12 @@ public class PlayerHandler implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e){
         if(e.getPlayer().hasPermission("cb.can.hex")) {
-            e.setFormat(ScoreboardManager.format(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
+            e.setFormat(ScoreboardManager.format2(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
                     + e.getPlayer().getName() + " §8: §r"
-                    + ScoreboardManager.format(e.getMessage()));
+                    + ScoreboardManager.format2(e.getMessage()));
         }else{
-            e.setFormat(ScoreboardManager.format(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
+            e.setFormat(ScoreboardManager.format2(
+                    ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
                     + e.getPlayer().getName() + " §8: §r"
                     + e.getMessage());
         }
