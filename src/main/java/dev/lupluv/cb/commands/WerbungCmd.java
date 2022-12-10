@@ -23,10 +23,16 @@ public class WerbungCmd implements CommandExecutor {
             return true;
         }
 
-        if(args.length == 1){
+        if(args.length >= 1){
 
             if(Economy.getBalance(player.getUniqueId()) >= 5000) {
-                sendAd(player, String.join(" ", args));
+                if(Economy.withdrawPlayer(player.getUniqueId(), 5000).transactionSuccess()){
+                    sendAd(player, String.join(" ", args));
+                }else{
+                    player.sendMessage(Strings.prefix + "§cEs ist etwas schief gelaufen");
+                }
+
+
             }
 
         }else{
