@@ -138,6 +138,9 @@ public class Citybuild extends JavaPlugin {
         getCommand("skull").setExecutor(new SkullCmd());
         getCommand("ranginfo").setExecutor(new RanginfoCmd());
         getCommand("social").setExecutor(new SocialCmd());
+        getCommand("werbung").setExecutor(new WerbungCmd());
+        getCommand("bewerben").setExecutor(new BewerbenCmd());
+        getCommand("live").setExecutor(new LiveCmd());
 
         // Events
 
@@ -206,6 +209,7 @@ public class Citybuild extends JavaPlugin {
                 System.out.println("Successfull");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_economy (uuid VARCHAR(255),name VARCHAR(255),money DOUBLE(255,20));");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_economy_banks (name VARCHAR(255),money DOUBLE(255,20));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_jobs (uuid VARCHAR(255),name VARCHAR(255),job VARCHAR(255))");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_clan (id BIGINT(255),name VARCHAR(255),tag VARCHAR(255),color VARCHAR(255)" +
                         ",open VARCHAR(255),chat VARCHAR(255),date BIGINT(255));");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_user (id BIGINT(255),uuid VARCHAR(255),name VARCHAR(255));");

@@ -36,6 +36,7 @@ public class RanginfoCmd implements CommandExecutor, Listener {
         lore1.add("§7• §a/werkbank §7öffne jederzeit die Werkbank");
         lore1.add("§7• §a/invsee §7lässt dich in andere Inventare schauen");
         lore1.add("§7• §a/payall §7erlaubt dir allen Spielern jede Stunde Coins zu zahlen");
+        lore1.add("§7• §a/werbung §7erlaubt dir werbung für deinen shop zu machen");
         lore1.add(" ");
         lore1.add("§7§lAnderes:");
         lore1.add("§7• Du erhälst den §6§lPremium §8Prefix");

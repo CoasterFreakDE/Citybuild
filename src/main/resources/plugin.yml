@@ -114,3 +114,12 @@ commands:
       - rankinfo
       - rinfo
   social:
+    aliases:
+      - socialmedia
+  werbung:
+    aliases:
+      - ad
+  bewerben:
+    aliases:
+      - apply
+  live:
