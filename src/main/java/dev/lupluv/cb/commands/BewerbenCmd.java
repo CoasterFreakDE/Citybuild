@@ -19,7 +19,7 @@ public class BewerbenCmd implements CommandExecutor {
         if(args.length == 0){
             player.sendMessage(" ");
             player.sendMessage(Strings.prefix + "§7Bewerbe dich jetzt auf unserem §aDiscord §7Server oder auf unserer §aWebsite");
-            player.sendMessage(Strings.prefix + "§aDiscord: https://discord.wonderbuild.net");
+            player.sendMessage(Strings.prefix + "§aDiscord: §7https://discord.wonderbuild.net");
             player.sendMessage(Strings.prefix + "§aWebsite: §7https://wonderbuild.net");
             player.sendMessage(" ");
         }else{

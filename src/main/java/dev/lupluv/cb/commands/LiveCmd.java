@@ -32,6 +32,8 @@ public class LiveCmd implements CommandExecutor {
             }
 
 
+        }else{
+            player.sendMessage(Strings.prefix + Strings.noPerms);
         }
 
 
@@ -43,7 +45,7 @@ public class LiveCmd implements CommandExecutor {
         Bukkit.getOnlinePlayers().forEach(all ->{
             all.sendMessage(Strings.prefix + "§7---------------§c§lLIVE§7---------------");
             all.sendMessage(Strings.prefix);
-            all.sendMessage(Strings.prefix + "§7Der Spieler §a" + player.getName() + "ist live auf");
+            all.sendMessage(Strings.prefix + "§7Der Spieler §a" + player.getName() + " §7ist live auf");
             all.sendMessage(Strings.prefix + "§b§l" + plat);
             all.sendMessage(Strings.prefix);
             all.sendMessage(Strings.prefix + "§7" + url);
