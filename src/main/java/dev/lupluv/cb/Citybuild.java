@@ -141,6 +141,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("werbung").setExecutor(new WerbungCmd());
         getCommand("bewerben").setExecutor(new BewerbenCmd());
         getCommand("live").setExecutor(new LiveCmd());
+        getCommand("belohnung").setExecutor(new BelohungCmd());
 
         // Events
 
@@ -150,6 +151,8 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new VoteListener(), this);
         pm.registerEvents(new RanginfoCmd(), this);
         pm.registerEvents(new SocialCmd(), this);
+        pm.registerEvents(new BelohungCmd(), this);
+
 
 
         statsNPC = new StatsNPC();

@@ -226,17 +226,19 @@ public class ScoreboardManager {
     }
 
     public static void updateTagline(Player player){
-        Scoreboard scoreboard = player.getScoreboard();
-        Objective objective = scoreboard.getObjective(DisplaySlot.BELOW_NAME);
-        if(objective == null){
-            objective = scoreboard.registerNewObjective("citybuild_belowname", "air");
-            objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-        }
+        //Scoreboard scoreboard = player.getScoreboard();
+
+        //Objective objective = scoreboard.registerNewObjective("citybuild_belowname", "air");
+        //if(objective == null){
+            //objective.setDisplayName(ChatColor.RED + "Test");
+          //  objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+           // objective.setDisplayName("test123");
+       // }
 
         // Find out tagline
-        String tagline = "test";
+        //String tagline = "test";
 
-        objective.displayName(Component.text("test123"));
+
 
   
     }
