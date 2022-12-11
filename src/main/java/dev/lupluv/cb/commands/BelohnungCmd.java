@@ -35,7 +35,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
             createInv(player);
 
         }else{
-            player.sendMessage(Strings.prefix + "Benutzung: /Belohnung");
+            player.sendMessage(Strings.prefix + "Benutzung: /belohnung");
         }
 
         return false;
@@ -79,7 +79,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
     @EventHandler
     public void onClick(InventoryClickEvent e){
 
-        if(!(e.getWhoClicked() instanceof Player)) return;;
+        if(!(e.getWhoClicked() instanceof Player)) return;
 
         Player pl = (Player) e.getWhoClicked();
 
