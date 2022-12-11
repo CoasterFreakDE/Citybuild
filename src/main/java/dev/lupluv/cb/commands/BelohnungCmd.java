@@ -2,11 +2,14 @@ package dev.lupluv.cb.commands;
 
 import dev.lupluv.cb.utils.Item;
 import dev.lupluv.cb.utils.Strings;
+import org.apache.logging.log4j.core.util.SystemMillisClock;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,14 +19,18 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class BelohnungCmd implements CommandExecutor, Listener {
 
     public Inventory inv;
     public String invname = "§6§lBelohnung";
-    public static boolean hasTagesBelohnung;
-    public static boolean hasWochenBelohnung;
+
+    public static File BelohnungsFile;
+    public static FileConfiguration cfg;
+
+
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -89,12 +96,16 @@ public class BelohnungCmd implements CommandExecutor, Listener {
 
                 case "§c§lTages Belohnung":
 
-                    getTagesBelohnung(pl);
+                    long milli = System.currentTimeMillis();
+
+                    getTagesBelohnung(pl, milli);
 
                     break;
                 case "§c§lWochen Belohnung":
 
-                    getWochenBelohnung(pl);
+                    long milli2 = System.currentTimeMillis();
+
+                    getWochenBelohnung(pl, milli2);
 
                     break;
 
@@ -110,15 +121,14 @@ public class BelohnungCmd implements CommandExecutor, Listener {
 
     }
 
-    public void getTagesBelohnung(Player player){
+    public void getTagesBelohnung(Player player, long Millisconds){
 //500
      player.sendMessage(Strings.prefix + "Diese Fuktion ist noch nicht fertig!");
 
 
-
     }
 
-    public void getWochenBelohnung(Player player){
+    public void getWochenBelohnung(Player player, long Milliseconds){
 //3000
         player.sendMessage(Strings.prefix + "Diese Fuktion ist noch nicht fertig!");
 

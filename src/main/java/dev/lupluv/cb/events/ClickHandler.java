@@ -222,14 +222,13 @@ public class ClickHandler implements Listener {
                     p.sendMessage(Strings.prefix + "§cDu hast nicht genug Items in deinem Inventar!");
                     return;
                 }
-                ItemStack is = new ItemStack(cbItem.getMaterial());
                 if(!Economy.depositPlayer(p.getUniqueId(), price).transactionSuccess()){
                     p.closeInventory();
                     p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
                     return;
                 }
-                p.getInventory().remove(is);
-                p.sendMessage(Strings.prefix + "§7Du hast §a" + is.getAmount() + " " + cbItem.getDisplayName() + " §7verkauft.");
+                removeItems(p, cbItem.getMaterial(), 1);
+                p.sendMessage(Strings.prefix + "§7Du hast §a1 " + cbItem.getDisplayName() + " §7verkauft.");
             }else if(item.getItemMeta().getDisplayName().startsWith("§7Verkaufe 32 ")){
                 // Sell 2
                 double price = Worth.getWorth(cbItem).getSell()*32;
@@ -237,14 +236,13 @@ public class ClickHandler implements Listener {
                     p.sendMessage(Strings.prefix + "§cDu hast nicht genug Items in deinem Inventar!");
                     return;
                 }
-                ItemStack is = new ItemStack(cbItem.getMaterial(), 32);
                 if(!Economy.depositPlayer(p.getUniqueId(), price).transactionSuccess()){
                     p.closeInventory();
                     p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
                     return;
                 }
-                p.getInventory().remove(is);
-                p.sendMessage(Strings.prefix + "§7Du hast §a" + is.getAmount() + " " + cbItem.getDisplayName() + " §7verkauft.");
+                removeItems(p, cbItem.getMaterial(), 32);
+                p.sendMessage(Strings.prefix + "§7Du hast §a32 " + cbItem.getDisplayName() + " §7verkauft.");
             }else if(item.getItemMeta().getDisplayName().startsWith("§7Verkaufe 64 ")){
                 // Sell 3
                 double price = Worth.getWorth(cbItem).getSell()*64;
@@ -252,14 +250,13 @@ public class ClickHandler implements Listener {
                     p.sendMessage(Strings.prefix + "§cDu hast nicht genug Items in deinem Inventar!");
                     return;
                 }
-                ItemStack is = new ItemStack(cbItem.getMaterial(), 64);
                 if(!Economy.depositPlayer(p.getUniqueId(), price).transactionSuccess()){
                     p.closeInventory();
                     p.sendMessage(Strings.prefix + "§cEs ist etwas schiefgelaufen. Bitte versuche es erneut.");
                     return;
                 }
-                p.getInventory().remove(is);
-                p.sendMessage(Strings.prefix + "§7Du hast §a" + is.getAmount() + " " + cbItem.getDisplayName() + " §7verkauft.");
+                removeItems(p, cbItem.getMaterial(), 64);
+                p.sendMessage(Strings.prefix + "§7Du hast §a64 " + cbItem.getDisplayName() + " §7verkauft.");
             }else if(item.getItemMeta().getDisplayName().equalsIgnoreCase("§7➥ Zurück")){
                 new Adminshop(p).open();
             }
@@ -277,6 +274,28 @@ public class ClickHandler implements Listener {
             }
         }
         return hasFree;
+    }
+
+    public static void removeItems(Player p, Material mat, int amount){
+        int am = 0;
+        for(int i = 0; i < 6*5+3; i++){
+            ItemStack is = p.getInventory().getItem(i);
+            if(is != null && is.getType() != Material.AIR){
+                if(is.getType() == mat){
+                    if(is.getAmount() > amount-am){
+                        am=amount;
+                        is.setAmount(is.getAmount()-amount-am);
+                        break;
+                    }else{
+                        am+=is.getAmount();
+                        p.getInventory().remove(is);
+                    }
+                    if(am >= amount){
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public static boolean hasItems(Player p, Material mat, int amount){
