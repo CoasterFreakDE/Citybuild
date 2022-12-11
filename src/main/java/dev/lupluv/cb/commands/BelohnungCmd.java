@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class BelohungCmd implements CommandExecutor, Listener {
+public class BelohnungCmd implements CommandExecutor, Listener {
 
     public Inventory inv;
     public String invname = "§6§lBelohnung";
@@ -112,11 +112,7 @@ public class BelohungCmd implements CommandExecutor, Listener {
 
     public void getTagesBelohnung(Player player){
 //500
-        if(!(hasTagesBelohnung)){
-
-        }else{
-            player.sendMessage(Strings.prefix + "Du hast deine Tagesbelohnung bereits eingelöst");
-        }
+     player.sendMessage(Strings.prefix + "Diese Fuktion ist noch nicht fertig!");
 
 
 
@@ -124,11 +120,7 @@ public class BelohungCmd implements CommandExecutor, Listener {
 
     public void getWochenBelohnung(Player player){
 //3000
-        if(!(hasWochenBelohnung)){
-
-        }else{
-            player.sendMessage(Strings.prefix + "Du hast deine Wochbelohnung bereits eingelöst");
-        }
+        player.sendMessage(Strings.prefix + "Diese Fuktion ist noch nicht fertig!");
 
     }
 

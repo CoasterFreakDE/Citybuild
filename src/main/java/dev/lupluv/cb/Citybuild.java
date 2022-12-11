@@ -3,9 +3,7 @@ package dev.lupluv.cb;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
-import dev.lupluv.cb.clans.Clan;
 import dev.lupluv.cb.commands.*;
-import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.events.*;
 import dev.lupluv.cb.licence.LicenceManager;
 import dev.lupluv.cb.listeners.CloudNetSimpleNameTagsListener;
@@ -14,7 +12,6 @@ import dev.lupluv.cb.scorebaord.ScoreboardManager;
 import dev.lupluv.cb.stats.StatsNPC;
 import dev.lupluv.cb.utils.*;
 import dev.lupluv.cb.voting.VoteListener;
-import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -141,7 +138,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("werbung").setExecutor(new WerbungCmd());
         getCommand("bewerben").setExecutor(new BewerbenCmd());
         getCommand("live").setExecutor(new LiveCmd());
-        getCommand("belohnung").setExecutor(new BelohungCmd());
+        getCommand("belohnung").setExecutor(new BelohnungCmd());
 
         // Events
 
@@ -151,7 +148,7 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new VoteListener(), this);
         pm.registerEvents(new RanginfoCmd(), this);
         pm.registerEvents(new SocialCmd(), this);
-        pm.registerEvents(new BelohungCmd(), this);
+        pm.registerEvents(new BelohnungCmd(), this);
 
 
 
