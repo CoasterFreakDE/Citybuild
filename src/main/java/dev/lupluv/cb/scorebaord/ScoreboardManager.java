@@ -8,16 +8,15 @@ import de.dytanic.cloudnet.ext.bridge.player.ICloudPlayer;
 import de.dytanic.cloudnet.ext.bridge.player.IPlayerManager;
 import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.economy.Economy;
+import dev.lupluv.cb.tagline.TaglineManager;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 //import net.melion.rgbchat.api.RGBApi;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.melion.rgbchat.api.RGBApi;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.scoreboard.DisplaySlot;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
+import org.bukkit.scoreboard.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -72,6 +71,8 @@ public class ScoreboardManager {
         server.setPrefix("§b" + serverName);
         coins.setPrefix("§e" + Economy.getBalance(p.getUniqueId()) + " §6❂");
         online.setPrefix("§a" + Bukkit.getOnlinePlayers().size());
+
+        updateTagline(p);
     }
 
     public static String getPrefix(Player player){
@@ -224,6 +225,22 @@ public class ScoreboardManager {
         target.setDisplayName(permissionGroup.getDisplay() + target.getName());
     }
 
+    public static void updateTagline(Player player){
+        Scoreboard scoreboard = player.getScoreboard();
+        Objective objective = scoreboard.getObjective(DisplaySlot.BELOW_NAME);
+        if(objective == null){
+            objective = scoreboard.registerNewObjective("citybuild_belowname", "air");
+            objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+        }
+
+        // Find out tagline
+        String tagline = "test";
+
+        objective.displayName(Component.text("test123"));
+
+  
+    }
+
     private void initScoreboard(Player all) {
         if (all.getScoreboard().equals(all.getServer().getScoreboardManager().getMainScoreboard())) {
             Scoreboard scoreboard = all.getServer().getScoreboardManager().getNewScoreboard();
@@ -256,6 +273,7 @@ public class ScoreboardManager {
             online.addEntry("§5");
 
             all.setScoreboard(scoreboard);
+            updateTagline(all);
         }
     }
 
