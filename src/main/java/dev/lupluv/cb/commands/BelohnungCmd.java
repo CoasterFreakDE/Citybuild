@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class BelohungCmd implements CommandExecutor, Listener {
+public class BelohnungCmd implements CommandExecutor, Listener {
 
     public Inventory inv;
     public String invname = "§6§lBelohnung";
@@ -35,7 +35,7 @@ public class BelohungCmd implements CommandExecutor, Listener {
             createInv(player);
 
         }else{
-            player.sendMessage(Strings.prefix + "Benutzung: /Belohnung");
+            player.sendMessage(Strings.prefix + "Benutzung: /belohnung");
         }
 
         return false;
@@ -79,7 +79,7 @@ public class BelohungCmd implements CommandExecutor, Listener {
     @EventHandler
     public void onClick(InventoryClickEvent e){
 
-        if(!(e.getWhoClicked() instanceof Player)) return;;
+        if(!(e.getWhoClicked() instanceof Player)) return;
 
         Player pl = (Player) e.getWhoClicked();
 
