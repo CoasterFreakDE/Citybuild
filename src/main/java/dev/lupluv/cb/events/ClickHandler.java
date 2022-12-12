@@ -256,6 +256,7 @@ public class ClickHandler implements Listener {
                     return;
                 }
                 removeItems(p, cbItem.getMaterial(), 64);
+
                 p.sendMessage(Strings.prefix + "§7Du hast §a64 " + cbItem.getDisplayName() + " §7verkauft.");
             }else if(item.getItemMeta().getDisplayName().equalsIgnoreCase("§7➥ Zurück")){
                 new Adminshop(p).open();
@@ -277,25 +278,30 @@ public class ClickHandler implements Listener {
     }
 
     public static void removeItems(Player p, Material mat, int amount){
-        int am = 0;
-        for(int i = 0; i < 6*5+3; i++){
-            ItemStack is = p.getInventory().getItem(i);
-            if(is != null && is.getType() != Material.AIR){
-                if(is.getType() == mat){
-                    if(is.getAmount() > amount-am){
-                        am=amount;
-                        is.setAmount(is.getAmount()-amount-am);
-                        break;
-                    }else{
-                        am+=is.getAmount();
-                        p.getInventory().remove(is);
-                    }
-                    if(am >= amount){
-                        break;
-                    }
-                }
-            }
-        }
+
+        ItemStack iss = new ItemStack(mat, amount);
+
+       p.getInventory().removeItem(iss);
+
+        //int am = 0;
+        //for(int i = 0; i < 6*5+3; i++){
+        //  ItemStack is = p.getInventory().getItem(i);
+        //    if(is != null && is.getType() != Material.AIR){
+        //        if(is.getType() == mat){
+        //            if(is.getAmount() > amount-am){
+        //                am=amount;
+        //                is.setAmount(is.getAmount()-amount-am);
+        //                break;
+        //            }else{
+        //                am+=is.getAmount();
+        //                p.getInventory().remove(is);
+        //            }
+        //            if(am >= amount){
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     public static boolean hasItems(Player p, Material mat, int amount){

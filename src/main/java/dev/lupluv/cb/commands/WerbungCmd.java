@@ -53,6 +53,7 @@ public class WerbungCmd implements CommandExecutor {
     public void sendAd(Player player, String message) {
 
         Bukkit.getOnlinePlayers().forEach(all ->{
+            all.sendMessage(" ");
             all.sendMessage(Strings.prefix + "§7--------------------------------");
             all.sendMessage(Strings.prefix);
             all.sendMessage(Strings.prefix + "§7Werbung von §a" + player.getName());
@@ -60,6 +61,7 @@ public class WerbungCmd implements CommandExecutor {
             all.sendMessage(Strings.prefix + "§7" + message);
             all.sendMessage(Strings.prefix);
             all.sendMessage(Strings.prefix + "§7--------------------------------");
+            all.sendMessage(" ");
         });
 
     }
