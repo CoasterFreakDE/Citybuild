@@ -280,7 +280,6 @@ public class ClickHandler implements Listener {
     public static void removeItems(Player p, Material mat, int amount){
 
         ItemStack iss = new ItemStack(mat, amount);
-
        p.getInventory().removeItem(iss);
 
         //int am = 0;

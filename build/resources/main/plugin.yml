@@ -116,6 +116,15 @@ commands:
   social:
     aliases:
       - socialmedia
+      - tiktok
+      - twitch
+      - website
+      - store
+      - instagram
+      - twitter
+      - youtube
+      - teamspeak
+      - ts
   werbung:
     aliases:
       - ad

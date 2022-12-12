@@ -87,7 +87,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
     public void onClick(InventoryClickEvent e){
 
         if(!(e.getWhoClicked() instanceof Player)) return;
-
+        if(e.getCurrentItem() == null) return;
         Player pl = (Player) e.getWhoClicked();
 
         if(e.getView().getTitle().equals(invname)) {
