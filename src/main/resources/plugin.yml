@@ -136,3 +136,6 @@ commands:
       - apply
   live:
   belohnung:
+  rangshop:
+    aliases:
+      - rankshop
