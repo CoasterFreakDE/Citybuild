@@ -139,7 +139,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("bewerben").setExecutor(new BewerbenCmd());
         getCommand("live").setExecutor(new LiveCmd());
         getCommand("belohnung").setExecutor(new BelohnungCmd());
-        getCommand("rangshop").setExecutor(new RangshopCmd());
+
 
         // Events
 
@@ -150,7 +150,6 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new RanginfoCmd(), this);
         pm.registerEvents(new SocialCmd(), this);
         pm.registerEvents(new BelohnungCmd(), this);
-        pm.registerEvents(new RangshopCmd(), this);
 
 
 
