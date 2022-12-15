@@ -4,6 +4,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import dev.lupluv.cb.belohnung.FileMangerB;
+import dev.lupluv.cb.belohnung.FileMangerC;
 import dev.lupluv.cb.commands.*;
 import dev.lupluv.cb.events.*;
 import dev.lupluv.cb.licence.LicenceManager;
@@ -63,6 +64,7 @@ public class Citybuild extends JavaPlugin {
 
         //Belohnung
         FileMangerB.loadFile();
+        FileMangerC.loadFile();
 
 
         if(getServer().getPluginManager().isPluginEnabled("Vault")) {

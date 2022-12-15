@@ -1,6 +1,7 @@
 package dev.lupluv.cb.commands;
 
 import dev.lupluv.cb.belohnung.FileMangerB;
+import dev.lupluv.cb.belohnung.FileMangerC;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.utils.FileManager;
 import dev.lupluv.cb.utils.Item;
@@ -130,7 +131,38 @@ public class BelohnungCmd implements CommandExecutor, Listener {
 
                     //WOCHENBELOHNUNG BEKOMMEN
 
-                 pl.sendMessage(Strings.prefix + "Diese Funktion kommt noch");
+
+
+
+                    long currentTime2 = System.currentTimeMillis();
+
+
+
+                    if(FileMangerC.yamlConfiguration.get(pl.getName()) != null){
+                        if(FileMangerC.yamlConfiguration.getLong(pl.getName()) + 604800000 <= currentTime2){
+
+                            FileMangerC.yamlConfiguration.set(pl.getName(), currentTime2);
+                            FileMangerC.loadFile();
+                            sendAllWeeklyReward(pl);
+                            pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt!");
+                            Economy.depositPlayer(pl.getUniqueId(), 500);
+                            FileMangerC.loadFile();
+                        }else{
+                            pl.sendMessage(Strings.prefix + "§cDu hast die deine Wöchentliche Belohnung schon abgeholt!");
+
+                        }
+
+                    }else{
+                        FileMangerC.yamlConfiguration.set(pl.getName(), currentTime2);
+                        FileMangerC.loadFile();
+                        sendAllWeeklyReward(pl);
+                        pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt!");
+                        Economy.depositPlayer(pl.getUniqueId(), 500);
+                        FileMangerC.loadFile();
+                    }
+
+
+
 
                     break;
 
@@ -162,7 +194,16 @@ public class BelohnungCmd implements CommandExecutor, Listener {
 
         Bukkit.getOnlinePlayers().forEach(all ->{
             all.sendMessage(" ");
-            all.sendMessage(Strings.prefix + "Der Spieler §9" + player.getName() + " §7hat seine Täglichen belohnung erhalten!");
+            all.sendMessage(Strings.prefix + "Der Spieler §9" + player.getName() + " §7hat seine Tägliche Belohnung erhalten!");
+            all.sendMessage(" ");
+        });
+
+    }
+    public void sendAllWeeklyReward(Player player) {
+
+        Bukkit.getOnlinePlayers().forEach(all ->{
+            all.sendMessage(" ");
+            all.sendMessage(Strings.prefix + "Der Spieler §9" + player.getName() + " §7hat seine Wöchentliche Belohnung erhalten!");
             all.sendMessage(" ");
         });
 
