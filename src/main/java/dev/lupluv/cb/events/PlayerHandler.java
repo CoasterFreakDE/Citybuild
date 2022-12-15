@@ -427,7 +427,7 @@ public class PlayerHandler implements Listener {
         if(!player.hasPermission("cb.colors.rename")) return;
 
         ItemMeta im = res.getItemMeta();
-        im.displayName(Component.text(ScoreboardManager.format2(im.displayName().toString())));
+        im.setDisplayName(ScoreboardManager.format2(im.getDisplayName()));
         res.setItemMeta(im);
 
         e.setResult(res);
