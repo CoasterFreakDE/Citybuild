@@ -73,10 +73,10 @@ public class ScoreboardManager {
         online.setPrefix("§7" + Bukkit.getOnlinePlayers().size() + "§8/§7" + Bukkit.getMaxPlayers());
 
         updateTagline(p);
-        profile.setPrefix("§e" + getPrefix(p).replaceAll("&", "§") + getColor(p).replaceAll("&", "§") + p.getName());
-        server.setPrefix("§b" + serverName);
-        coins.setPrefix("§e" + Economy.getBalance(p.getUniqueId()) + " §6❂");
-        online.setPrefix("§a" + Bukkit.getOnlinePlayers().size());
+        profile.setPrefix("§7" + getPrefix(p).replaceAll("&", "§") + getColor(p).replaceAll("&", "§") + p.getName());
+        server.setPrefix("§7" + serverName);
+        coins.setPrefix("§7" + Economy.getBalance(p.getUniqueId()) + " §7Coins");
+        online.setPrefix("§7" + Bukkit.getOnlinePlayers().size() + "§8/§7" + Bukkit.getMaxPlayers());
     }
 
     public static String getPrefix(Player player){
@@ -252,7 +252,7 @@ public class ScoreboardManager {
             Scoreboard scoreboard = all.getServer().getScoreboardManager().getNewScoreboard();
             Objective objective = scoreboard.registerNewObjective("citybuild", "dummy");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            objective.setDisplayName("§6§lWONDERBUILD§8.§6§lNET");
+            objective.setDisplayName("§6§lWONDERBUILD§8§l.§6§lNET");
             Team profile;
             Team server;
             Team coins;

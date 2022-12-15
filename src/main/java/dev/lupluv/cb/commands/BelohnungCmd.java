@@ -109,11 +109,11 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                             FileMangerB.yamlConfiguration.set(pl.getName(), currentTime);
                             FileMangerB.loadFile();
                             sendAllDailyReward(pl);
-                            pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt!");
+                            pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt§8,§7 250§8!");
                             Economy.depositPlayer(pl.getUniqueId(), 250);
                             FileMangerB.loadFile();
                         }else{
-                            pl.sendMessage(Strings.prefix + "§cDu hast die deine Tägliche Belohnung schon abgeholt!");
+                            pl.sendMessage(Strings.prefix + "§cDu hast deine Tägliche Belohnung schon abgeholt!");
 
                         }
 
@@ -121,7 +121,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                         FileMangerB.yamlConfiguration.set(pl.getName(), currentTime);
                         FileMangerB.loadFile();
                         sendAllDailyReward(pl);
-                        pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt!");
+                        pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt§8,§7 250§8!");
                         Economy.depositPlayer(pl.getUniqueId(), 250);
                         FileMangerB.loadFile();
                     }
@@ -144,11 +144,11 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                             FileMangerC.yamlConfiguration.set(pl.getName(), currentTime2);
                             FileMangerC.loadFile();
                             sendAllWeeklyReward(pl);
-                            pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt!");
+                            pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt§8,§7 500§8!");
                             Economy.depositPlayer(pl.getUniqueId(), 500);
                             FileMangerC.loadFile();
                         }else{
-                            pl.sendMessage(Strings.prefix + "§cDu hast die deine Wöchentliche Belohnung schon abgeholt!");
+                            pl.sendMessage(Strings.prefix + "§cDu hast deine Wöchentliche Belohnung schon abgeholt!");
 
                         }
 
@@ -156,7 +156,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                         FileMangerC.yamlConfiguration.set(pl.getName(), currentTime2);
                         FileMangerC.loadFile();
                         sendAllWeeklyReward(pl);
-                        pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt!");
+                        pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt§8,§7 500§8!");
                         Economy.depositPlayer(pl.getUniqueId(), 500);
                         FileMangerC.loadFile();
                     }
@@ -194,7 +194,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
 
         Bukkit.getOnlinePlayers().forEach(all ->{
             all.sendMessage(" ");
-            all.sendMessage(Strings.prefix + "Der Spieler §9" + player.getName() + " §7hat seine Tägliche Belohnung erhalten!");
+            all.sendMessage(Strings.prefix + "Der Spieler §a" + player.getName() + " §7hat gerade seine Tägliche Belohnung abgeholt§8! (§7/belohnung§8)");
             all.sendMessage(" ");
         });
 
@@ -203,7 +203,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
 
         Bukkit.getOnlinePlayers().forEach(all ->{
             all.sendMessage(" ");
-            all.sendMessage(Strings.prefix + "Der Spieler §9" + player.getName() + " §7hat seine Wöchentliche Belohnung erhalten!");
+            all.sendMessage(Strings.prefix + "Der Spieler §a" + player.getName() + " §7hat gerade seine Wöchentliche Belohnung abgeholt§8! (§7/belohnung§8)");
             all.sendMessage(" ");
         });
 
