@@ -13,6 +13,7 @@ import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.elevators.ElevatorBlock;
 import dev.lupluv.cb.scorebaord.ScoreboardManager;
 import dev.lupluv.cb.utils.*;
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
@@ -34,10 +35,12 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BlockDataMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.io.IOException;
@@ -414,6 +417,31 @@ public class PlayerHandler implements Listener {
             } else if (p.getLocation().getWorld().getName().equalsIgnoreCase("farmwelt_end")) {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rtp " + p.getName() + " " + p.getLocation().getWorld().getName());
             }
+        }
+    }
+
+    @EventHandler
+    public void onRename(PrepareAnvilEvent e){
+        ItemStack res = e.getResult();
+        Player player = (Player) e.getView().getPlayer();
+        if(!player.hasPermission("cb.colors.rename")) return;
+
+        ItemMeta im = res.getItemMeta();
+        im.displayName(Component.text(ScoreboardManager.format2(im.displayName().toString())));
+        res.setItemMeta(im);
+
+        e.setResult(res);
+    }
+
+    @EventHandler
+    public void onSign(SignChangeEvent e){
+        Player player = e.getPlayer();
+        if(!player.hasPermission("cb.colors.signs")) return;
+
+        int i = 0;
+        for(String s : e.getLines()){
+            e.setLine(i, ScoreboardManager.format2(s));
+            i++;
         }
     }
 
