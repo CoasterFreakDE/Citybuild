@@ -120,6 +120,8 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                         FileMangerB.yamlConfiguration.set(pl.getName(), currentTime);
                         FileMangerB.loadFile();
                         sendAllDailyReward(pl);
+                        pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt!");
+                        Economy.depositPlayer(pl.getUniqueId(), 250);
                         FileMangerB.loadFile();
                     }
 

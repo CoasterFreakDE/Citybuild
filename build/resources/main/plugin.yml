@@ -118,7 +118,6 @@ commands:
       - rinfo
   social:
     aliases:
-<<<<<<< Updated upstream
       - socialmedia
       - tiktok
       - twitch
@@ -138,6 +137,3 @@ commands:
   live:
   belohnung:
   rangshop:
-=======
-      - socialmedia
->>>>>>> Stashed changes
