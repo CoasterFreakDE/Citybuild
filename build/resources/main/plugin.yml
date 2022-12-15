@@ -41,6 +41,9 @@ commands:
       - gamemode
   fly:
   farmwelt:
+    aliases:
+      - farming
+      - farm
   shop:
   admin:
   speed:
@@ -133,3 +136,4 @@ commands:
       - apply
   live:
   belohnung:
+  rangshop:

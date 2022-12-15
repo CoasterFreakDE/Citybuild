@@ -140,6 +140,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("live").setExecutor(new LiveCmd());
         getCommand("belohnung").setExecutor(new BelohnungCmd());
 
+
         // Events
 
         PluginManager pm = Bukkit.getPluginManager();
