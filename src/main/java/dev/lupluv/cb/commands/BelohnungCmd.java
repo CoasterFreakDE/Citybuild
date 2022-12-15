@@ -1,15 +1,15 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.belohnung.FileMangerB;
+import dev.lupluv.cb.economy.Economy;
+import dev.lupluv.cb.utils.FileManager;
 import dev.lupluv.cb.utils.Item;
 import dev.lupluv.cb.utils.Strings;
-import org.apache.logging.log4j.core.util.SystemMillisClock;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class BelohnungCmd implements CommandExecutor, Listener {
@@ -27,8 +26,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
     public Inventory inv;
     public String invname = "§6§lBelohnung";
 
-    public static File BelohnungsFile;
-    public static FileConfiguration cfg;
+    public static long millis;
 
 
 
@@ -96,16 +94,41 @@ public class BelohnungCmd implements CommandExecutor, Listener {
 
                 case "§c§lTages Belohnung":
 
-                    long milli = System.currentTimeMillis();
+                    //TAGESBELOHNUNG BEKOMMEN--------------------------------------------------
 
-                    getTagesBelohnung(pl, milli);
+                   // pl.sendMessage(Strings.prefix + "Funktion in bearbeitung!");
+
+                    long currentTime = System.currentTimeMillis();
+
+
+
+                    if(FileMangerB.yamlConfiguration.get(pl.getName()) != null){
+                        if(FileMangerB.yamlConfiguration.getLong(pl.getName()) + 86400000 <= currentTime){
+
+                            FileMangerB.yamlConfiguration.set(pl.getName(), currentTime);
+                            FileMangerB.loadFile();
+                            sendAllDailyReward(pl);
+                            pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt!");
+                            Economy.depositPlayer(pl.getUniqueId(), 250);
+                            FileMangerB.loadFile();
+                        }else{
+                            pl.sendMessage(Strings.prefix + "§cDu hast die deine Tägliche Belohnung schon abgeholt!");
+
+                        }
+
+                    }else{
+                        FileMangerB.yamlConfiguration.set(pl.getName(), currentTime);
+                        FileMangerB.loadFile();
+                        sendAllDailyReward(pl);
+                        FileMangerB.loadFile();
+                    }
 
                     break;
                 case "§c§lWochen Belohnung":
 
-                    long milli2 = System.currentTimeMillis();
+                    //WOCHENBELOHNUNG BEKOMMEN
 
-                    getWochenBelohnung(pl, milli2);
+                 pl.sendMessage(Strings.prefix + "Diese Funktion kommt noch");
 
                     break;
 
@@ -121,16 +144,25 @@ public class BelohnungCmd implements CommandExecutor, Listener {
 
     }
 
-    public void getTagesBelohnung(Player player, long Millisconds){
+    public void getTagesBelohnung(Player player){
 //500
-     player.sendMessage(Strings.prefix + "Diese Fuktion ist noch nicht fertig!");
 
 
     }
 
-    public void getWochenBelohnung(Player player, long Milliseconds){
+    public void getWochenBelohnung(Player player){
 //3000
         player.sendMessage(Strings.prefix + "Diese Fuktion ist noch nicht fertig!");
+
+    }
+
+    public void sendAllDailyReward(Player player) {
+
+        Bukkit.getOnlinePlayers().forEach(all ->{
+            all.sendMessage(" ");
+            all.sendMessage(Strings.prefix + "Der Spieler §9" + player.getName() + " §7hat seine Täglichen belohnung erhalten!");
+            all.sendMessage(" ");
+        });
 
     }
 

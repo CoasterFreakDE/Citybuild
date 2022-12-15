@@ -3,6 +3,7 @@ package dev.lupluv.cb;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
+import dev.lupluv.cb.belohnung.FileMangerB;
 import dev.lupluv.cb.commands.*;
 import dev.lupluv.cb.events.*;
 import dev.lupluv.cb.licence.LicenceManager;
@@ -59,6 +60,9 @@ public class Citybuild extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
+        //Belohnung
+        FileMangerB.loadFile();
 
 
         if(getServer().getPluginManager().isPluginEnabled("Vault")) {
@@ -139,7 +143,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("bewerben").setExecutor(new BewerbenCmd());
         getCommand("live").setExecutor(new LiveCmd());
         getCommand("belohnung").setExecutor(new BelohnungCmd());
-
+        getCommand("rangshop").setExecutor(new RangshopCmd());
 
         // Events
 
@@ -150,6 +154,7 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new RanginfoCmd(), this);
         pm.registerEvents(new SocialCmd(), this);
         pm.registerEvents(new BelohnungCmd(), this);
+        pm.registerEvents(new RangshopCmd(), this);
 
 
 
@@ -167,6 +172,9 @@ public class Citybuild extends JavaPlugin {
         ScoreboardManager.getInstance().startScoreboardTask();
 
     }
+
+    //BelohungsSystem
+
 
     @Override
     public void onDisable() {
