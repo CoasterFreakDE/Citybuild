@@ -109,7 +109,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                             FileMangerB.yamlConfiguration.set(pl.getName(), currentTime);
                             FileMangerB.loadFile();
                             sendAllDailyReward(pl);
-                            pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt§8,§7 250§8!");
+                            pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt§8,§7 250 Coins§8!");
                             Economy.depositPlayer(pl.getUniqueId(), 250);
                             FileMangerB.loadFile();
                         }else{
@@ -121,7 +121,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                         FileMangerB.yamlConfiguration.set(pl.getName(), currentTime);
                         FileMangerB.loadFile();
                         sendAllDailyReward(pl);
-                        pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt§8,§7 250§8!");
+                        pl.sendMessage(Strings.prefix + "Du hast deine Tägliche Belohnung abgeholt§8,§7 250 Coins§8!");
                         Economy.depositPlayer(pl.getUniqueId(), 250);
                         FileMangerB.loadFile();
                     }
@@ -144,7 +144,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                             FileMangerC.yamlConfiguration.set(pl.getName(), currentTime2);
                             FileMangerC.loadFile();
                             sendAllWeeklyReward(pl);
-                            pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt§8,§7 500§8!");
+                            pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt§8,§7 500 Coins§8!");
                             Economy.depositPlayer(pl.getUniqueId(), 500);
                             FileMangerC.loadFile();
                         }else{
@@ -156,7 +156,7 @@ public class BelohnungCmd implements CommandExecutor, Listener {
                         FileMangerC.yamlConfiguration.set(pl.getName(), currentTime2);
                         FileMangerC.loadFile();
                         sendAllWeeklyReward(pl);
-                        pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt§8,§7 500§8!");
+                        pl.sendMessage(Strings.prefix + "Du hast deine Wöchentliche Belohnung abgeholt§8,§7 500 Coins§8!");
                         Economy.depositPlayer(pl.getUniqueId(), 500);
                         FileMangerC.loadFile();
                     }
