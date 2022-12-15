@@ -72,15 +72,11 @@ public class ScoreboardManager {
         coins.setPrefix("§7" + Economy.getBalance(p.getUniqueId()) + " §7Coins");
         online.setPrefix("§7" + Bukkit.getOnlinePlayers().size() + "§8/§7" + Bukkit.getMaxPlayers());
 
-<<<<<<< Updated upstream
         updateTagline(p);
-=======
         profile.setPrefix("§e" + getPrefix(p).replaceAll("&", "§") + getColor(p).replaceAll("&", "§") + p.getName());
-        playTime.setPrefix("§6Kommt bald!");
         server.setPrefix("§b" + serverName);
         coins.setPrefix("§e" + Economy.getBalance(p.getUniqueId()) + " §6❂");
         online.setPrefix("§a" + Bukkit.getOnlinePlayers().size());
->>>>>>> Stashed changes
     }
 
     public static String getPrefix(Player player){
