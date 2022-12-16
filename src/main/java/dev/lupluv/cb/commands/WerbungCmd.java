@@ -25,14 +25,16 @@ public class WerbungCmd implements CommandExecutor {
 
         if(args.length >= 1){
 
-            if(Economy.getBalance(player.getUniqueId()) >= 5000) {
-                if(Economy.withdrawPlayer(player.getUniqueId(), 5000).transactionSuccess()){
+            if(Economy.getBalance(player.getUniqueId()) >= 100) {
+                if(Economy.withdrawPlayer(player.getUniqueId(), 100).transactionSuccess()){
                     sendAd(player, String.join(" ", args));
                 }else{
                     player.sendMessage(Strings.prefix + "§cEs ist etwas schief gelaufen");
                 }
 
 
+            }else{
+                player.sendMessage(Strings.prefix + "Du hast zu wenig geld!");
             }
 
         }else{

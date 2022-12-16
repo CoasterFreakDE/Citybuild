@@ -58,7 +58,6 @@ public class RangshopCmd implements CommandExecutor, Listener {
         emerladmeta.setDisplayName("§2§lPlatin");
         emerladmeta.setLore(Lore.create(
                 " ",
-                "§7§lBefehle:",
                 "§7Der §2Platin §7Rang kostet §a65.000 §7Coins",
                 "§7§8(§7Rechtsclick zum Kaufen§8)",
                 " ",
