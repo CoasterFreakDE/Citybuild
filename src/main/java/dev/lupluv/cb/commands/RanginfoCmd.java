@@ -39,8 +39,8 @@ public class RanginfoCmd implements CommandExecutor, Listener {
         lore1.add("§7• §a/werbung §7Erlaubt dir Werbung für deinen Shop zu machen");
         lore1.add(" ");
         lore1.add("§7§lAnderes:");
-        lore1.add("§7• Du erhälst den §6§lPremium §7Prefix");
-        lore1.add("§7• Du erhälst mehrere Plot-Ränder & Wände");
+        lore1.add("§7• Du erhältst den §6§lPremium §7Prefix");
+        lore1.add("§7• Du erhältst mehrere Plot-Ränder & Wände");
         lore1.add("§7• Du kannst 4 Homes setzen");
         lore1.add("§7• Du kannst farbig schreiben (Alle ColorCode's mit &)");
         lore1.add("§7• Du kannst 3 Plots besitzen");
@@ -86,9 +86,9 @@ public class RanginfoCmd implements CommandExecutor, Listener {
                 "§7• §a/tpatoggle §7Schalte Teleportierungsanfragen aus",
                 " ",
                 "§7§lAnderes:",
-                "§7• Du erhälst den §2§lPlatin §7Prefix",
-                "§7• Du erhälst mehr Plot-Ränder & Wände",
-                "§7• Du erhälst den kein Fallschaden Perk",
+                "§7• Du erhältst den §2§lPlatin §7Prefix",
+                "§7• Du erhältst mehr Plot-Ränder & Wände",
+                "§7• Du erhältst den kein Fallschaden Perk",
                 "§7• (Bestimmte Effekte)",
                 "§7• (Bestimmte Haustiere)",
                 "§7• Du kannst 5 Homes setzen",
