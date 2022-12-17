@@ -33,17 +33,17 @@ public class RanginfoCmd implements CommandExecutor, Listener {
         ArrayList<String> lore1 = new ArrayList<>();
         lore1.add(" ");
         lore1.add("§7§lBefehle:");
-        lore1.add("§7• §a/werkbank §7öffne jederzeit die Werkbank");
-        lore1.add("§7• §a/invsee §7lässt dich in andere Inventare schauen");
-        lore1.add("§7• §a/payall §7erlaubt dir allen Spielern jede Stunde Coins zu zahlen");
-        lore1.add("§7• §a/werbung §7erlaubt dir werbung für deinen shop zu machen");
+        lore1.add("§7• §a/werkbank §7Öffne jederzeit die Werkbank");
+        lore1.add("§7• §a/invsee §7Lässt dich in andere Inventare schauen");
+        lore1.add("§7• §a/payall §7Erlaubt dir allen Spielern jede Stunde Coins zu zahlen");
+        lore1.add("§7• §a/werbung §7Erlaubt dir Werbung für deinen Shop zu machen");
         lore1.add(" ");
         lore1.add("§7§lAnderes:");
-        lore1.add("§7• Du erhälst den §6§lPremium §8Prefix");
-        lore1.add("§7• Du erhälst mehrer Plot Ränder & Wände");
-        lore1.add("§7• Du kannst 4 Homes setzten");
-        lore1.add("§7• Du kannst farbig schreiben (Alle ColorCode mit &)");
-        lore1.add("§7• Du kannst 3 Plots besitzten");
+        lore1.add("§7• Du erhälst den §6§lPremium §7Prefix");
+        lore1.add("§7• Du erhälst mehrere Plot-Ränder & Wände");
+        lore1.add("§7• Du kannst 4 Homes setzen");
+        lore1.add("§7• Du kannst farbig schreiben (Alle ColorCode's mit &)");
+        lore1.add("§7• Du kannst 3 Plots besitzen");
         lore1.add(" ");
         nethscrapemeta.setLore(lore1);
         nethscrape.setItemMeta(nethscrapemeta);
@@ -63,14 +63,14 @@ public class RanginfoCmd implements CommandExecutor, Listener {
                 "§7• §a/p time §7Setze deine eigene Zeit",
                 " ",
                 "§7§lAnderes:",
-                "§7• Du erhälst den §9§lTitan §7Prefix",
-                "§7• Du erhälst mehr Plot Ränder & Wände",
-                "§7• Du erhälst den Schnelligkeit & kein Hunger Perk",
+                "§7• Du erhältst den §9§lTitan §7Prefix",
+                "§7• Du erhältst mehr Plot-Ränder & Wände",
+                "§7• Du erhältst den Schnelligkeit & kein Hunger Perk",
                 "§7• (Bestimmte Effekte)",
                 "§7• (Bestimmte Haustiere)",
                 "§7• Du kannst 7 Homes setzen",
                 "§7• Du kannst 7 Plots besitzen",
-                "§7• §lDu erhälst alle Funktionen vom Premium und Platin Rang",
+                "§7• §lDu erhältst alle Funktionen vom Premium und Platin Rang",
                 " "
         ));
         amtcluster.setItemMeta(amtclustermeta);
@@ -87,13 +87,13 @@ public class RanginfoCmd implements CommandExecutor, Listener {
                 " ",
                 "§7§lAnderes:",
                 "§7• Du erhälst den §2§lPlatin §7Prefix",
-                "§7• Du erhälst mehr Plot, Ränder & Wände",
+                "§7• Du erhälst mehr Plot-Ränder & Wände",
                 "§7• Du erhälst den kein Fallschaden Perk",
                 "§7• (Bestimmte Effekte)",
                 "§7• (Bestimmte Haustiere)",
                 "§7• Du kannst 5 Homes setzen",
                 "§7• Du kannst 5 Plots besitzen",
-                "§7• §lDu erhälst alle Funktionen vom Premium und Platin Rang"
+                "§7• §lDu erhältst alle Funktionen vom Premium Rang"
 
         ));
         emerlad.setItemMeta(emerladmeta);
@@ -111,13 +111,13 @@ public class RanginfoCmd implements CommandExecutor, Listener {
                 "§7• §a/skull §7Gebe dir alle 4 Tage einen Spielerkopf",
                 " ",
                 "§7§lAnderes:",
-                "§7• Du erhälst den §d§lWonder §7Prefix",
-                "§7• Du erhälst alle Plot Ränder & Wände",
+                "§7• Du erhältst den §d§lWonder §7Prefix",
+                "§7• Du erhältst alle Plot-Ränder & Wände",
                 "§7• (Bestimmte Effekte)",
                 "§7• (Bestimmte Haustiere)",
                 "§7• Du kannst 12 Homes setzen",
                 "§7• Du kannst 12 Plots besitzen",
-                "§7• §lDu erhälst alle Funktionen vom Premium, Platin und Titan Rang"
+                "§7• §lDu erhältst alle Funktionen vom Premium, Platin und Titan Rang"
         ));
         diamond.setItemMeta(diamondmeta);
 

@@ -68,15 +68,15 @@ public class ScoreboardManager {
         if(scoreboard.getTeam("online") != null) online = scoreboard.getTeam("online"); else online = scoreboard.registerNewTeam("online");
 
         profile.setPrefix("§e" + format2(getPrefix(p) + getColor(p) + p.getName()));
-        server.setPrefix("§7" + serverName);
-        coins.setPrefix("§7" + Economy.getBalance(p.getUniqueId()) + " §7Coins");
-        online.setPrefix("§7" + Bukkit.getOnlinePlayers().size() + "§8/§7" + Bukkit.getMaxPlayers());
+        server.setPrefix("§8 » §6" + serverName);
+        coins.setPrefix("§8 » §6" + Economy.getBalance(p.getUniqueId()) + " §6Coins");
+        online.setPrefix("§8 » §6" + Bukkit.getOnlinePlayers().size() + "§8/§6" + Bukkit.getMaxPlayers());
 
         updateTagline(p);
         profile.setPrefix("§7" + getPrefix(p).replaceAll("&", "§") + getColor(p).replaceAll("&", "§") + p.getName());
-        server.setPrefix("§7" + serverName);
-        coins.setPrefix("§7" + Economy.getBalance(p.getUniqueId()) + " §7Coins");
-        online.setPrefix("§7" + Bukkit.getOnlinePlayers().size() + "§8/§7" + Bukkit.getMaxPlayers());
+        server.setPrefix("§8 » §6" + serverName);
+        coins.setPrefix("§8 » §6" + Economy.getBalance(p.getUniqueId()) + " §6Coins");
+        online.setPrefix("§8 » §6" + Bukkit.getOnlinePlayers().size() + "§8/§6" + Bukkit.getMaxPlayers());
     }
 
     public static String getPrefix(Player player){
@@ -230,17 +230,16 @@ public class ScoreboardManager {
     }
 
     public static void updateTagline(Player player){
-        //Scoreboard scoreboard = player.getScoreboard();
-
+       // Scoreboard scoreboard = player.getScoreboard();
         //Objective objective = scoreboard.registerNewObjective("citybuild_belowname", "air");
         //if(objective == null){
-            //objective.setDisplayName(ChatColor.RED + "Test");
-          //  objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
-           // objective.setDisplayName("test123");
-       // }
+        //    objective.setDisplayName(ChatColor.RED + "Test");
+        //    objective.setDisplaySlot(DisplaySlot.BELOW_NAME);
+        //    objective.setDisplayName("test123");
+        //}
 
-        // Find out tagline
-        //String tagline = "test";
+
+       // String tagline = "test";
 
 
 
@@ -252,7 +251,7 @@ public class ScoreboardManager {
             Scoreboard scoreboard = all.getServer().getScoreboardManager().getNewScoreboard();
             Objective objective = scoreboard.registerNewObjective("citybuild", "dummy");
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-            objective.setDisplayName("§6§lWONDERBUILD§8§l.§6§lNET");
+            objective.setDisplayName("§6§lWONDERBUILD§8§l");
             Team profile;
             Team server;
             Team coins;
@@ -261,23 +260,26 @@ public class ScoreboardManager {
             if(scoreboard.getTeam("server") != null) server = scoreboard.getTeam("server"); else server = scoreboard.registerNewTeam("server");
             if(scoreboard.getTeam("coins") != null) coins = scoreboard.getTeam("coins"); else coins = scoreboard.registerNewTeam("coins");
             if(scoreboard.getTeam("online") != null) online = scoreboard.getTeam("online"); else online = scoreboard.registerNewTeam("online");
-            //objective.getScore(" ").setScore(11);
+            objective.getScore("§7§o    wonderbuild.net").setScore(13);
+            objective.getScore(" ").setScore(12);
+            objective.getScore("§7⭐ §8• §7Bargeld§8:").setScore(11);
+            objective.getScore("§6").setScore(10);
+            objective.getScore("  ").setScore(9);
+            objective.getScore("§7✪ §8• §7Server§8:").setScore(8);
+            objective.getScore("§5").setScore(7);
+            objective.getScore("   ").setScore(6);
+            objective.getScore("§7⛏ §8• §7Job§8:").setScore(5);
+            objective.getScore("§8 » §6Wartungen").setScore(4);
+            objective.getScore("    ").setScore(3);
             //objective.getScore("§fProfil§7:").setScore(10);
             //objective.getScore("§1").setScore(9);
-            objective.getScore("  ").setScore(8);
-            objective.getScore("§a§lServer§8:").setScore(4);
-            objective.getScore("§7").setScore(3);
-            objective.getScore("    ").setScore(5);
-            objective.getScore("§9§lBargeld§8:").setScore(7);
-            objective.getScore("§9").setScore(6);
-            objective.getScore("     ").setScore(2);
-            objective.getScore("§b§lSpieler§8:").setScore(1);
-            objective.getScore("§1").setScore(0);
-            //objective.getScore("      ").setScore(0);
+            objective.getScore("§7❤ §8• §7Spieler§8:").setScore(2);
+            objective.getScore("§4").setScore(1);
+            objective.getScore("           ").setScore(0);
             //profile.addEntry("§1");
-            server.addEntry("§7");
-            coins.addEntry("§9");
-            online.addEntry("§1");
+            server.addEntry("§5");
+            coins.addEntry("§6");
+            online.addEntry("§4");
 //8-0
             all.setScoreboard(scoreboard);
             updateTagline(all);
