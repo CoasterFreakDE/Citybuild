@@ -127,8 +127,9 @@ public class RangshopCmd implements CommandExecutor, Listener {
                         }
 
                         //Ränge vergeben
-                        user.addGroup("premium");
+                        //user.addGroup("premium");
 
+                        giveRank(pl, "premium");
                     }else{
                         pl.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
                         pl.closeInventory();
@@ -144,8 +145,8 @@ public class RangshopCmd implements CommandExecutor, Listener {
                             return;
                         }
                         //Ränge vergeben
-                        user.addGroup("titan");
-
+                        //user.addGroup("titan");
+                        giveRank(pl, "titan");
 
                     }else{
                         pl.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
@@ -162,7 +163,8 @@ public class RangshopCmd implements CommandExecutor, Listener {
                         }
 
                         //Ränge vergeben
-                        user.addGroup("platin");
+                        //user.addGroup("platin");
+                        giveRank(pl, "platin");
 
 
                     }else{
