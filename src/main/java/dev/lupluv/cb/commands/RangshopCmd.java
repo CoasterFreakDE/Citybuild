@@ -3,6 +3,7 @@ package dev.lupluv.cb.commands;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import de.dytanic.cloudnet.ext.bridge.player.CloudPlayer;
+import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.utils.*;
 import org.bukkit.Bukkit;
@@ -13,6 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -20,6 +22,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class RangshopCmd implements CommandExecutor, Listener {
 
@@ -102,91 +105,48 @@ public class RangshopCmd implements CommandExecutor, Listener {
         return false;
     }
 
-    public void giveRank(Player player, String group){
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "shop_manager give " + player + " " + group);
+    public static void giveRank(Player player, String group, double money){
+        if(Economy.withdrawPlayer(player.getUniqueId(), money).transactionSuccess()) {
+            String cmd = "hopecommander shop_manager purchase " + player.getUniqueId() + " " + group;
+            Citybuild.getPlugin().getLogger().log(Level.INFO, cmd);
+            System.out.println(cmd);
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
+        }
     }
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
 
-        if(!(e.getWhoClicked() instanceof Player)) return;
+        if(!(e.getWhoClicked() instanceof Player player)) return;
         if(e.getCurrentItem() == null) return;
-        Player pl = (Player) e.getWhoClicked();
 
         if(e.getView().getTitle().equals(invname)) {
             e.setCancelled(true);
-            IPermissionUser user = CloudNetDriver.getInstance().getPermissionManagement().getUser(pl.getUniqueId());
-            switch (e.getCurrentItem().getItemMeta().getDisplayName()){
-
-                case "§6§lPremium":
-
-                    if(Economy.getBalance(pl.getUniqueId()) >= 100000){
-
-                        if(!Economy.withdrawPlayer(pl.getUniqueId(), 100000).transactionSuccess()){
-                            return;
-                        }
-
-                        //Ränge vergeben
-                        //user.addGroup("premium");
-
-                        giveRank(pl, "premium");
-                    }else{
-                        pl.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
-                        pl.closeInventory();
-                    }
-
-                    break;
-                case "§9§lTitan":
-
-                    if(Economy.getBalance(pl.getUniqueId()) >= 600000){
-
-
-                        if(!Economy.withdrawPlayer(pl.getUniqueId(), 600000).transactionSuccess()){
-                            return;
-                        }
-                        //Ränge vergeben
-                        //user.addGroup("titan");
-                        giveRank(pl, "titan");
-
-                    }else{
-                        pl.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
-                        pl.closeInventory();
-                    }
-
-                    break;
-                case "§2§lPlatin":
-
-                    if(Economy.getBalance(pl.getUniqueId()) >= 225000){
-
-                        if(!Economy.withdrawPlayer(pl.getUniqueId(), 225000).transactionSuccess()){
-                            return;
-                        }
-
-                        //Ränge vergeben
-                        //user.addGroup("platin");
-                        giveRank(pl, "platin");
-
-
-                    }else{
-                        pl.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
-                        pl.closeInventory();
-                    }
-
-                    break;
-
-            }
-            switch (e.getCurrentItem().getType()){
-
-                case BLACK_STAINED_GLASS:
-                    pl.sendMessage(" ");
-                    break;
-
+            if(!e.isRightClick()) return;
+            Material mat = e.getCurrentItem().getType();
+            if(mat == Material.NETHERITE_SCRAP){
+                if (Economy.getBalance(player.getUniqueId()) >= 100000) {
+                    giveRank(player, "premium", 100000);
+                } else {
+                    player.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
+                    player.closeInventory();
+                }
+            }else if(mat == Material.AMETHYST_CLUSTER){
+                if (Economy.getBalance(player.getUniqueId()) >= 600000) {
+                    giveRank(player, "titan", 600000);
+                } else {
+                    player.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
+                    player.closeInventory();
+                }
+            }else if(mat == Material.EMERALD){
+                if (Economy.getBalance(player.getUniqueId()) >= 225000) {
+                    giveRank(player, "platin", 225000);
+                } else {
+                    player.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
+                    player.closeInventory();
+                }
             }
         }
-
-
     }
-
-
 
 }
