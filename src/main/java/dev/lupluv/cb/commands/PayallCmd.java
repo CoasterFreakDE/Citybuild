@@ -24,7 +24,9 @@ public class PayallCmd implements CommandExecutor {
                         double balance = Economy.getBalance(p.getUniqueId());
                         if(balance >= Bukkit.getOnlinePlayers().size()*amount){
                             Bukkit.getOnlinePlayers().forEach(all ->{
-                                p.performCommand("pay " + all.getName() + " " + (long) amount);
+                                if(all != p) {
+                                    p.performCommand("pay " + all.getName() + " " + (long) amount);
+                                }
                             });
                         }else{
                             p.sendMessage(Strings.prefix + "§cDu hast nicht genug Geld dafür.");

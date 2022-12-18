@@ -13,13 +13,11 @@ import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.elevators.ElevatorBlock;
 import dev.lupluv.cb.scorebaord.ScoreboardManager;
 import dev.lupluv.cb.utils.*;
+import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Sign;
@@ -62,7 +60,7 @@ public class PlayerHandler implements Listener {
         User.onJoin(e);
 
         // Editing Join Message
-        e.setJoinMessage("§8[§2+§8] §7" + p.getName());
+        e.joinMessage(Component.text("§8[§2+§8] §7" + p.getName()));
 
         // Registering Home File
         File file = new File("plugins//Citybuild//homes.yml");
@@ -105,6 +103,11 @@ public class PlayerHandler implements Listener {
             e.setFormat(ScoreboardManager.format2(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
                     + e.getPlayer().getName() + " §8: §r"
                     + ScoreboardManager.format2(e.getMessage()));
+        }else if(e.getPlayer().hasPermission("cb.can.color")){
+            e.setFormat(ScoreboardManager.format2(
+                    ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
+                    + e.getPlayer().getName() + " §8: §r"
+                    + ChatColor.translateAlternateColorCodes('&', e.getMessage()));
         }else{
             e.setFormat(ScoreboardManager.format2(
                     ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
@@ -116,11 +119,11 @@ public class PlayerHandler implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent e){
         Player p = e.getPlayer();
-        e.setQuitMessage("§8[§4-§8] §7" + p.getName());
+        e.quitMessage(Component.text("§8[§4-§8] §7" + p.getName()));
     }
     @EventHandler
     public void onDeath(PlayerDeathEvent e){
-        e.setDeathMessage(null);
+        e.deathMessage(null);
         e.setKeepInventory(false);
         e.setShouldDropExperience(false);
         e.getPlayer().sendMessage(Strings.prefix + "Du bist gestorben.");
@@ -146,7 +149,7 @@ public class PlayerHandler implements Listener {
                 if(eb1 != null) {
                     if (eb1.exists()) eb1.load();
                     eb1.delete();
-                    p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§6Du hast einen Teleporter abgebaut."));
+                    p.sendActionBar(Component.text("§6Du hast einen Teleporter abgebaut."));
                     e.setDropItems(false);
                     Item item = new Item(Material.BLACK_CONCRETE);
                     item.setDisplayName("§6§lAufzug");
