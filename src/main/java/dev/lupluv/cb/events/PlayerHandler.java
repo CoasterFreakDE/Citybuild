@@ -97,24 +97,62 @@ public class PlayerHandler implements Listener {
         VanishCmd.updateVanished();
     }
 
+    //@EventHandler
+    //public void onChat(AsyncPlayerChatEvent e){
+      //  if(e.getPlayer().hasPermission("cb.can.hex")) {
+      //      e.setFormat(ScoreboardManager.format2(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
+      //              + e.getPlayer().getName() + " §8: §r"
+      //              + ScoreboardManager.format2(e.getMessage()));
+      //  }else if(e.getPlayer().hasPermission("cb.can.color")){
+      //      e.setFormat(ScoreboardManager.format2(
+      //              ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
+      //              + e.getPlayer().getName() + " §8: §r"
+      //              + ChatColor.translateAlternateColorCodes('&', e.getMessage()));
+      //  }else{
+      //      e.setFormat(ScoreboardManager.format2(
+      //              ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
+      //              + e.getPlayer().getName() + " §8: §r"
+      //              + e.getMessage());
+      //  }
+    //}
+
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e){
         if(e.getPlayer().hasPermission("cb.can.hex")) {
+            send(" ", e.getPlayer());
             e.setFormat(ScoreboardManager.format2(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
                     + e.getPlayer().getName() + " §8: §r"
                     + ScoreboardManager.format2(e.getMessage()));
+            Bukkit.getScheduler().runTaskLater(Citybuild.getInstance(), () ->{
+                send(" ", e.getPlayer());
+            }, 1);
         }else if(e.getPlayer().hasPermission("cb.can.color")){
+            send(" ", e.getPlayer());
             e.setFormat(ScoreboardManager.format2(
                     ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
                     + e.getPlayer().getName() + " §8: §r"
                     + ChatColor.translateAlternateColorCodes('&', e.getMessage()));
+            Bukkit.getScheduler().runTaskLater(Citybuild.getInstance(), () ->{
+                send(" ", e.getPlayer());
+            }, 1);
         }else{
+            send(" ", e.getPlayer());
             e.setFormat(ScoreboardManager.format2(
                     ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
                     + e.getPlayer().getName() + " §8: §r"
                     + e.getMessage());
+            Bukkit.getScheduler().runTaskLater(Citybuild.getInstance(), () ->{
+                send(" ", e.getPlayer());
+            }, 1);
         }
     }
+    public static void send(String s, Player player){
+        if(player.hasPermission("chat.big")) {
+            Bukkit.getOnlinePlayers().forEach(all -> all.sendMessage(s));
+        }
+    }
+
+
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){

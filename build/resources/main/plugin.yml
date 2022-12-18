@@ -137,3 +137,10 @@ commands:
   live:
   belohnung:
   rangshop:
+  craft:
+    aliases:
+      - werkbank
+      - crafting
+  anvil:
+    aliases:
+      - amboss

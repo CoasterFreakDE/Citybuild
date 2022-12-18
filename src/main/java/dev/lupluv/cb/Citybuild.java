@@ -42,10 +42,16 @@ public class Citybuild extends JavaPlugin {
     private static StatsNPC statsNPC;
     public static MySQL mySQL;
 
+    private static Citybuild instance;
+
+    public static Citybuild getInstance() {
+        return instance;
+    }
+
     @Override
     public void onLoad() {
         plugin = this;
-
+        instance = this;
         // Files
 
         try {
@@ -59,8 +65,12 @@ public class Citybuild extends JavaPlugin {
 
     }
 
+
+
     @Override
     public void onEnable() {
+
+
 
         //Belohnung
         FileMangerB.loadFile();
@@ -147,6 +157,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("belohnung").setExecutor(new BelohnungCmd());
         getCommand("rangshop").setExecutor(new RangshopCmd());
         getCommand("craft").setExecutor(new CraftCmd());
+        getCommand("anvil").setExecutor(new AnvilCmd());
 
         // Events
 

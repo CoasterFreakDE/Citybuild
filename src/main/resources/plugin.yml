@@ -141,3 +141,6 @@ commands:
     aliases:
       - werkbank
       - crafting
+  anvil:
+    aliases:
+      - amboss

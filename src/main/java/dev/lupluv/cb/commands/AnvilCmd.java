@@ -7,21 +7,21 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CraftCmd implements CommandExecutor {
+public class AnvilCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         if(!(sender instanceof Player player)) return true;
 
-        if(!player.hasPermission("cb.craft")){
+        if(!player.hasPermission("cb.anvil")) {
             player.sendMessage(Strings.noPerms);
             return true;
         }
 
         if(args.length == 0){
-            player.openWorkbench(null, true);
+            player.openAnvil(null, true);
         }else{
-            player.sendMessage(Strings.prefix + "§7Benutzung: /werkbank");
+            player.sendMessage(Strings.prefix + "§7Benutzung: /amboss");
         }
 
         return false;

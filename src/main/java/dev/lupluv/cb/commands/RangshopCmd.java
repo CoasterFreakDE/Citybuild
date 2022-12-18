@@ -1,5 +1,8 @@
 package dev.lupluv.cb.commands;
 
+import de.dytanic.cloudnet.driver.CloudNetDriver;
+import de.dytanic.cloudnet.driver.permission.IPermissionUser;
+import de.dytanic.cloudnet.ext.bridge.player.CloudPlayer;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.utils.*;
 import org.bukkit.Bukkit;
@@ -32,7 +35,7 @@ public class RangshopCmd implements CommandExecutor, Listener {
         nethscrapemeta.setDisplayName("§6§lPremium");
         ArrayList<String> lore1 = new ArrayList<>();
         lore1.add(" ");
-        lore1.add("§7Der §6Premium §7Rang kostet §a17.500 §7Coins");
+        lore1.add("§7Der §6Premium §7Rang kostet §a100.000 §7Coins");
         lore1.add("§7§8(§7Rechtsclick zum Kaufen§8)");
         lore1.add(" ");
         lore1.add("§7Um zu sehen was der Rang kann benutzte §a/ranginfo");
@@ -45,7 +48,7 @@ public class RangshopCmd implements CommandExecutor, Listener {
         amtclustermeta.setDisplayName("§9§lTitan");
         amtclustermeta.setLore(Lore.create(
                 " ",
-                "§7Der §9Titan §7Rang kostet §a120.000 §7Coins",
+                "§7Der §9Titan §7Rang kostet §a600.000 §7Coins",
                 "§7§8(§7Rechtsclick zum Kaufen§8)",
                 " ",
                 "§7Um zu sehen was der Rang kann benutzte §a/ranginfo",
@@ -58,7 +61,7 @@ public class RangshopCmd implements CommandExecutor, Listener {
         emerladmeta.setDisplayName("§2§lPlatin");
         emerladmeta.setLore(Lore.create(
                 " ",
-                "§7Der §2Platin §7Rang kostet §a65.000 §7Coins",
+                "§7Der §2Platin §7Rang kostet §a225.000 §7Coins",
                 "§7§8(§7Rechtsclick zum Kaufen§8)",
                 " ",
                 "§7Um zu sehen was der Rang kann benutzte §a/ranginfo",
@@ -99,6 +102,9 @@ public class RangshopCmd implements CommandExecutor, Listener {
         return false;
     }
 
+    public void giveRank(Player player, String group){
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "shop_manager give " + player + " " + group);
+    }
 
     @EventHandler
     public void onClick(InventoryClickEvent e){
@@ -109,13 +115,19 @@ public class RangshopCmd implements CommandExecutor, Listener {
 
         if(e.getView().getTitle().equals(invname)) {
             e.setCancelled(true);
+            IPermissionUser user = CloudNetDriver.getInstance().getPermissionManagement().getUser(pl.getUniqueId());
             switch (e.getCurrentItem().getItemMeta().getDisplayName()){
 
                 case "§6§lPremium":
 
-                    if(Economy.getBalance(pl.getUniqueId()) >= 17500){
+                    if(Economy.getBalance(pl.getUniqueId()) >= 100000){
+
+                        if(!Economy.withdrawPlayer(pl.getUniqueId(), 100000).transactionSuccess()){
+                            return;
+                        }
 
                         //Ränge vergeben
+                        user.addGroup("premium");
 
                     }else{
                         pl.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
@@ -125,10 +137,15 @@ public class RangshopCmd implements CommandExecutor, Listener {
                     break;
                 case "§9§lTitan":
 
-                    if(Economy.getBalance(pl.getUniqueId()) >= 120000){
+                    if(Economy.getBalance(pl.getUniqueId()) >= 600000){
 
 
+                        if(!Economy.withdrawPlayer(pl.getUniqueId(), 600000).transactionSuccess()){
+                            return;
+                        }
                         //Ränge vergeben
+                        user.addGroup("titan");
+
 
                     }else{
                         pl.sendMessage(Strings.prefix + "Du hast leider nicht genügend Geld um dir diesen Rang zu kaufen");
@@ -138,9 +155,14 @@ public class RangshopCmd implements CommandExecutor, Listener {
                     break;
                 case "§2§lPlatin":
 
-                    if(Economy.getBalance(pl.getUniqueId()) >= 65000){
+                    if(Economy.getBalance(pl.getUniqueId()) >= 225000){
+
+                        if(!Economy.withdrawPlayer(pl.getUniqueId(), 225000).transactionSuccess()){
+                            return;
+                        }
 
                         //Ränge vergeben
+                        user.addGroup("platin");
 
 
                     }else{
