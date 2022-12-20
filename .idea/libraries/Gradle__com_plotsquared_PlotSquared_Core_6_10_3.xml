@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.plotsquared:PlotSquared-Core:6.10.3">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.plotsquared/PlotSquared-Core/6.10.3/3c549a4ec21eae8746ddcbdf5ae5571488489181/PlotSquared-Core-6.10.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.plotsquared/PlotSquared-Core/6.10.3/fdebe5f8ee28180dd26a7f5f405ed682d50228d2/PlotSquared-Core-6.10.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

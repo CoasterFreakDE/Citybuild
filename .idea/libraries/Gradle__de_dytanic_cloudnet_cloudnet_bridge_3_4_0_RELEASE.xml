@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: de.dytanic.cloudnet:cloudnet-bridge:3.4.0-RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.dytanic.cloudnet/cloudnet-bridge/3.4.0-RELEASE/a99555a6f754960c8ccf06df303cfef20cd416c3/cloudnet-bridge-3.4.0-RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.dytanic.cloudnet/cloudnet-bridge/3.4.0-RELEASE/4bceffdac5a64c38f196cf6a73b54b87a354cad8/cloudnet-bridge-3.4.0-RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

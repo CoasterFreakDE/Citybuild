@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: de.dytanic.cloudnet:cloudnet-driver:3.4.0-RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.dytanic.cloudnet/cloudnet-driver/3.4.0-RELEASE/43d13bc31e943f69cad4306e07d01b86f2b65bc9/cloudnet-driver-3.4.0-RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.dytanic.cloudnet/cloudnet-driver/3.4.0-RELEASE/909f4a937ba728ea9bda4ca13b7278895661cd2e/cloudnet-driver-3.4.0-RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

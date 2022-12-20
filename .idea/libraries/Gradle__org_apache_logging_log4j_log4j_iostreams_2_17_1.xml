@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.logging.log4j:log4j-iostreams:2.17.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-iostreams/2.17.1/6ebd6d2186fae85d294b5d1994d711242d314427/log4j-iostreams-2.17.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-iostreams/2.17.1/5b85a8190d3b51e27fdb8c32d55e1148bff872b1/log4j-iostreams-2.17.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

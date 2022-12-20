@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: de.dytanic.cloudnet:cloudnet-common:3.4.0-RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.dytanic.cloudnet/cloudnet-common/3.4.0-RELEASE/130eadfa993e40cb9ca2dcf41f74508b3c9408a0/cloudnet-common-3.4.0-RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/de.dytanic.cloudnet/cloudnet-common/3.4.0-RELEASE/e433a48d834dfff7f31427277dc4c3323e707be8/cloudnet-common-3.4.0-RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
