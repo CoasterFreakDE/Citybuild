@@ -1,7 +1,10 @@
 package dev.lupluv.cb.namecolors;
 
+import org.bukkit.Material;
+
 public enum NColor {
 
+    NONE,
     ORANGE,
     MAGENTA,
     LIGHT_GREEN,
@@ -47,6 +50,10 @@ public enum NColor {
             }
         }
         return string;
+    }
+
+    public Material getMaterial(){
+        return Material.ACACIA_CHEST_BOAT;
     }
 
 }

@@ -10,7 +10,7 @@ import dev.lupluv.cb.events.*;
 import dev.lupluv.cb.licence.LicenceManager;
 import dev.lupluv.cb.listeners.CloudNetSimpleNameTagsListener;
 import dev.lupluv.cb.mysql.MySQL;
-import dev.lupluv.cb.scorebaord.ScoreboardManager;
+import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import dev.lupluv.cb.stats.StatsNPC;
 import dev.lupluv.cb.utils.*;
 import dev.lupluv.cb.voting.VoteListener;
@@ -238,6 +238,7 @@ public class Citybuild extends JavaPlugin {
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_user (id BIGINT(255),uuid VARCHAR(255),name VARCHAR(255));");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_member (user_id BIGINT(255),clan_id BIGINT(255),role VARCHAR(255));");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_requests (user_id BIGINT(255),clan_id BIGINT(255),type VARCHAR(255),date BIGINT(255));");
+                mySQL.update("CREATE TABLE IF NOT EXISTS cb_namecolors (uuid VARCHAR(255),name VARCHAR(255),namecolor VARCHAR(255));");
             }
         }
     }

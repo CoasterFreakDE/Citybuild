@@ -1,4 +1,4 @@
-package dev.lupluv.cb.scorebaord;
+package dev.lupluv.cb.scoreboard;
 import com.google.common.base.Preconditions;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
@@ -8,11 +8,7 @@ import de.dytanic.cloudnet.ext.bridge.player.ICloudPlayer;
 import de.dytanic.cloudnet.ext.bridge.player.IPlayerManager;
 import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.economy.Economy;
-import dev.lupluv.cb.tagline.TaglineManager;
-import net.kyori.adventure.text.Component;
-import net.md_5.bungee.api.ChatMessageType;
 //import net.melion.rgbchat.api.RGBApi;
-import net.md_5.bungee.api.chat.TextComponent;
 import net.melion.rgbchat.api.RGBApi;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -20,8 +16,6 @@ import org.bukkit.scoreboard.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.regex.Matcher;

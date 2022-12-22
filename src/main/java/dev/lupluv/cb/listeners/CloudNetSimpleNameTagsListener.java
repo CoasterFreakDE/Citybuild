@@ -6,7 +6,7 @@ import de.dytanic.cloudnet.driver.event.events.permission.PermissionUpdateGroupE
 import de.dytanic.cloudnet.driver.event.events.permission.PermissionUpdateUserEvent;
 import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import dev.lupluv.cb.Citybuild;
-import dev.lupluv.cb.scorebaord.ScoreboardManager;
+import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
