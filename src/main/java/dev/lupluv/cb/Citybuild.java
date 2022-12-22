@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import dev.lupluv.cb.belohnung.FileMangerB;
 import dev.lupluv.cb.belohnung.FileMangerC;
+import dev.lupluv.cb.broadcast.BroadcastMessages;
 import dev.lupluv.cb.commands.*;
 import dev.lupluv.cb.events.*;
 import dev.lupluv.cb.licence.LicenceManager;
@@ -14,6 +15,7 @@ import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import dev.lupluv.cb.stats.StatsNPC;
 import dev.lupluv.cb.utils.*;
 import dev.lupluv.cb.voting.VoteListener;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -27,6 +29,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
 
@@ -40,6 +44,7 @@ public class Citybuild extends JavaPlugin {
     private static InventoryManager inventoryManager;
     private static Crafting crafting;
     private static StatsNPC statsNPC;
+    private static BroadcastMessages broadcastMessages;
     public static MySQL mySQL;
 
     private static Citybuild instance;
@@ -172,7 +177,10 @@ public class Citybuild extends JavaPlugin {
 
 
 
+        broadcastMessages = new BroadcastMessages(fileManager.getBroadcast().getStringList("Messages"), 0);
+
         statsNPC = new StatsNPC();
+
 
         Bukkit.getScheduler().runTaskLater(this, Citybuild::startNPCScheduler, 20*10);
 

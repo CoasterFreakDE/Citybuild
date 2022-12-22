@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import static org.apache.commons.io.IOUtils.DEFAULT_BUFFER_SIZE;
 
@@ -31,6 +32,7 @@ public class FileManager {
         File statsFile = new File("plugins//Citybuild//stats.yml");
         File worthFile = new File("plugins//Citybuild//worth.yml");
         File jobsFile = new File("plugins//Citybuild//jobs.json");
+        File broadcastFile = new File("plugins//Citybuild//broadcast.yml");
         if(!folder.exists()) folder.mkdir();
         if(!warpsFolder.exists()) warpsFolder.mkdir();
         if(!configFile.exists()){
@@ -87,6 +89,9 @@ public class FileManager {
         if(!jobsFile.exists()){
             copyResourceFile("/defaults/jobs.json", "plugins//Citybuild//jobs.json");
         }
+        if(!broadcastFile.exists()){
+            copyResourceFile("/defaults/broadcast.yml", "plugins//Citybuild//broadcast.yml");
+        }
     }
 
     public File getJobsFile() {
@@ -103,6 +108,10 @@ public class FileManager {
 
     public FileConfiguration getMysql(){
         return YamlConfiguration.loadConfiguration(getMysqlFile());
+    }
+
+    public FileConfiguration getBroadcast(){
+        return YamlConfiguration.loadConfiguration(new File("plugins//Citybuild//broadcast.yml"));
     }
 
     public String getLicence(){
