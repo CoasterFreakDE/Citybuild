@@ -2,9 +2,9 @@ package dev.lupluv.cb.broadcast;
 
 import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.economy.Economy;
-import dev.lupluv.cb.scorebaord.ScoreboardManager;
-import net.kyori.adventure.text.Component;
+import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 
 import java.util.List;
 
@@ -20,13 +20,18 @@ public class BroadcastMessages {
         taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Citybuild.getPlugin(), () ->{
 
             Bukkit.getOnlinePlayers().forEach(player ->{
+                player.sendMessage(" ");
                 player.sendMessage(
                         ScoreboardManager.format2(messages.get(currentMessage)
                                 .replace("%player%", player.getName())
                                 .replace("%money%", String.valueOf(Economy.getBalance(player.getUniqueId())))
                         )
                 );
+                player.sendMessage(" ");
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE, 1.0f, 1.0f);
             });
+
+
 
             if(currentMessage == messages.size()-1){
                 currentMessage = 0;
@@ -34,7 +39,7 @@ public class BroadcastMessages {
                 currentMessage++;
             }
 
-        }, 0, 20*60*2+20*45);
+        }, 0, 20*60*3);
 
     }
 

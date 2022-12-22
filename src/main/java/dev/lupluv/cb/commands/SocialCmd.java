@@ -156,55 +156,47 @@ public class SocialCmd implements CommandExecutor, Listener {
                 case "§a§lInstgram":
 
                     txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
-                    btn = new TextComponent("§a§lINSTGRAN KANAL");
+                    btn = new TextComponent("§a§lINSTAGRAM KANAL");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.instagram.com/wonderbuild_net/?next=%2F"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
-                    txt2 = new TextComponent("§r §7bei.");
                     txt.addExtra(btn);
-                    txt.addExtra(txt2);
                     pl.sendMessage(txt);
                     pl.closeInventory();
                     break;
                 case "§c§lTikTok":
 
-                    txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
+                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf unserem §r");
                     btn = new TextComponent("§c§lTIKTOK KANAL");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.tiktok.com/@wonderbuild.net"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
-                    txt2 = new TextComponent("§r §7bei.");
                     txt.addExtra(btn);
-                    txt.addExtra(txt2);
                     pl.sendMessage(txt);
                     pl.closeInventory();
                     break;
                 case "§9§lTwitter":
 
-                    txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
-                    btn = new TextComponent("§9§lTWITTER");
+                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf unserem §r");
+                    btn = new TextComponent("§9§lTWITTER KANAL");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://twitter.com/wonderbuild_net"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
-                    txt2 = new TextComponent("§r §7bei.");
                     txt.addExtra(btn);
-                    txt.addExtra(txt2);
                     pl.sendMessage(txt);
                     pl.closeInventory();
                     break;
                 case "§5§lYoutube":
 
-                    txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
+                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf unserem §r");
                     btn = new TextComponent("§5§lYOUTUBE KANAL");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.youtube.com/watch?v=u0Hh4uspJsM"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
-                    txt2 = new TextComponent("§r §7bei.");
                     txt.addExtra(btn);
-                    txt.addExtra(txt2);
                     pl.sendMessage(txt);
                     pl.closeInventory();
                     break;
                 case "§2§lTeamSpeak":
 
                     txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
-                    btn = new TextComponent("§2§lTEAMSPEAK KANAL");
+                    btn = new TextComponent("§2§lTEAMSPEAK");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wonderbuild.com"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt2 = new TextComponent("§r §7bei.");
@@ -215,11 +207,11 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§e§lStore":
 
-                    txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
+                    txt = new TextComponent(Strings.prefix + "Schaue dich in unserem §r");
                     btn = new TextComponent("§e§lSTORE");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://store.wonderbuild.com"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
-                    txt2 = new TextComponent("§r §7bei.");
+                    txt2 = new TextComponent("§r §7um.");
                     txt.addExtra(btn);
                     txt.addExtra(txt2);
                     pl.sendMessage(txt);
@@ -228,13 +220,11 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§b§lTwitch":
 
-                    txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
-                    btn = new TextComponent("§b§lTWITCH");
+                    txt = new TextComponent(Strings.prefix + "Folge uns gerne auf unserem §r");
+                    btn = new TextComponent("§b§lTWITCH KANAL");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://twitch.com/wonderbuild"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
-                    txt2 = new TextComponent("§r §7bei.");
                     txt.addExtra(btn);
-                    txt.addExtra(txt2);
                     pl.sendMessage(txt);
 
                     pl.closeInventory();

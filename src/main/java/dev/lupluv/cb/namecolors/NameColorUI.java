@@ -53,6 +53,11 @@ public class NameColorUI {
         inventory.setItem(9+9+9+9+8, glass);
 
         List<NColor> nColors = List.of(NColor.values());
+        int i = 0;
+        for(NColor nColor : nColors){
+            if(i >= )
+        }
+
     }
 
     public void openGUI(){
