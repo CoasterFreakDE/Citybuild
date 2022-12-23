@@ -163,6 +163,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("rangshop").setExecutor(new RangshopCmd());
         getCommand("craft").setExecutor(new CraftCmd());
         getCommand("anvil").setExecutor(new AnvilCmd());
+        getCommand("namecolor").setExecutor(new NamecolorCmd());
 
         // Events
 

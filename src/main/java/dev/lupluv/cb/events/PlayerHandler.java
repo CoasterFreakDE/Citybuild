@@ -10,6 +10,7 @@ import dev.lupluv.cb.clans.User;
 import dev.lupluv.cb.commands.VanishCmd;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.elevators.ElevatorBlock;
+import dev.lupluv.cb.namecolors.NameColorSelector;
 import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import dev.lupluv.cb.utils.*;
 import net.kyori.adventure.text.Component;
@@ -51,6 +52,9 @@ public class PlayerHandler implements Listener {
 
         // Clans Registration
         User.onJoin(e);
+
+        // Namecolor Registration
+        NameColorSelector.correctName(p);
 
         // Editing Join Message
         e.joinMessage(Component.text("§8[§2+§8] §7" + p.getName()));

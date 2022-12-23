@@ -56,4 +56,24 @@ public enum NColor {
         return Material.ACACIA_CHEST_BOAT;
     }
 
+    public String getValue(){
+        switch (this){
+            case MAGENTA -> {
+                return "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjA" +
+                        "1YzE3NjUwZTVkNzQ3MDEwZThiNjlhNmYyMzYzZmQxMWViOTNmODFjNmNlOTliZjAzODk1Y2VmYjkyYmFhIn19fQ==";
+            }
+        }
+        return "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjQ3Y2YwZjN" +
+                "iOWVjOWRmMjQ4NWE5Y2Q0Nzk1YjYwYTM5MWM4ZTZlYmFjOTYzNTRkZTA2ZTMzNTdhOWE4ODYwNyJ9fX0=";
+    }
+
+    public String getName(){
+        switch (this){
+            case MAGENTA -> {
+                return "Magenta";
+            }
+        }
+        return "Nicht verfügbar.";
+    }
+
 }

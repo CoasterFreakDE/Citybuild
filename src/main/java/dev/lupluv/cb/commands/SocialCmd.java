@@ -49,7 +49,7 @@ public class SocialCmd implements CommandExecutor, Listener {
 
     public static final String money_value = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleH" +
             "R1cmUvZDE3N2E5NGUyYmQwOGJiZDgzOTQ0NjU4YjM0MjAyYjY5YWMzNmMyOGE4NmQyOThjZmNjMDQ0ZWYyOGIzMDlkYiJ9fX0=";
-    
+
     public static final String twitch_value = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3R" +
             "leHR1cmUvZWQyYjA1YWJlNDk3NmMwYWYxZjU0YjhkMzRlNjU2ZDE0MzgzMTc0ZmY1YzZlYmE2MTNhOGE4NDA1NDk4Y2IxNSJ9fX0=";
 
@@ -117,14 +117,14 @@ public class SocialCmd implements CommandExecutor, Listener {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-    if(!(sender instanceof Player)) return true;
-    Player player = (Player) sender;
+        if(!(sender instanceof Player)) return true;
+        Player player = (Player) sender;
 
-    if(args.length == 0){
-        createInv(player);
-    }else{
-        player.sendMessage(Strings.prefix + "§7Benutzung: /social");
-    }
+        if(args.length == 0){
+            createInv(player);
+        }else{
+            player.sendMessage(Strings.prefix + "§7Benutzung: /social");
+        }
 
         return false;
     }
@@ -155,8 +155,8 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§a§lInstgram":
 
-                    txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
-                    btn = new TextComponent("§a§lINSTAGRAM KANAL");
+                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf §r");
+                    btn = new TextComponent("§a§lINSTAGRAM");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.instagram.com/wonderbuild_net/?next=%2F"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt.addExtra(btn);
@@ -165,8 +165,8 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§c§lTikTok":
 
-                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf unserem §r");
-                    btn = new TextComponent("§c§lTIKTOK KANAL");
+                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf §r");
+                    btn = new TextComponent("§c§lTIKTOK");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.tiktok.com/@wonderbuild.net"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt.addExtra(btn);
@@ -175,8 +175,8 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§9§lTwitter":
 
-                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf unserem §r");
-                    btn = new TextComponent("§9§lTWITTER KANAL");
+                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf §r");
+                    btn = new TextComponent("§9§lTWITTER");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://twitter.com/wonderbuild_net"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt.addExtra(btn);
@@ -185,8 +185,8 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§5§lYoutube":
 
-                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf unserem §r");
-                    btn = new TextComponent("§5§lYOUTUBE KANAL");
+                    txt = new TextComponent(Strings.prefix + "Folge uns doch gerne auf §r");
+                    btn = new TextComponent("§5§lYOUTUBE");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.youtube.com/watch?v=u0Hh4uspJsM"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt.addExtra(btn);
@@ -195,7 +195,7 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§2§lTeamSpeak":
 
-                    txt = new TextComponent(Strings.prefix + "Trete jetzt unserem §r");
+                    txt = new TextComponent(Strings.prefix + "Trete gerne unserem §r");
                     btn = new TextComponent("§2§lTEAMSPEAK");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wonderbuild.com"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
@@ -207,7 +207,7 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§e§lStore":
 
-                    txt = new TextComponent(Strings.prefix + "Schaue dich in unserem §r");
+                    txt = new TextComponent(Strings.prefix + "Schaue dich gerne in unserem §r");
                     btn = new TextComponent("§e§lSTORE");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://store.wonderbuild.com"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
@@ -220,8 +220,8 @@ public class SocialCmd implements CommandExecutor, Listener {
                     break;
                 case "§b§lTwitch":
 
-                    txt = new TextComponent(Strings.prefix + "Folge uns gerne auf unserem §r");
-                    btn = new TextComponent("§b§lTWITCH KANAL");
+                    txt = new TextComponent(Strings.prefix + "Folge uns gerne auf §r");
+                    btn = new TextComponent("§b§lTWITCH");
                     btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://twitch.com/wonderbuild"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt.addExtra(btn);

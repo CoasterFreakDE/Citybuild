@@ -109,7 +109,7 @@ public class NameColorSelector {
     public void create(){
         if(Citybuild.getMySQL().isConnected()){
             Citybuild.getMySQL().update(
-                    "INSERT INTO cb_namecolors (uuid,name,money) VALUES (?,?,?)",
+                    "INSERT INTO cb_namecolors (uuid,name,namecolor) VALUES (?,?,?)",
                     this.playerUUID.toString(),
                     this.playerName,
                     this.name_color
@@ -120,7 +120,7 @@ public class NameColorSelector {
     public void update(){
         if(Citybuild.getMySQL().isConnected()){
             Citybuild.getMySQL().update(
-                    "UPDATE cb_namecolors SET name = ?, money = ? WHERE uuid = ?",
+                    "UPDATE cb_namecolors SET name = ?, namecolor = ? WHERE uuid = ?",
                     this.playerName,
                     this.name_color,
                     this.playerUUID.toString()
@@ -137,7 +137,7 @@ public class NameColorSelector {
                 );
                 while (rs.next()){
                     this.playerUUID = UUID.fromString(rs.getString("uuid"));
-                    this.name_color = rs.getString("name_color");
+                    this.name_color = rs.getString("namecolor");
                 }
             }catch (SQLException e){
                 e.printStackTrace();
@@ -154,7 +154,7 @@ public class NameColorSelector {
                 );
                 while (rs.next()){
                     this.playerName = rs.getString("name");
-                    this.name_color = rs.getString("name_color");
+                    this.name_color = rs.getString("namecolor");
                 }
             }catch (SQLException e){
                 e.printStackTrace();
