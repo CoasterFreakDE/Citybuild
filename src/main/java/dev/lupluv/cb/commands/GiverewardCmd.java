@@ -41,6 +41,7 @@ public class GiverewardCmd implements CommandExecutor {
                 IPermissionUser user = CloudNetDriver.getInstance().getPermissionManagement().getUser(target.getUniqueId());
                 assert user != null;
                 user.addPermission("citybuild", "cb.namecolor.color.GRAD_CHRISTMAS");
+                CloudNetDriver.getInstance().getPermissionManagement().updateUser(user);
                 target.sendMessage(Strings.prefix + "§aDu hast die Weihnachts Namensfarbe erhalten." +
                         " Du kannst diese sobald die Wartungen vorbei sind auswählen.");
                 return true;
