@@ -1,5 +1,8 @@
 package dev.lupluv.cb.commands;
 
+import de.dytanic.cloudnet.driver.CloudNetDriver;
+import de.dytanic.cloudnet.driver.permission.IPermissionUser;
+import de.dytanic.cloudnet.driver.permission.Permission;
 import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.advent.Reward;
 import dev.lupluv.cb.utils.Crafting;
@@ -34,6 +37,14 @@ public class GiverewardCmd implements CommandExecutor {
             if(target == null) return true;
             String name = args[1];
             if(name == null) return true;
+            if(name.equalsIgnoreCase("CHRISTMAS_NAMECOLOR")){
+                IPermissionUser user = CloudNetDriver.getInstance().getPermissionManagement().getUser(target.getUniqueId());
+                assert user != null;
+                user.addPermission("citybuild", "cb.namecolor.color.GRAD_CHRISTMAS");
+                target.sendMessage(Strings.prefix + "§aDu hast die Weihnachts Namensfarbe erhalten." +
+                        " Du kannst diese sobald die Wartungen vorbei sind auswählen.");
+                return true;
+            }
             ItemStack reward = getReward(Reward.valueOf(name.toUpperCase()));
             if(reward == null) return true;
 
