@@ -146,8 +146,4 @@ commands:
       - amboss
   namecolor:
     aliases:
-      - namecolors
-      - namensfarbe
       - namensfarben
-      - namenfarbe
-      - namenfarben
