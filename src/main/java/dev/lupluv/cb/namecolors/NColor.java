@@ -79,6 +79,9 @@ public enum NColor {
             case LIGHT_GREEN -> {
                 return "§a";
             }
+            case NONE -> {
+                return "§7";
+            }
         }
         return "";
     }
