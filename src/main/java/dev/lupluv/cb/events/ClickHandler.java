@@ -5,6 +5,10 @@ import com.plotsquared.core.plot.Plot;
 import com.plotsquared.core.plot.PlotId;
 import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.economy.Economy;
+import dev.lupluv.cb.namecolors.NColor;
+import dev.lupluv.cb.namecolors.NameColorSelector;
+import dev.lupluv.cb.namecolors.NameColorUI;
+import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import dev.lupluv.cb.shop.Adminshop;
 import dev.lupluv.cb.utils.*;
 import dev.lupluv.cb.voting.VoteAPI;
@@ -125,7 +129,9 @@ public class ClickHandler implements Listener {
                     if(e.isLeftClick()){
                         new Adminshop(p).amountBuy(cbItem);
                     }else if(e.isRightClick()){
-                        new Adminshop(p).amountSell(cbItem);
+                        if(Worth.getWorth(cbItem).getSell() >= 1) {
+                            new Adminshop(p).amountSell(cbItem);
+                        }
                     }
                 }
             }
@@ -260,6 +266,62 @@ public class ClickHandler implements Listener {
                 p.sendMessage(Strings.prefix + "§7Du hast §a64 " + cbItem.getDisplayName() + " §7verkauft.");
             }else if(item.getItemMeta().getDisplayName().equalsIgnoreCase("§7➥ Zurück")){
                 new Adminshop(p).open();
+            }
+        }else if(e.getView().title().equals(NameColorUI.invName1)){
+            e.setCancelled(true);
+            if(mat == Material.PLAYER_HEAD){
+                NColor nColor = NColor.NONE;
+                for(NColor all : NColor.values()){
+                    if(item.getItemMeta().getDisplayName().equalsIgnoreCase(all.format(all.getName()))){
+                        nColor = all;
+                        break;
+                    }
+                }
+
+                if(!p.hasPermission("cb.namecolor.color." + nColor.toString())) return;
+
+                NameColorSelector ncs = new NameColorSelector(p.getUniqueId());
+                if(!ncs.existsByUuid()) return;
+                ncs.loadByUuid();
+                ncs.setName_color(nColor.toString());
+                ncs.update();
+
+                p.sendMessage(Strings.prefix + "§7Namensfarbe wurde auf " + nColor.format(nColor.getName()) + " §7gesetzt.");
+
+                new NameColorUI(p).setMainGUI().openGUI();
+
+            }else if(mat == Material.PAPER){
+
+                new NameColorUI(p).setMainGUI2().openGUI();
+
+            }
+        }else if(e.getView().title().equals(NameColorUI.invName2)){
+            e.setCancelled(true);
+            if(mat == Material.PLAYER_HEAD){
+                NColor nColor = NColor.NONE;
+                for(NColor all : NColor.values()){
+                    if(item.getItemMeta().getDisplayName().equalsIgnoreCase(ScoreboardManager.format2(all.format(all.getName())))){
+                        nColor = all;
+                        break;
+                    }
+                }
+
+                if(!p.hasPermission("cb.namecolor.color." + nColor.toString())) return;
+
+                NameColorSelector ncs = new NameColorSelector(p.getUniqueId());
+                if(!ncs.existsByUuid()) return;
+                ncs.loadByUuid();
+                ncs.setName_color(nColor.toString());
+                ncs.update();
+
+                p.sendMessage(Strings.prefix + "§7Namensfarbe wurde auf " + ScoreboardManager.format2(nColor.format(nColor.getName())) + " §7gesetzt.");
+
+                new NameColorUI(p).setMainGUI2().openGUI();
+
+            }else if(mat == Material.PAPER){
+
+                new NameColorUI(p).setMainGUI().openGUI();
+
             }
         }
 

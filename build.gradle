@@ -16,6 +16,7 @@ repositories {
         url = 'https://maven.citizensnpcs.co/repo'
     }
     maven { url 'https://repo.cloudnetservice.eu/repository/releases/' }
+    maven { url 'https://repo.kryptonmc.org/releases' }
 }
 
 dependencies {
@@ -39,6 +40,7 @@ dependencies {
     compileOnly 'de.dytanic.cloudnet:cloudnet-bridge:3.4.0-RELEASE'
 
     implementation('com.github.CoasterFreakDE:minecraft-spigot-rgb-chat-support:1.0.5')
+    compileOnly 'me.neznamy:tab-api:3.2.1'
 }
 
 compileJava.options.encoding = 'UTF-8'

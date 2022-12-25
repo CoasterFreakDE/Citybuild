@@ -39,15 +39,25 @@ public class Adminshop {
             // Item
             Item item = new Item(cbItem.getMaterial());
             item.setDisplayName("§7" + cbItem.getDisplayName());
-            item.setLore(Lore.create(
-                    " ",
-                    "§7Kaufen für §a" + Worth.getWorth(cbItem).getBuy() + "§7 pro Item",
-                    "§7Verkaufen für §a" + Worth.getWorth(cbItem).getSell() + "§7 pro Item",
-                    " ",
-                    "§7Linksklick um zu kaufen",
-                    "§7Rechtsklick um zu verkaufen",
-                    " "
-            ));
+            if(Worth.getWorth(cbItem).getSell() >= 1) {
+                item.setLore(Lore.create(
+                        " ",
+                        "§7Kaufen für §a" + Worth.getWorth(cbItem).getBuy() + "§7 pro Item",
+                        "§7Verkaufen für §a" + Worth.getWorth(cbItem).getSell() + "§7 pro Item",
+                        " ",
+                        "§7Linksklick um zu kaufen",
+                        "§7Rechtsklick um zu verkaufen",
+                        " "
+                ));
+            }else{
+                item.setLore(Lore.create(
+                        " ",
+                        "§7Kaufen für §a" + Worth.getWorth(cbItem).getBuy() + "§7 pro Item",
+                        " ",
+                        "§7Linksklick um zu kaufen",
+                        " "
+                ));
+            }
             inv.addItem(item.build());
         }
 

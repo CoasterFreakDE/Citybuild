@@ -20,7 +20,7 @@ public class NamecolorCmd implements CommandExecutor {
         }
 
         if(args.length == 0){
-            new NameColorUI(player).openGUI();
+            new NameColorUI(player).setMainGUI().openGUI();
         }else{
             player.sendMessage(Strings.prefix + "§7Benutzung: /namensfarbe");
         }

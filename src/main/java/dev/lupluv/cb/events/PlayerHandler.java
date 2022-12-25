@@ -11,6 +11,7 @@ import dev.lupluv.cb.commands.VanishCmd;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.elevators.ElevatorBlock;
 import dev.lupluv.cb.namecolors.NameColorSelector;
+import dev.lupluv.cb.namecolors.NamecolorManager;
 import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import dev.lupluv.cb.utils.*;
 import net.kyori.adventure.text.Component;
@@ -118,7 +119,7 @@ public class PlayerHandler implements Listener {
         if(e.getPlayer().hasPermission("cb.can.hex")) {
             send(" ", e.getPlayer());
             e.setFormat(ScoreboardManager.format2(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
-                    + e.getPlayer().getName() + " §8: §r"
+                    + ScoreboardManager.format2(NamecolorManager.getNameColor(e.getPlayer()).format(e.getPlayer().getName())) + "§8: §r"
                     + ScoreboardManager.format2(e.getMessage()));
             Bukkit.getScheduler().runTaskLater(Citybuild.getInstance(), () ->{
                 send(" ", e.getPlayer());
@@ -127,7 +128,7 @@ public class PlayerHandler implements Listener {
             send(" ", e.getPlayer());
             e.setFormat(ScoreboardManager.format2(
                     ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
-                    + e.getPlayer().getName() + " §8: §r"
+                    + ScoreboardManager.format2(NamecolorManager.getNameColor(e.getPlayer()).format(e.getPlayer().getName())) + "§8: §r"
                     + ChatColor.translateAlternateColorCodes('&', e.getMessage()));
             Bukkit.getScheduler().runTaskLater(Citybuild.getInstance(), () ->{
                 send(" ", e.getPlayer());
@@ -136,7 +137,7 @@ public class PlayerHandler implements Listener {
             send(" ", e.getPlayer());
             e.setFormat(ScoreboardManager.format2(
                     ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
-                    + e.getPlayer().getName() + " §8: §r"
+                    + ScoreboardManager.format2(NamecolorManager.getNameColor(e.getPlayer()).format(e.getPlayer().getName())) + "§8: §r"
                     + e.getMessage());
             Bukkit.getScheduler().runTaskLater(Citybuild.getInstance(), () ->{
                 send(" ", e.getPlayer());

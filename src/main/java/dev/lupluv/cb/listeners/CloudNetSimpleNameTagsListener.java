@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class CloudNetSimpleNameTagsListener implements Listener {
 
+    /*
     @EventHandler(priority = EventPriority.HIGHEST)
     public void handle(PlayerJoinEvent event) {
         Bukkit.getScheduler().runTask(Citybuild.getPlugin(), () -> ScoreboardManager.getInstance().updateNameTags(event.getPlayer()));
@@ -39,5 +40,7 @@ public class CloudNetSimpleNameTagsListener implements Listener {
             }
         }));
     }
+
+     */
 
 }

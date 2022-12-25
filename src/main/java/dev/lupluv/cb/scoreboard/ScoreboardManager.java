@@ -9,6 +9,8 @@ import de.dytanic.cloudnet.ext.bridge.player.IPlayerManager;
 import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.economy.Economy;
 //import net.melion.rgbchat.api.RGBApi;
+import dev.lupluv.cb.namecolors.NColor;
+import dev.lupluv.cb.namecolors.NamecolorManager;
 import net.melion.rgbchat.api.RGBApi;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -46,6 +48,7 @@ public class ScoreboardManager {
         return net.md_5.bungee.api.ChatColor.translateAlternateColorCodes('&', RGBApi.INSTANCE.toColoredMessage(s));
     }
 
+    /*
     public static void updateScoreboard(Player p){
         IPlayerManager pm = BridgePlayerManager.getInstance();
         ICloudPlayer cp = pm.getOnlinePlayer(p.getUniqueId());
@@ -67,11 +70,8 @@ public class ScoreboardManager {
         online.setPrefix("§8 » §6" + Bukkit.getOnlinePlayers().size() + "§8/§6" + Bukkit.getMaxPlayers());
 
         updateTagline(p);
-        profile.setPrefix("§7" + getPrefix(p).replaceAll("&", "§") + getColor(p).replaceAll("&", "§") + p.getName());
-        server.setPrefix("§8 » §6" + serverName);
-        coins.setPrefix("§8 » §6" + Economy.getBalance(p.getUniqueId()) + " §6Coins");
-        online.setPrefix("§8 » §6" + Bukkit.getOnlinePlayers().size() + "§8/§6" + Bukkit.getMaxPlayers());
     }
+    */
 
     public static String getPrefix(Player player){
         return CloudNetDriver.getInstance().getPermissionManagement()
@@ -95,6 +95,7 @@ public class ScoreboardManager {
                 .getColor();
     }
 
+    /*
     public void startScoreboardTask(){
         Bukkit.getScheduler().scheduleSyncRepeatingTask(Citybuild.getPlugin(), new Runnable() {
             @Override
@@ -185,38 +186,44 @@ public class ScoreboardManager {
             team = all.getScoreboard().registerNewTeam(teamName);
         }
 
-        String prefix = format2(permissionGroup.getPrefix());
-        String color = permissionGroup.getColor();
-        String suffix = permissionGroup.getSuffix().replaceAll("&", "§");
+        String prefix = permissionGroup.getPrefix();
+        String groupColor = permissionGroup.getColor();
+        ChatColor finalColor = ChatColor.GRAY;
+        if(NamecolorManager.getNameColor(target) != NColor.NONE){
+            finalColor = NamecolorManager.getNameColor(target).asColor();
+        }else{
+            if (groupColor != null && !groupColor.isEmpty()) {
+                ChatColor chatColor = ChatColor.getByChar(groupColor.replaceAll("&", "").replaceAll("§", ""));
+                if (chatColor != null) {
+                    finalColor = chatColor;
+                }
+            } else {
+                groupColor = ChatColor.getLastColors(prefix.replace('&', '§'));
+                if (!groupColor.isEmpty()) {
+                    ChatColor chatColor = ChatColor.getByChar(groupColor.replaceAll("&", "").replaceAll("§", ""));
+                    if (chatColor != null) {
+                        permissionGroup.setColor(groupColor);
+                        CloudNetDriver.getInstance().getPermissionManagement().updateGroup(permissionGroup);
+                    }
+                }
+            }
+        }
+        String suffix = permissionGroup.getSuffix();
+
+
 
         try {
             Method method = team.getClass().getDeclaredMethod("setColor", ChatColor.class);
             method.setAccessible(true);
-
-            if (color != null && !color.isEmpty()) {
-                ChatColor chatColor = ChatColor.getByChar(color.replaceAll("&", "").replaceAll("§", ""));
-                if (chatColor != null) {
-                    method.invoke(team, chatColor);
-                }
-            } else {
-                color = ChatColor.getLastColors(prefix.replace('&', '§'));
-                if (!color.isEmpty()) {
-                    ChatColor chatColor = ChatColor.getByChar(color.replaceAll("&", "").replaceAll("§", ""));
-                    if (chatColor != null) {
-                        permissionGroup.setColor(color);
-                        CloudNetDriver.getInstance().getPermissionManagement().updateGroup(permissionGroup);
-                        method.invoke(team, chatColor);
-                    }
-                }
-            }
+            method.invoke(team, finalColor);
         } catch (NoSuchMethodException ignored) {
         } catch (IllegalAccessException | InvocationTargetException exception) {
             exception.printStackTrace();
         }
 
-        team.setPrefix(prefix);
+        team.setPrefix(format2(prefix));
 
-        team.setSuffix(suffix);
+        team.setSuffix(format2(suffix));
 
         team.addEntry(target.getName());
 
@@ -279,5 +286,7 @@ public class ScoreboardManager {
             updateTagline(all);
         }
     }
+
+     */
 
 }

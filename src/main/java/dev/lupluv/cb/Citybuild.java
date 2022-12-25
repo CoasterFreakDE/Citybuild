@@ -3,6 +3,8 @@ package dev.lupluv.cb;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
+import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
+import de.dytanic.cloudnet.driver.permission.Permission;
 import dev.lupluv.cb.belohnung.FileMangerB;
 import dev.lupluv.cb.belohnung.FileMangerC;
 import dev.lupluv.cb.broadcast.BroadcastMessages;
@@ -11,10 +13,13 @@ import dev.lupluv.cb.events.*;
 import dev.lupluv.cb.licence.LicenceManager;
 import dev.lupluv.cb.listeners.CloudNetSimpleNameTagsListener;
 import dev.lupluv.cb.mysql.MySQL;
+import dev.lupluv.cb.namecolors.NamecolorManager;
 import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import dev.lupluv.cb.stats.StatsNPC;
 import dev.lupluv.cb.utils.*;
 import dev.lupluv.cb.voting.VoteListener;
+import me.neznamy.tab.api.TabAPI;
+import me.neznamy.tab.api.placeholder.PlayerPlaceholder;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -192,12 +197,39 @@ public class Citybuild extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new CloudNetSimpleNameTagsListener(), this);
         CloudNetDriver.getInstance().getEventManager().registerListener(listener);
 
-        ScoreboardManager.getInstance().startScoreboardTask();
+        // ScoreboardManager.getInstance().startScoreboardTask();
+
+        TabAPI.getInstance().getPlaceholderManager().registerPlayerPlaceholder("%player_rank_color%", 1000*3, player -> NamecolorManager.getNameColor(Bukkit.getPlayer(player.getUniqueId())).format(player.getName()));
+
+        fixCloudPermsGroupsSortIDs();
 
     }
 
-    //BelohungsSystem
+    public void fixCloudPermsGroupsSortIDs(){
+        for(IPermissionGroup iPermissionGroup : CloudNetDriver.getInstance().getPermissionManagement().getGroups()){
+            int sortID = iPermissionGroup.getSortId();
+            boolean hasCurrent = false;
+            boolean changed = false;
+            for(Permission permission : iPermissionGroup.getPermissions()){
+                if(permission.getName().startsWith("sort.id.")){
+                    int thatID = Integer.valueOf(permission.getName().replace("sort.id.", ""));
+                    if(thatID != sortID){
+                        iPermissionGroup.removePermission(permission.getName());
+                        changed = true;
+                    }else{
+                        hasCurrent = true;
+                    }
+                }
+            }
+            if(!hasCurrent){
+                iPermissionGroup.addPermission("sort.id." + sortID);
+                changed = true;
+            }
+            if(changed) CloudNetDriver.getInstance().getPermissionManagement().updateGroup(iPermissionGroup);
+        }
+    }
 
+    //BelohungsSystem
 
     @Override
     public void onDisable() {
