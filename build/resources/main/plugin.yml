@@ -146,8 +146,12 @@ commands:
       - amboss
   namecolor:
     aliases:
-      - namecolors
-      - namensfarbe
       - namensfarben
-      - namenfarbe
-      - namenfarben
+  bank:
+  itemshop:
+    aliases:
+      - shop
+  coinflip:
+    aliases:
+      - cf
+  statistiken:

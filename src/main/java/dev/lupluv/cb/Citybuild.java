@@ -5,10 +5,13 @@ import com.google.common.io.ByteStreams;
 import de.dytanic.cloudnet.driver.CloudNetDriver;
 import de.dytanic.cloudnet.driver.permission.IPermissionGroup;
 import de.dytanic.cloudnet.driver.permission.Permission;
+import de.dytanic.cloudnet.ext.bridge.BridgePlayerManager;
 import dev.lupluv.cb.belohnung.FileMangerB;
 import dev.lupluv.cb.belohnung.FileMangerC;
 import dev.lupluv.cb.broadcast.BroadcastMessages;
+import dev.lupluv.cb.casino.Casino;
 import dev.lupluv.cb.commands.*;
+import dev.lupluv.cb.economy.BankHandler;
 import dev.lupluv.cb.events.*;
 import dev.lupluv.cb.licence.LicenceManager;
 import dev.lupluv.cb.listeners.CloudNetSimpleNameTagsListener;
@@ -22,7 +25,9 @@ import me.neznamy.tab.api.TabAPI;
 import me.neznamy.tab.api.placeholder.PlayerPlaceholder;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Statistic;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -50,6 +55,7 @@ public class Citybuild extends JavaPlugin {
     private static Crafting crafting;
     private static StatsNPC statsNPC;
     private static BroadcastMessages broadcastMessages;
+    private static BankHandler bankHandler;
     public static MySQL mySQL;
 
     private static Citybuild instance;
@@ -112,6 +118,8 @@ public class Citybuild extends JavaPlugin {
         inventoryManager = new InventoryManager();
         crafting = new Crafting();
         crafting.loadRecipes();
+        bankHandler = new BankHandler();
+        new Casino();
 
 
         // Commands
@@ -135,7 +143,6 @@ public class Citybuild extends JavaPlugin {
         getCommand("tpo").setExecutor(new TpoCmd());
         getCommand("tpohere").setExecutor(new TpohereCmd());
         getCommand("farmwelt").setExecutor(new FarmweltCmd());
-        getCommand("shop").setExecutor(new ShopCmd());
         getCommand("gamemode").setExecutor(new GamemodeCmd());
         getCommand("cc").setExecutor(new ChatclearCmd());
         getCommand("ec").setExecutor(new EnderchestCmd());
@@ -169,6 +176,10 @@ public class Citybuild extends JavaPlugin {
         getCommand("craft").setExecutor(new CraftCmd());
         getCommand("anvil").setExecutor(new AnvilCmd());
         getCommand("namecolor").setExecutor(new NamecolorCmd());
+        getCommand("bank").setExecutor(new BankCmd());
+        getCommand("itemshop").setExecutor(new ItemshopCmd());
+        getCommand("coinflip").setExecutor(new CoinflipCmd());
+        getCommand("statistiken").setExecutor(new StatistikenCmd());
 
         // Events
 
@@ -180,7 +191,8 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new SocialCmd(), this);
         pm.registerEvents(new BelohnungCmd(), this);
         pm.registerEvents(new RangshopCmd(), this);
-
+        pm.registerEvents(new ItemshopCmd(), this);
+        pm.registerEvents(new StatistikenCmd(), this);
 
 
         broadcastMessages = new BroadcastMessages(fileManager.getBroadcast().getStringList("Messages"), 0);
@@ -199,7 +211,8 @@ public class Citybuild extends JavaPlugin {
 
         // ScoreboardManager.getInstance().startScoreboardTask();
 
-        TabAPI.getInstance().getPlaceholderManager().registerPlayerPlaceholder("%player_rank_color%", 1000*3, player -> NamecolorManager.getNameColor(Bukkit.getPlayer(player.getUniqueId())).format(player.getName()));
+        TabAPI.getInstance().getPlaceholderManager().registerPlayerPlaceholder("%player_rank_color%", 1000*3, player -> ChatColor.GRAY + NamecolorManager.getNameColor(Bukkit.getPlayer(player.getUniqueId())).format(player.getName()));
+        TabAPI.getInstance().getPlaceholderManager().registerServerPlaceholder("%proxy_players_online%", 1000, () -> BridgePlayerManager.getInstance().getOnlinePlayers().size());
 
         fixCloudPermsGroupsSortIDs();
 
@@ -256,6 +269,14 @@ public class Citybuild extends JavaPlugin {
         return crafting;
     }
 
+    public static BankHandler getBankHandler() {
+        return bankHandler;
+    }
+
+    public static BroadcastMessages getBroadcastMessages() {
+        return broadcastMessages;
+    }
+
     public static MySQL getMySQL() {
         return mySQL;
     }
@@ -280,6 +301,7 @@ public class Citybuild extends JavaPlugin {
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_member (user_id BIGINT(255),clan_id BIGINT(255),role VARCHAR(255));");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_clans_requests (user_id BIGINT(255),clan_id BIGINT(255),type VARCHAR(255),date BIGINT(255));");
                 mySQL.update("CREATE TABLE IF NOT EXISTS cb_namecolors (uuid VARCHAR(255),name VARCHAR(255),namecolor VARCHAR(255));");
+
             }
         }
     }

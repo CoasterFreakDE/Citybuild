@@ -38,6 +38,11 @@ public class NameColorUI {
         glassItem.setDisplayName(" ");
         ItemStack glass = glassItem.build();
 
+        NameColorSelector ncs = new NameColorSelector(player.getUniqueId());
+        if(!ncs.existsByUuid()) return this;
+        ncs.loadByUuid();
+        NColor sel = NColor.valueOf(ncs.getName_color());
+
         inventory.setItem(0, glass);
         inventory.setItem(1, glass);
         inventory.setItem(2, glass);
@@ -75,7 +80,14 @@ public class NameColorUI {
         inventory.setItem(42, glass);
         inventory.setItem(43, glass);
         inventory.setItem(44, glass);
-        inventory.setItem(45, glass);
+        Item none = new Item(Material.RED_STAINED_GLASS_PANE);
+        none.setDisplayName("§4Keine Namensfarbe");
+        if(sel == NColor.NONE){
+            none.setLore(Lore.create("§aAusgewählt."));
+        }else {
+            none.setLore(Lore.create("§7Klicke zum auswählen."));
+        }
+        inventory.setItem(45, none.build());
         inventory.setItem(46, glass);
         inventory.setItem(47, glass);
         inventory.setItem(48, glass);
@@ -96,11 +108,6 @@ public class NameColorUI {
             if(i > 7){
                 break;
             }
-
-            NameColorSelector ncs = new NameColorSelector(player.getUniqueId());
-            if(!ncs.existsByUuid()) return this;
-            ncs.loadByUuid();
-            NColor sel = NColor.valueOf(ncs.getName_color());
 
             // Set item
             ItemStack is;
@@ -144,6 +151,11 @@ public class NameColorUI {
         glassItem.setDisplayName(" ");
         ItemStack glass = glassItem.build();
 
+        NameColorSelector ncs = new NameColorSelector(player.getUniqueId());
+        if (!ncs.existsByUuid()) return this;
+        ncs.loadByUuid();
+        NColor sel = NColor.valueOf(ncs.getName_color());
+
         inventory.setItem(0, glass);
         inventory.setItem(1, glass);
         inventory.setItem(2, glass);
@@ -181,7 +193,14 @@ public class NameColorUI {
         inventory.setItem(42, glass);
         inventory.setItem(43, glass);
         inventory.setItem(44, glass);
-        inventory.setItem(45, glass);
+        Item none = new Item(Material.RED_STAINED_GLASS_PANE);
+        none.setDisplayName("§4Keine Namensfarbe");
+        if(sel == NColor.NONE){
+            none.setLore(Lore.create("§aAusgewählt."));
+        }else {
+            none.setLore(Lore.create("§7Klicke zum auswählen."));
+        }
+        inventory.setItem(45, none.build());
         inventory.setItem(46, glass);
         inventory.setItem(47, glass);
         inventory.setItem(50, glass);
@@ -203,11 +222,6 @@ public class NameColorUI {
                 if (i > 7+8) {
                     break;
                 }
-
-                NameColorSelector ncs = new NameColorSelector(player.getUniqueId());
-                if (!ncs.existsByUuid()) return this;
-                ncs.loadByUuid();
-                NColor sel = NColor.valueOf(ncs.getName_color());
 
                 // Set item
                 ItemStack is;

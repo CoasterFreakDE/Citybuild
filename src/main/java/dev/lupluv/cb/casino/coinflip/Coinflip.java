@@ -1,4 +1,4 @@
-package dev.lupluv.cb.casino;
+package dev.lupluv.cb.casino.coinflip;
 
 import org.bukkit.entity.Player;
 
@@ -9,8 +9,7 @@ public class Coinflip {
     Player p1;
     Player p2;
 
-    long bet1;
-    long bet2;
+    double bet;
 
     CoinSide tip1;
     CoinSide tip2;
@@ -20,9 +19,9 @@ public class Coinflip {
     public void flip(){
         Random random = new Random();
         int i = random.nextInt(2);
-        if(i == 0){
+        if(i == 1){
             result = CoinSide.HEAD;
-        }else {
+        }else{
             result = CoinSide.NUMBER;
         }
     }
@@ -30,6 +29,16 @@ public class Coinflip {
     public Coinflip(Player p1, Player p2) {
         this.p1 = p1;
         this.p2 = p2;
+    }
+
+    public Coinflip(Player p1) {
+        this.p1 = p1;
+        this.bet = 0;
+    }
+
+    public void sendMessage(String message){
+        p1.sendMessage(message);
+        p2.sendMessage(message);
     }
 
     public Player getP1() {
@@ -48,20 +57,20 @@ public class Coinflip {
         this.p2 = p2;
     }
 
-    public long getBet1() {
-        return bet1;
+    public double getBet() {
+        return bet;
     }
 
-    public void setBet1(long bet1) {
-        this.bet1 = bet1;
+    public void setBet(double bet) {
+        this.bet = bet;
     }
 
-    public long getBet2() {
-        return bet2;
+    public CoinSide getResult() {
+        return result;
     }
 
-    public void setBet2(long bet2) {
-        this.bet2 = bet2;
+    public void setResult(CoinSide result) {
+        this.result = result;
     }
 
     public CoinSide getTip1() {
@@ -79,4 +88,13 @@ public class Coinflip {
     public void setTip2(CoinSide tip2) {
         this.tip2 = tip2;
     }
+
+    public void higherBet(double amount){
+        this.bet+=amount;
+    }
+
+    public void lowerBet(double amount){
+        this.bet-=amount;
+    }
+
 }

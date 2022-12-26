@@ -1,4 +1,4 @@
-package dev.lupluv.cb.casino;
+package dev.lupluv.cb.casino.coinflip;
 
 public enum CoinSide {
 

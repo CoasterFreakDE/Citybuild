@@ -6,8 +6,13 @@ import com.plotsquared.core.PlotSquared;
 import com.plotsquared.core.player.PlotPlayer;
 import com.plotsquared.core.plot.Plot;
 import dev.lupluv.cb.Citybuild;
+import dev.lupluv.cb.casino.Casino;
+import dev.lupluv.cb.casino.coinflip.Coinflip;
+import dev.lupluv.cb.casino.coinflip.CoinflipUI;
 import dev.lupluv.cb.clans.User;
 import dev.lupluv.cb.commands.VanishCmd;
+import dev.lupluv.cb.economy.Bank;
+import dev.lupluv.cb.economy.BankHandler;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.elevators.ElevatorBlock;
 import dev.lupluv.cb.namecolors.NameColorSelector;
@@ -30,9 +35,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.server.ServerListPingEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -50,6 +57,7 @@ public class PlayerHandler implements Listener {
 
         // Economy Registration
         Economy.correctName(p);
+        Bank.loadPlayerBank(p);
 
         // Clans Registration
         User.onJoin(e);
@@ -116,6 +124,11 @@ public class PlayerHandler implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e){
+        if(Citybuild.getBankHandler().bankActions.containsKey(e.getPlayer())){
+            e.setCancelled(true);
+            Citybuild.getBankHandler().chatEvent(e.getPlayer(), e.getMessage());
+            return;
+        }
         if(e.getPlayer().hasPermission("cb.can.hex")) {
             send(" ", e.getPlayer());
             e.setFormat(ScoreboardManager.format2(ScoreboardManager.getPrefix(e.getPlayer()) + ScoreboardManager.getColor(e.getPlayer()))
@@ -150,7 +163,15 @@ public class PlayerHandler implements Listener {
         }
     }
 
-
+    @EventHandler
+    public void onInvClose(InventoryCloseEvent event){
+        Player player = (Player) event.getPlayer();
+        Inventory inventory = event.getInventory();
+        Component title = event.getView().title();
+        if(title.equals(CoinflipUI.inv_name_main) || title.equals(CoinflipUI.inv_name_create)){
+            Casino.getInstance().getCoinflipManager().openedUIs.remove(player);
+        }
+    }
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e){

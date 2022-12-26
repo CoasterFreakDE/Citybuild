@@ -4,6 +4,11 @@ import com.plotsquared.core.PlotSquared;
 import com.plotsquared.core.plot.Plot;
 import com.plotsquared.core.plot.PlotId;
 import dev.lupluv.cb.Citybuild;
+import dev.lupluv.cb.casino.Casino;
+import dev.lupluv.cb.casino.coinflip.Coinflip;
+import dev.lupluv.cb.casino.coinflip.CoinflipUI;
+import dev.lupluv.cb.economy.BankHandler;
+import dev.lupluv.cb.economy.BankUI;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.namecolors.NColor;
 import dev.lupluv.cb.namecolors.NameColorSelector;
@@ -290,6 +295,17 @@ public class ClickHandler implements Listener {
 
                 new NameColorUI(p).setMainGUI().openGUI();
 
+            }else if(mat == Material.RED_STAINED_GLASS_PANE){
+                NameColorSelector ncs = new NameColorSelector(p.getUniqueId());
+                if(!ncs.existsByUuid()) return;
+                ncs.loadByUuid();
+                ncs.setName_color(NColor.NONE.toString());
+                ncs.update();
+
+                p.sendMessage(Strings.prefix + "§7Namensfarbe wurde entfernt.");
+
+                new NameColorUI(p).setMainGUI().openGUI();
+
             }else if(mat == Material.PAPER){
 
                 new NameColorUI(p).setMainGUI2().openGUI();
@@ -318,9 +334,42 @@ public class ClickHandler implements Listener {
 
                 new NameColorUI(p).setMainGUI2().openGUI();
 
+            }else if(mat == Material.RED_STAINED_GLASS_PANE){
+                NameColorSelector ncs = new NameColorSelector(p.getUniqueId());
+                if(!ncs.existsByUuid()) return;
+                ncs.loadByUuid();
+                ncs.setName_color(NColor.NONE.toString());
+                ncs.update();
+
+                p.sendMessage(Strings.prefix + "§7Namensfarbe wurde entfernt.");
+
+                new NameColorUI(p).setMainGUI2().openGUI();
+
             }else if(mat == Material.PAPER){
 
                 new NameColorUI(p).setMainGUI().openGUI();
+
+            }
+        }else if(e.getView().title().equals(BankUI.invName)){
+            e.setCancelled(true);
+            if(mat == Material.PLAYER_HEAD){
+                if(item.getItemMeta().getDisplayName().equalsIgnoreCase(BankUI.out_name)){
+                    Citybuild.getBankHandler().putPayOut(p);
+                }else if(item.getItemMeta().getDisplayName().equalsIgnoreCase(BankUI.in_name)){
+                    Citybuild.getBankHandler().putPayIn(p);
+                }
+            }
+        }else if(e.getView().title().equals(CoinflipUI.inv_name_main)){
+            e.setCancelled(true);
+            if(mat == Material.NETHER_STAR){
+                Casino.getInstance().getCoinflipManager().openedUIs.get(p).setCreateGUI().openGUI();
+                Casino.getInstance().getCoinflipManager().addCreation(p, new Coinflip(p));
+            }
+        }else if(e.getView().title().equals(CoinflipUI.inv_name_create)){
+            e.setCancelled(true);
+            if(mat == Material.PLAYER_HEAD){
+                Casino.getInstance().getCoinflipManager().openedUIs.get(p).clickChangeBet(item.getItemMeta().getDisplayName());
+            }else if(mat == Material.GREEN_DYE){
 
             }
         }

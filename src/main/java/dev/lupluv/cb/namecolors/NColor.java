@@ -83,7 +83,7 @@ public enum NColor {
                 return "§7";
             }
         }
-        return "";
+        return "§7";
     }
 
     public String getColor2(){

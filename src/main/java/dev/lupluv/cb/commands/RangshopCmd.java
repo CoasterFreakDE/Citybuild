@@ -28,7 +28,7 @@ public class RangshopCmd implements CommandExecutor, Listener {
     public static Inventory inv;
     public static String invname = "§6§lRangshop";
 
-    public void createInv(Player player){
+    public static void createInv(Player player){
 
         inv = Bukkit.createInventory(null, 9*3, invname);
 

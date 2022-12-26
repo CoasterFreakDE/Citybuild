@@ -147,3 +147,11 @@ commands:
   namecolor:
     aliases:
       - namensfarben
+  bank:
+  itemshop:
+    aliases:
+      - shop
+  coinflip:
+    aliases:
+      - cf
+  statistiken:

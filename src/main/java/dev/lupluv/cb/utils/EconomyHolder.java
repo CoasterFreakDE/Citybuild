@@ -1,6 +1,7 @@
 package dev.lupluv.cb.utils;
 import java.util.List;
 
+import dev.lupluv.cb.economy.Bank;
 import org.bukkit.OfflinePlayer;
 
 import net.milkbowl.vault.economy.Economy;
@@ -94,37 +95,37 @@ public class EconomyHolder implements Economy {
     @Override
     public EconomyResponse bankBalance(String arg0) {
 
-        return null;
+        return dev.lupluv.cb.economy.Bank.getBalanceResponse(arg0);
     }
 
     @Override
     public EconomyResponse bankDeposit(String arg0, double arg1) {
 
-        return null;
+        return dev.lupluv.cb.economy.Bank.depositBank(arg0, arg1);
     }
 
     @Override
     public EconomyResponse bankHas(String arg0, double arg1) {
 
-        return null;
+        return dev.lupluv.cb.economy.Bank.has(arg0, arg1);
     }
 
     @Override
     public EconomyResponse bankWithdraw(String arg0, double arg1) {
 
-        return null;
+        return dev.lupluv.cb.economy.Bank.withdrawBank(arg0, arg1);
     }
 
     @Override
     public EconomyResponse createBank(String arg0, String arg1) {
 
-        return null;
+        return dev.lupluv.cb.economy.Bank.createBank(arg0);
     }
 
     @Override
     public EconomyResponse createBank(String arg0, OfflinePlayer arg1) {
 
-        return null;
+        return dev.lupluv.cb.economy.Bank.createBank(arg0);
     }
 
     @Override
@@ -153,22 +154,22 @@ public class EconomyHolder implements Economy {
 
     @Override
     public String currencyNamePlural() {
-        return "wc";
+        return "Coins";
     }
 
     @Override
     public String currencyNameSingular() {
-        return "wc";
+        return "Coin";
     }
 
     @Override
     public EconomyResponse deleteBank(String arg0) {
-        return null;
+        return dev.lupluv.cb.economy.Bank.deleteBank(arg0);
     }
 
     @Override
     public String format(double arg0) {
-        return null;
+        return arg0 + " Coins";
     }
 
     @Override
@@ -178,7 +179,7 @@ public class EconomyHolder implements Economy {
 
     @Override
     public List<String> getBanks() {
-        return null;
+        return dev.lupluv.cb.economy.Bank.getBankNames();
     }
 
     @Override

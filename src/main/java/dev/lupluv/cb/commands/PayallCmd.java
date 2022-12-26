@@ -22,12 +22,19 @@ public class PayallCmd implements CommandExecutor {
                     try {
                         double amount = Double.parseDouble(args[0]);
                         double balance = Economy.getBalance(p.getUniqueId());
-                        if(balance >= Bukkit.getOnlinePlayers().size()*amount){
-                            Bukkit.getOnlinePlayers().forEach(all ->{
-                                if(all != p) {
-                                    p.performCommand("pay " + all.getName() + " " + (long) amount);
-                                }
-                            });
+                        if(balance >= (Bukkit.getOnlinePlayers().size()-1)*amount){
+                            if(Economy.withdrawPlayer(p.getUniqueId(), amount*(Bukkit.getOnlinePlayers().size()-1)).transactionSuccess()) {
+                                Bukkit.getOnlinePlayers().forEach(all -> {
+                                    if (all != p) {
+                                        if(Economy.depositPlayer(all.getUniqueId(), amount).transactionSuccess()){
+                                            all.sendMessage(Strings.prefix + "§7Jeder Spieler hat " + amount + " Coins von " + p.getName() + " erhalten.");
+                                        }
+                                    }
+                                });
+                                p.sendMessage(Strings.prefix + "§7Du hast jedem Spieler " + amount + " Coins gegeben. (" + (amount*(Bukkit.getOnlinePlayers().size()-1)) + ")");
+                            }else{
+                                p.sendMessage(Strings.prefix + "§cFehler.");
+                            }
                         }else{
                             p.sendMessage(Strings.prefix + "§cDu hast nicht genug Geld dafür.");
                         }

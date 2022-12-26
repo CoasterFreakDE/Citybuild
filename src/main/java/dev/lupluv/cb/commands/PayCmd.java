@@ -28,8 +28,8 @@ public class PayCmd implements CommandExecutor {
                                 if (amount >= 1) {
                                     if (Economy.getBalance(p.getUniqueId()) >= amount) {
                                         Economy.transferMoney(p.getUniqueId(), t.getUniqueId(), amount);
-                                        p.sendMessage(Strings.prefix + "Du hast " + t.getName() + " " + amount + "wc überwiesen");
-                                        t.sendMessage(Strings.prefix + p.getName() + " hat dir " + amount + "wc überwiesen");
+                                        p.sendMessage(Strings.prefix + "Du hast " + t.getName() + " " + amount + " Coins überwiesen");
+                                        t.sendMessage(Strings.prefix + p.getName() + " hat dir " + amount + " Coins überwiesen");
                                     } else {
                                         p.sendMessage(Strings.prefix + "Du hast nicht genug Geld");
                                     }
