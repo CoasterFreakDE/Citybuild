@@ -34,7 +34,7 @@ public class Particel implements Listener {
             player.getWorld().spawnParticle(Particle.HEART, player.getLocation(), 2, 0.3, 0.3,0.3);
        }
        if(haseffect2.contains(player)){
-           player.getWorld().spawnParticle(Particle.HEART, player.getLocation(), 2, 0.3, 0.3,0.3);
+           player.getWorld().spawnParticle(Particle.NOTE, player.getLocation(), 2, 0.3, 0.3,0.3);
        }
        if(haseffect3.contains(player)){
            player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 2, 0.3, 0.3,0.3);

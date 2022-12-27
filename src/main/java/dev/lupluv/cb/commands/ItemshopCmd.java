@@ -122,11 +122,11 @@ public static void createAndOpenInventory(Player player){
                     new NameColorUI(player).setMainGUI().openGUI();
                     break;
                 }
-                case "§aRänge" -> {
-                    RangshopCmd.createInv(player);
-                    break;
-                }
-                case "§aBooster" -> {
+                    case "§aRänge" -> {
+                        RangshopCmd.createInv(player);
+                        break;
+                    }
+                    case "§aBooster" -> {
 
                     player.sendMessage(Strings.prefix + "§cDiese Funktion ist in Arbeit!");
 
