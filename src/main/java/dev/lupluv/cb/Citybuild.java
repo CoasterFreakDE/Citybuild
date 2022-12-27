@@ -196,6 +196,7 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new ItemshopCmd(), this);
         pm.registerEvents(new StatistikenCmd(), this);
         pm.registerEvents(new Particel(), this);
+        pm.registerEvents(new Effects(), this);
 
 
         broadcastMessages = new BroadcastMessages(fileManager.getBroadcast().getStringList("Messages"), 0);

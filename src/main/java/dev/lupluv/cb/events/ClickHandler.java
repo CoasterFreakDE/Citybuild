@@ -368,6 +368,9 @@ public class ClickHandler implements Listener {
         }else if(e.getView().title().equals(CoinflipUI.inv_name_create)){
             e.setCancelled(true);
             if(mat == Material.PLAYER_HEAD){
+                for(CoinflipUI c : Casino.getInstance().getCoinflipManager().openedUIs.values()){
+                    p.sendMessage("Player: " + c.getPlayer() + " | Inventar: " + c.getPlayer().getOpenInventory().getTitle());
+                }
                 Casino.getInstance().getCoinflipManager().openedUIs.get(p).clickChangeBet(item.getItemMeta().getDisplayName());
             }else if(mat == Material.GREEN_DYE){
 

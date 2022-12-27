@@ -156,3 +156,5 @@ commands:
       - cf
   statistiken:
   effekt:
+    aliases:
+      - effects

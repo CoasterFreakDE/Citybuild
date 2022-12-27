@@ -33,6 +33,14 @@ public class CoinflipUI {
     Player player;
     Inventory inventory;
 
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
     public CoinflipUI(Player player) {
         this.player = player;
         Casino.getInstance().getCoinflipManager().openedUIs.put(player, this);
@@ -140,7 +148,7 @@ public class CoinflipUI {
     }
 
     public void clickChangeBet(String item_name){
-        Coinflip coinflip = Casino.getInstance().getCoinflipManager().getCoinflip(player);
+        Coinflip coinflip = Casino.getInstance().getCoinflipManager().getCreations().get(player);
         if(item_name.equalsIgnoreCase(plus_100_name)){
             coinflip.higherBet(100);
         }else if(item_name.equalsIgnoreCase(plus_500_name)){
