@@ -22,7 +22,7 @@ import javax.swing.*;
 public class ItemshopCmd implements CommandExecutor, Listener {
 
     public static Inventory inv;
-    public static String inv_name = "§6§lItemShop";
+    public static String inv_name = "§6§lItemshop";
 
     public static final String pets_value = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDY1NTE4NDA5" +
             "NTVmNTI0MzY3NTgwZjExYjM1MjI4OTM4YjY3ODYzOTdhOGYyZThjOGNjNmIwZWIwMWI1ZGIzZCJ9fX0=";
@@ -46,12 +46,12 @@ public static void createAndOpenInventory(Player player){
 
     inv = Bukkit.createInventory(null, 9*5, inv_name);
 
-        ItemStack pets = Util.createCustomSkull(pets_value, "§aHaustiere", null);
-        ItemStack crates = Util.createCustomSkull(crates_valeu, "§aCrates", null);
-        ItemStack effects = Util.createCustomSkull(effects_vlaue, "§aEffekte", null);
-        ItemStack namecolor = Util.createCustomSkull(namecolor_value, "§aNamensfarben", null);
-        ItemStack ranks = Util.createCustomSkull(ranks_value, "§aRänge", null);
-        ItemStack booster = Util.createCustomSkull(booster_value, "§aBooster", null);
+        ItemStack pets = Util.createCustomSkull(pets_value, "§a§lHaustiere", null);
+        ItemStack crates = Util.createCustomSkull(crates_valeu, "§a§lCrates", null);
+        ItemStack effects = Util.createCustomSkull(effects_vlaue, "§a§lEffekte", null);
+        ItemStack namecolor = Util.createCustomSkull(namecolor_value, "§a§lNamensfarben", null);
+        ItemStack ranks = Util.createCustomSkull(ranks_value, "§a§lRänge", null);
+        ItemStack booster = Util.createCustomSkull(booster_value, "§a§lBooster", null);
 
 
 

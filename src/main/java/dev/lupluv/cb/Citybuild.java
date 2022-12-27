@@ -17,6 +17,7 @@ import dev.lupluv.cb.licence.LicenceManager;
 import dev.lupluv.cb.listeners.CloudNetSimpleNameTagsListener;
 import dev.lupluv.cb.mysql.MySQL;
 import dev.lupluv.cb.namecolors.NamecolorManager;
+import dev.lupluv.cb.particels.Particel;
 import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import dev.lupluv.cb.stats.StatsNPC;
 import dev.lupluv.cb.utils.*;
@@ -180,6 +181,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("itemshop").setExecutor(new ItemshopCmd());
         getCommand("coinflip").setExecutor(new CoinflipCmd());
         getCommand("statistiken").setExecutor(new StatistikenCmd());
+        getCommand("effekt").setExecutor(new Effects());
 
         // Events
 
@@ -193,6 +195,7 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new RangshopCmd(), this);
         pm.registerEvents(new ItemshopCmd(), this);
         pm.registerEvents(new StatistikenCmd(), this);
+        pm.registerEvents(new Particel(), this);
 
 
         broadcastMessages = new BroadcastMessages(fileManager.getBroadcast().getStringList("Messages"), 0);

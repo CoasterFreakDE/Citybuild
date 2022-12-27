@@ -22,17 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class StatistikenCmd implements CommandExecutor, Listener {
 
-    @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(!(sender instanceof Player player)) return true;
-        if(args.length == 0){
-            createAndOpenInventory(player);
-        }else{
-            player.sendMessage(Strings.prefix + "§cBenutzung /statistiken");
-        }
-        return false;
-    }
 
     public static Inventory inv;
     public static String invname = "§6§lStatistiken";
@@ -42,44 +32,90 @@ public class StatistikenCmd implements CommandExecutor, Listener {
         inv = Bukkit.createInventory(null, 9*5, invname);
 
         Item sheep = new Item(Material.SHEEP_SPAWN_EGG);
-        sheep.setDisplayName("§6§lGetötete Lebewesen:");
-        sheep.setLore(Lore.create("§7Anzahl§8: §a" + player.getStatistic(Statistic.KILL_ENTITY)));
+        sheep.setDisplayName("§6§lGetötete Lebewesen");
+        try{
+            int killed_entity = player.getStatistic(Statistic.MOB_KILLS) + player.getStatistic(Statistic.PLAYER_KILLS);
+
+            sheep.setLore(Lore.create("§a" + killed_entity + " §7Lebewesen"));
+        }catch (Exception e){
+            sheep.setLore(Lore.create("§7Anzahl§8: §a"));
+        }
+
 
 
         Item grass_block = new Item(Material.GRASS_BLOCK);
-        grass_block.setDisplayName("§6§lBlöcke gelauen");
-        grass_block.setLore(Lore.create("§7Anzahl§8: §a" + player.getStatistic(Statistic.WALK_ONE_CM)));
+        grass_block.setDisplayName("§6§lBlöcke gelaufen");
+        try{
+            grass_block.setLore(Lore.create("§a" + player.getStatistic(Statistic.WALK_ONE_CM)  + " §7Blöcke"));
+
+        }catch (Exception e){
+            grass_block.setLore(Lore.create("§7Anzahl§8: §a"));
+        }
 
 
         Item Stonesword = new Item(Material.STONE_SWORD);
         Stonesword.setDisplayName("§6§lGetötete Spieler");
-        Stonesword.setLore(Lore.create("§7Anzahl§8: §a" + player.getStatistic(Statistic.PLAYER_KILLS)));
+
+        try{
+            Stonesword.setLore(Lore.create("§a" + player.getStatistic(Statistic.PLAYER_KILLS) + " §7Spieler"));
+        }catch (Exception e){
+            Stonesword.setLore(Lore.create("§7Anzahl§8: §a"));
+        }
+
+
 
 
         Item TotemOfUndiyng = new Item(Material.TOTEM_OF_UNDYING);
         TotemOfUndiyng.setDisplayName("§6§lTode");
-        TotemOfUndiyng.setLore(Lore.create("§7Anzahl§8: §a" + player.getStatistic(Statistic.DEATHS)));
+        try {
+            TotemOfUndiyng.setLore(Lore.create("§a" + player.getStatistic(Statistic.DEATHS) + " §7Tode"));
+
+        }catch (Exception e){
+            TotemOfUndiyng.setLore(Lore.create("§7Anzahl§8: §a"));
+        }
 
 
         Item elytra = new Item(Material.ELYTRA);
         elytra.setDisplayName("§6§lGeflogene Blöcke");
-        elytra.setLore(Lore.create("§7Anzahl§8: §a" + player.getStatistic(Statistic.FLY_ONE_CM)));
+        try{
+            elytra.setLore(Lore.create("§a" + player.getStatistic(Statistic.FLY_ONE_CM) + " §7Blöcke"));
+        }catch (Exception e){
+            elytra.setLore(Lore.create("§7Anzahl§8: §a"));
+        }
+
 
 
         Item enderperl = new Item(Material.ENDER_PEARL);
         enderperl.setDisplayName("§6§lJumps");
-        enderperl.setLore(Lore.create("§7Anzahl§8: §a" + player.getStatistic(Statistic.JUMP)));
+        try{
+            enderperl.setLore(Lore.create("§a" + player.getStatistic(Statistic.JUMP) + " §7Jumps"));
+        }catch (Exception e){
+            enderperl.setLore(Lore.create("§7Anzahl§8: §a"));
+        }
+
 
 
         Item clock = new Item(Material.CLOCK);
-        clock.setDisplayName("§6§lSpielerzeit");
-        clock.setLore(Lore.create("§a" + player.getPlayerTime() + " §7Minuten"));
+        clock.setDisplayName("§6§lSpielzeit");
+        try {
+            clock.setLore(Lore.create("§a" + player.getPlayerTime() + " §7Minuten"));
+        }catch (Exception e){
+            clock.setLore(Lore.create("§7Anzahl§8: §a"));
+        }
+
 
 
         Item mobs = new Item(Material.ZOMBIE_HEAD);
         mobs.setDisplayName("§6§lMobs getötet");
-        mobs.setLore(Lore.create("§7Anzahl§8: §a" + player.getStatistic(Statistic.MOB_KILLS)));
-        inv.setItem(21, mobs.build());
+        try{
+            mobs.setLore(Lore.create("§a" + player.getStatistic(Statistic.MOB_KILLS) + " §7Mobs"));
+        }catch (Exception e){
+           mobs.setLore(Lore.create("§7Anzahl§): §a"));
+        }
+
+
+
+        inv.setItem(31, mobs.build());
         inv.setItem(24, clock.build());
         inv.setItem(22, enderperl.build());
         inv.setItem(20, elytra.build());
@@ -121,5 +157,18 @@ public class StatistikenCmd implements CommandExecutor, Listener {
     }
 
 
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
+        if(!(sender instanceof Player player)) return true;
+        if(!(args.length == 0)) return true;
+
+        try{
+            createAndOpenInventory(player);
+        }catch (Exception e){
+            player.sendMessage(Strings.prefix + "§cFehler beim Bilden der GUI");
+        }
+
+        return false;
+    }
 }
