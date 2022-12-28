@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.utils.Item;
 import dev.lupluv.cb.utils.Lore;
@@ -22,11 +23,13 @@ import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerCommandSendEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
+@RegisterCommand(name = "merge", permissionDefault = PermissionDefault.TRUE)
 public class MergeCmd implements CommandExecutor, Listener {
 
     public static Inventory inv;

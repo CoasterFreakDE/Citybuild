@@ -5,6 +5,7 @@ import de.dytanic.cloudnet.driver.permission.IPermissionUser;
 import de.dytanic.cloudnet.driver.permission.Permission;
 import dev.lupluv.cb.Citybuild;
 import dev.lupluv.cb.advent.Reward;
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Crafting;
 import dev.lupluv.cb.utils.Strings;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -24,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.logging.Level;
 
+@RegisterCommand(name = "givereward", permission = "cb.givereward")
 public class GiverewardCmd implements CommandExecutor {
 
 

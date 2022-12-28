@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Strings;
 import dev.lupluv.cb.utils.Warp;
 import org.bukkit.command.Command;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+@RegisterCommand(name = "setwarp", permission = "cb.warp.set")
 public class SetwarpCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {

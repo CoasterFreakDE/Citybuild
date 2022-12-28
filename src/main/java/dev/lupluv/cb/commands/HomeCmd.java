@@ -1,6 +1,7 @@
 package dev.lupluv.cb.commands;
 
 import dev.lupluv.cb.Citybuild;
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Home;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.command.Command;
@@ -9,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "home", permission = "cb.home.home")
 public class HomeCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {

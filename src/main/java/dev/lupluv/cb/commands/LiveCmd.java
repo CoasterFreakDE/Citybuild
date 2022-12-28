@@ -1,14 +1,17 @@
 package dev.lupluv.cb.commands;
 
 import com.sun.jna.platform.unix.solaris.LibKstat;
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "live", permission = "cb.live")
 public class LiveCmd implements CommandExecutor {
 
 

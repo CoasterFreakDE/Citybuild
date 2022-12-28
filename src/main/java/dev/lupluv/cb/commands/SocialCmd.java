@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Item;
 import dev.lupluv.cb.utils.Lore;
 import dev.lupluv.cb.utils.Strings;
@@ -19,8 +20,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "social", permissionDefault = PermissionDefault.TRUE, aliases = {
+        "socialmedia", "tiktok", "twitch", "website", "store", "instagram",
+        "twitter", "youtube", "teamspeak", "ts"
+})
 public class SocialCmd implements CommandExecutor, Listener {
 
     private static Inventory inv;

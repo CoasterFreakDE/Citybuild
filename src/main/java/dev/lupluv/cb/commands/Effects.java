@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.particels.Particel;
 import dev.lupluv.cb.utils.Item;
 import dev.lupluv.cb.utils.Lore;
@@ -16,11 +17,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 
+@RegisterCommand(name = "effects", aliases = {"effekt", "effect"}, description = "Opens the effects menu", permissionDefault = PermissionDefault.TRUE)
 public class Effects implements CommandExecutor, Listener {
 
     public static Inventory inv;

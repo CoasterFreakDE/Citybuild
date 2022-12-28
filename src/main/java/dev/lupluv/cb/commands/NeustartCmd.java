@@ -1,6 +1,7 @@
 package dev.lupluv.cb.commands;
 
 import dev.lupluv.cb.Citybuild;
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -9,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "neustart", permission = "cb.restart")
 public class NeustartCmd implements CommandExecutor {
 
     public static int taskID = -1;

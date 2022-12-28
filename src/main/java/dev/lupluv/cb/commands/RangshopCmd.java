@@ -2,6 +2,7 @@ package dev.lupluv.cb.commands;
 
 
 import dev.lupluv.cb.Citybuild;
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.utils.*;
 import org.bukkit.Bukkit;
@@ -17,12 +18,14 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
 
 
+@RegisterCommand(name = "rangshop", permissionDefault = PermissionDefault.TRUE)
 public class RangshopCmd implements CommandExecutor, Listener {
 
     public static Inventory inv;

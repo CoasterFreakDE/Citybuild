@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.belohnung.FileMangerB;
 import dev.lupluv.cb.belohnung.FileMangerC;
 import dev.lupluv.cb.economy.Economy;
@@ -18,10 +19,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+@RegisterCommand(name = "belohnung", description = "Öffnet das Belohnungsmenü", permissionDefault = PermissionDefault.TRUE)
 public class BelohnungCmd implements CommandExecutor, Listener {
 
     public Inventory inv;

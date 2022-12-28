@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Home;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.command.Command;
@@ -10,6 +11,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+
+@RegisterCommand(name = "delhome", description = "Deletes a home", permission = "cb.home.del")
 public class DelhomeCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
