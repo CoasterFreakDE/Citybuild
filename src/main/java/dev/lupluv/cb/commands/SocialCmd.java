@@ -200,7 +200,7 @@ public class SocialCmd implements CommandExecutor, Listener {
 
                     txt = new TextComponent(Strings.prefix + "Trete gerne unserem §r");
                     btn = new TextComponent("§2§lTEAMSPEAK");
-                    btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wonderbuild.com"));
+                    btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wonderbuild.net"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt2 = new TextComponent("§r §7bei.");
                     txt.addExtra(btn);
@@ -212,7 +212,7 @@ public class SocialCmd implements CommandExecutor, Listener {
 
                     txt = new TextComponent(Strings.prefix + "Schaue dich gerne in unserem §r");
                     btn = new TextComponent("§e§lSTORE");
-                    btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://store.wonderbuild.com"));
+                    btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://store.wonderbuild.net"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt2 = new TextComponent("§r §7um.");
                     txt.addExtra(btn);
