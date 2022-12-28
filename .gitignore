@@ -23,6 +23,5 @@
 hs_err_pid*
 replay_pid*
 /.gradle/
-/.idea/
-/settings.gradle
+.idea
 .idea/workspace.xml
