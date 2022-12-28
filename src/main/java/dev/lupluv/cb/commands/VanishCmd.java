@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -11,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@RegisterCommand(name = "vanish", permission = "cb.vanish.self", aliases = {"v"})
 public class VanishCmd implements CommandExecutor {
 
     public static List<Player> vanishedPlayer = new ArrayList<>();

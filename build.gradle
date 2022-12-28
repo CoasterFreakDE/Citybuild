@@ -41,6 +41,9 @@ dependencies {
 
     implementation('com.github.CoasterFreakDE:minecraft-spigot-rgb-chat-support:1.0.5')
     compileOnly 'me.neznamy:tab-api:3.2.1'
+
+    // Reflection Dependencies for automatic registration of commands and listeners
+    implementation("net.oneandone.reflections8:reflections8:0.11.7")
 }
 
 compileJava.options.encoding = 'UTF-8'

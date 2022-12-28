@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Item;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.Material;
@@ -9,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "skull", aliases = {"kopf", "head"}, permission = "cb.skull")
 public class SkullCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

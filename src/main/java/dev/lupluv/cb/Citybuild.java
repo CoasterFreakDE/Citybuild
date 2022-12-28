@@ -12,23 +12,20 @@ import dev.lupluv.cb.broadcast.BroadcastMessages;
 import dev.lupluv.cb.casino.Casino;
 import dev.lupluv.cb.commands.*;
 import dev.lupluv.cb.economy.BankHandler;
-import dev.lupluv.cb.events.*;
+import dev.lupluv.cb.events.ClickHandler;
+import dev.lupluv.cb.events.PlayerHandler;
 import dev.lupluv.cb.licence.LicenceManager;
 import dev.lupluv.cb.listeners.CloudNetSimpleNameTagsListener;
 import dev.lupluv.cb.mysql.MySQL;
 import dev.lupluv.cb.namecolors.NamecolorManager;
 import dev.lupluv.cb.particels.Particel;
-import dev.lupluv.cb.scoreboard.ScoreboardManager;
 import dev.lupluv.cb.stats.StatsNPC;
 import dev.lupluv.cb.utils.*;
 import dev.lupluv.cb.voting.VoteListener;
 import me.neznamy.tab.api.TabAPI;
-import me.neznamy.tab.api.placeholder.PlayerPlaceholder;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Statistic;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -40,8 +37,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 
 
@@ -123,82 +118,8 @@ public class Citybuild extends JavaPlugin {
         new Casino();
 
 
-        // Commands
-
-        getCommand("setwarp").setExecutor(new SetwarpCmd());
-        getCommand("delwarp").setExecutor(new DelwarpCmd());
-        getCommand("warp").setExecutor(new WarpCmd());
-        getCommand("warps").setExecutor(new WarpsCmd());
-        getCommand("spawn").setExecutor(new SpawnCmd());
-        getCommand("money").setExecutor(new MoneyCmd());
-        getCommand("pay").setExecutor(new PayCmd());
-        getCommand("sethome").setExecutor(new SethomeCmd());
-        getCommand("delhome").setExecutor(new DelhomeCmd());
-        getCommand("home").setExecutor(new HomeCmd());
-        getCommand("homes").setExecutor(new HomesCmd());
-        getCommand("fly").setExecutor(new FlyCmd());
-        getCommand("tpa").setExecutor(new TpaCmd());
-        getCommand("tpahere").setExecutor(new TpahereCmd());
-        getCommand("tpaccept").setExecutor(new TpacceptCmd());
-        getCommand("tpdeny").setExecutor(new TpdenyCmd());
-        getCommand("tpo").setExecutor(new TpoCmd());
-        getCommand("tpohere").setExecutor(new TpohereCmd());
-        getCommand("farmwelt").setExecutor(new FarmweltCmd());
-        getCommand("gamemode").setExecutor(new GamemodeCmd());
-        getCommand("cc").setExecutor(new ChatclearCmd());
-        getCommand("ec").setExecutor(new EnderchestCmd());
-        getCommand("feed").setExecutor(new FeedCmd());
-        getCommand("heal").setExecutor(new HealCmd());
-        getCommand("v").setExecutor(new VanishCmd());
-        getCommand("myplot").setExecutor(new PlotsCmd());
-        getCommand("vote").setExecutor(new VoteCmd());
-        getCommand("event").setExecutor(new EventCmd());
-        getCommand("startkick").setExecutor(new StartkickCmd());
-        getCommand("ja").setExecutor(new JaCmd());
-        getCommand("nein").setExecutor(new NeinCmd());
-        getCommand("setstats").setExecutor(new SetstatsCmd());
-        getCommand("msg").setExecutor(new MsgCmd());
-        getCommand("reply").setExecutor(new ReplyCmd());
-        getCommand("sign").setExecutor(new SignCmd());
-        getCommand("invsee").setExecutor(new InvseeCmd());
-        getCommand("payall").setExecutor(new PayallCmd());
-        getCommand("clan").setExecutor(new ClanCmd());
-        getCommand("adminshop").setExecutor(new AdminshopCmd());
-        getCommand("givereward").setExecutor(new GiverewardCmd());
-        getCommand("neustart").setExecutor(new NeustartCmd());
-        getCommand("skull").setExecutor(new SkullCmd());
-        getCommand("ranginfo").setExecutor(new RanginfoCmd());
-        getCommand("social").setExecutor(new SocialCmd());
-        getCommand("werbung").setExecutor(new WerbungCmd());
-        getCommand("bewerben").setExecutor(new BewerbenCmd());
-        getCommand("live").setExecutor(new LiveCmd());
-        getCommand("belohnung").setExecutor(new BelohnungCmd());
-        getCommand("rangshop").setExecutor(new RangshopCmd());
-        getCommand("craft").setExecutor(new CraftCmd());
-        getCommand("anvil").setExecutor(new AnvilCmd());
-        getCommand("namecolor").setExecutor(new NamecolorCmd());
-        getCommand("bank").setExecutor(new BankCmd());
-        getCommand("itemshop").setExecutor(new ItemshopCmd());
-        getCommand("coinflip").setExecutor(new CoinflipCmd());
-        getCommand("statistiken").setExecutor(new StatistikenCmd());
-        getCommand("effekt").setExecutor(new Effects());
-        getCommand("merge").setExecutor(new MergeCmd());
-
-        // Events
-
-        PluginManager pm = Bukkit.getPluginManager();
-        pm.registerEvents(new PlayerHandler(), this);
-        pm.registerEvents(new ClickHandler(), this);
-        pm.registerEvents(new VoteListener(), this);
-        pm.registerEvents(new RanginfoCmd(), this);
-        pm.registerEvents(new SocialCmd(), this);
-        pm.registerEvents(new BelohnungCmd(), this);
-        pm.registerEvents(new RangshopCmd(), this);
-        pm.registerEvents(new ItemshopCmd(), this);
-        pm.registerEvents(new StatistikenCmd(), this);
-        pm.registerEvents(new Particel(), this);
-        pm.registerEvents(new Effects(), this);
-        pm.registerEvents(new MergeCmd(), this);
+        // Commands & Events
+        RegisterManager.registerAll();
 
 
         broadcastMessages = new BroadcastMessages(fileManager.getBroadcast().getStringList("Messages"), 0);

@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.Bukkit;
@@ -9,6 +10,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "werbung", permission = "cb.werbung", aliases = {"ad"})
 public class WerbungCmd implements CommandExecutor {
 
 

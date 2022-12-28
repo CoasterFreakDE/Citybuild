@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.stats.StatsNPC;
 import dev.lupluv.cb.utils.Strings;
 import dev.lupluv.cb.utils.Util;
@@ -14,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 
+@RegisterCommand(name = "setstats", permission = "cb.stats.set")
 public class SetstatsCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

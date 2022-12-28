@@ -1,6 +1,7 @@
 package dev.lupluv.cb.commands;
 
 import dev.lupluv.cb.Citybuild;
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.Bukkit;
@@ -10,6 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "pay", permission = "cb.money.pay")
 public class PayCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {

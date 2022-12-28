@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Strings;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+@RegisterCommand(name = "msg", aliases = {"message"}, permission = "cb.msg")
 public class MsgCmd implements CommandExecutor {
 
     public static Map<UUID, UUID> lastDiscussions = new HashMap<>();

@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Item;
 import dev.lupluv.cb.utils.Lore;
 import dev.lupluv.cb.utils.Strings;
@@ -19,8 +20,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "social", permissionDefault = PermissionDefault.TRUE, aliases = {
+        "socialmedia", "tiktok", "twitch", "website", "store", "instagram",
+        "twitter", "youtube", "teamspeak", "ts"
+})
 public class SocialCmd implements CommandExecutor, Listener {
 
     private static Inventory inv;
@@ -194,7 +200,7 @@ public class SocialCmd implements CommandExecutor, Listener {
 
                     txt = new TextComponent(Strings.prefix + "Trete gerne unserem §r");
                     btn = new TextComponent("§2§lTEAMSPEAK");
-                    btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wonderbuild.com"));
+                    btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://wonderbuild.net"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt2 = new TextComponent("§r §7bei.");
                     txt.addExtra(btn);
@@ -206,7 +212,7 @@ public class SocialCmd implements CommandExecutor, Listener {
 
                     txt = new TextComponent(Strings.prefix + "Schaue dich gerne in unserem §r");
                     btn = new TextComponent("§e§lSTORE");
-                    btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://store.wonderbuild.com"));
+                    btn.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://store.wonderbuild.net"));
                     btn.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§7Klicke um weitergeleitet zu werden.").create()));
                     txt2 = new TextComponent("§r §7um.");
                     txt.addExtra(btn);

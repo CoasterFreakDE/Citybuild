@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Item;
 import dev.lupluv.cb.utils.Lore;
 import dev.lupluv.cb.utils.Strings;
@@ -18,8 +19,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "statistiken", aliases = {"stats", "statistic", "stat"}, permissionDefault = PermissionDefault.TRUE)
 public class StatistikenCmd implements CommandExecutor, Listener {
 
 

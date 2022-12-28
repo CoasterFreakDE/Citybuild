@@ -1,5 +1,6 @@
 package dev.lupluv.cb.commands;
 
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.clans.*;
 import dev.lupluv.cb.economy.Economy;
 import dev.lupluv.cb.utils.Strings;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+@RegisterCommand(name = "clan", aliases = {"clans"}, permission = "cb.clans", description = "Clan command")
 public class ClanCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

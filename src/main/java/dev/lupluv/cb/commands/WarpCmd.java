@@ -1,14 +1,17 @@
 package dev.lupluv.cb.commands;
 
 import dev.lupluv.cb.Citybuild;
+import dev.lupluv.cb.annotations.RegisterCommand;
 import dev.lupluv.cb.utils.Strings;
 import dev.lupluv.cb.utils.Warp;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.permissions.PermissionDefault;
 import org.jetbrains.annotations.NotNull;
 
+@RegisterCommand(name = "warp", permission = "cb.warp.warp", aliases = {"w"})
 public class WarpCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
