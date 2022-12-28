@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c01ee715-407b-47a6-9d77-b00720ddfb9c" name="Changes" comment="test">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <list id="8874aa29-0edb-4647-bae2-86b926435d64" name="Changes by thore" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +50,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -186,7 +187,7 @@
       <option name="presentableId" value="Default" />
       <updated>1670163382334</updated>
       <workItem from="1672241360812" duration="484000" />
-      <workItem from="1672241861206" duration="589000" />
+      <workItem from="1672241861206" duration="1993000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1670164775034</created>
