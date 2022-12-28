@@ -182,6 +182,7 @@ public class Citybuild extends JavaPlugin {
         getCommand("coinflip").setExecutor(new CoinflipCmd());
         getCommand("statistiken").setExecutor(new StatistikenCmd());
         getCommand("effekt").setExecutor(new Effects());
+        getCommand("merge").setExecutor(new MergeCmd());
 
         // Events
 
@@ -197,6 +198,7 @@ public class Citybuild extends JavaPlugin {
         pm.registerEvents(new StatistikenCmd(), this);
         pm.registerEvents(new Particel(), this);
         pm.registerEvents(new Effects(), this);
+        pm.registerEvents(new MergeCmd(), this);
 
 
         broadcastMessages = new BroadcastMessages(fileManager.getBroadcast().getStringList("Messages"), 0);

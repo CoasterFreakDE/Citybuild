@@ -99,34 +99,34 @@ public static void createAndOpenInventory(Player player){
             e.setCancelled(true);
             switch (e.getCurrentItem().getItemMeta().getDisplayName()){
 
-                case "§aHaustiere" -> {
+                case "§a§lHaustiere" -> {
 
                     player.sendMessage(Strings.prefix  + "§cDiese Funktion ist in Arbeit!");
 
                     break;
 
                 }
-                case "§aCrates" -> {
+                case "§a§lCrates" -> {
 
-                    player.sendMessage(Strings.prefix + "§cDiese Funktion ist in Arbeit!");
-
-                    break;
-                }
-                case "§aEffekte" -> {
-
-                    player.sendMessage(Strings.prefix + "§cDiese Funktion ist in Arbeit!");
+                    player.performCommand("warp crates");
 
                     break;
                 }
-                case "§aNamensfarben" -> {
+                case "§a§lEffekte" -> {
+
+                    Effects.createAndOpenInventory(player);
+
+                    break;
+                }
+                case "§a§lNamensfarben" -> {
                     new NameColorUI(player).setMainGUI().openGUI();
                     break;
                 }
-                    case "§aRänge" -> {
+                    case "§a§lRänge" -> {
                         RangshopCmd.createInv(player);
                         break;
                     }
-                    case "§aBooster" -> {
+                    case "§a§lBooster" -> {
 
                     player.sendMessage(Strings.prefix + "§cDiese Funktion ist in Arbeit!");
 

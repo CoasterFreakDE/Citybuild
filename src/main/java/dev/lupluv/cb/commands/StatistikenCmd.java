@@ -98,7 +98,8 @@ public class StatistikenCmd implements CommandExecutor, Listener {
         Item clock = new Item(Material.CLOCK);
         clock.setDisplayName("§6§lSpielzeit");
         try {
-            clock.setLore(Lore.create("§a" + player.getPlayerTime() + " §7Minuten"));
+            clock.setLore(Lore.create("§a" + player.getStatistic(Statistic.TOTAL_WORLD_TIME)/60 + " §7Minuten"));
+
         }catch (Exception e){
             clock.setLore(Lore.create("§7Anzahl§8: §a"));
         }

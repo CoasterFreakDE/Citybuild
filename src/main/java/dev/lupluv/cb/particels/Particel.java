@@ -49,13 +49,13 @@ public class Particel implements Listener {
            player.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, player.getLocation(), 2, 0.3, 0.3,0.3);
        }
        if(haseffect7.contains(player)){
-           player.getWorld().spawnParticle(Particle.REDSTONE, player.getLocation(), 2, 0.3, 0.3,0.3);
+           player.getWorld().spawnParticle(Particle.FALLING_LAVA, player.getLocation(), 2, 0.3, 0.3,0.3);
        }
        if(haseffect8.contains(player)){
            player.getWorld().spawnParticle(Particle.DRAGON_BREATH, player.getLocation(), 2, 0.3, 0.3,0.3);
        }
        if(haseffect9.contains(player)){
-           player.getWorld().spawnParticle(Particle.MOB_APPEARANCE, player.getLocation(), 2, 0.3, 0.3,0.3);
+           player.getWorld().spawnParticle(Particle.SPELL_MOB, player.getLocation(), 2, 0.3, 0.3,0.3);
        }
 
 
