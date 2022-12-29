@@ -1,67 +1,42 @@
 package dev.lupluv.cb.particels;
 
+import dev.lupluv.cb.Citybuild;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
 public class Particel implements Listener {
-
-    public static ArrayList<Player> haseffect1 = new ArrayList<Player>();
-    public static ArrayList<Player> haseffect2 = new ArrayList<Player>();
-    public static ArrayList<Player> haseffect3 = new ArrayList<Player>();
-    public static ArrayList<Player> haseffect4 = new ArrayList<Player>();
-    public static ArrayList<Player> haseffect5 = new ArrayList<Player>();
-    public static ArrayList<Player> haseffect6 = new ArrayList<Player>();
-    public static ArrayList<Player> haseffect7 = new ArrayList<Player>();
-    public static ArrayList<Player> haseffect8 = new ArrayList<Player>();
-    public static ArrayList<Player> haseffect9 = new ArrayList<Player>();
-
-    public static ArrayList<Player> has_one_effect = new ArrayList<>();
-
+    
    @EventHandler
    public void onMove(PlayerMoveEvent event){
        Player player = event.getPlayer();
+       NamespacedKey key = new NamespacedKey(Citybuild.getPlugin(), "effect");
+       if(!player.getPersistentDataContainer().has(key, PersistentDataType.BYTE)) return;
+       byte effect = player.getPersistentDataContainer().get(key, PersistentDataType.BYTE);
 
-
-
-       if(haseffect1.contains(player)){
-            player.getWorld().spawnParticle(Particle.HEART, player.getLocation(), 2, 0.3, 0.3,0.3);
+       switch (effect) {
+           case (byte) 1 -> player.getWorld().spawnParticle(Particle.HEART, player.getLocation(), 2, 0.3, 0.3, 0.3);
+           case (byte) 2 -> player.getWorld().spawnParticle(Particle.NOTE, player.getLocation(), 2, 0.3, 0.3, 0.3);
+           case (byte) 3 ->
+                   player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 2, 0.3, 0.3, 0.3);
+           case (byte) 4 ->
+                   player.getWorld().spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, player.getLocation(), 2, 0.3, 0.3, 0.3);
+           case (byte) 5 -> player.getWorld().spawnParticle(Particle.LAVA, player.getLocation(), 2, 0.3, 0.3, 0.3);
+           case (byte) 6 ->
+                   player.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, player.getLocation(), 2, 0.3, 0.3, 0.3);
+           case (byte) 7 ->
+                   player.getWorld().spawnParticle(Particle.FALLING_LAVA, player.getLocation(), 2, 0.3, 0.3, 0.3);
+           case (byte) 8 ->
+                   player.getWorld().spawnParticle(Particle.DRAGON_BREATH, player.getLocation(), 2, 0.3, 0.3, 0.3);
+           case (byte) 9 -> player.getWorld().spawnParticle(Particle.SPELL_MOB, player.getLocation(), 2, 0.3, 0.3, 0.3);
        }
-       if(haseffect2.contains(player)){
-           player.getWorld().spawnParticle(Particle.NOTE, player.getLocation(), 2, 0.3, 0.3,0.3);
-       }
-       if(haseffect3.contains(player)){
-           player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 2, 0.3, 0.3,0.3);
-       }
-       if(haseffect4.contains(player)){
-           player.getWorld().spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, player.getLocation(), 2, 0.3, 0.3,0.3);
-       }
-       if(haseffect5.contains(player)){
-           player.getWorld().spawnParticle(Particle.LAVA, player.getLocation(), 2, 0.3, 0.3,0.3);
-       }
-       if(haseffect6.contains(player)){
-           player.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, player.getLocation(), 2, 0.3, 0.3,0.3);
-       }
-       if(haseffect7.contains(player)){
-           player.getWorld().spawnParticle(Particle.FALLING_LAVA, player.getLocation(), 2, 0.3, 0.3,0.3);
-       }
-       if(haseffect8.contains(player)){
-           player.getWorld().spawnParticle(Particle.DRAGON_BREATH, player.getLocation(), 2, 0.3, 0.3,0.3);
-       }
-       if(haseffect9.contains(player)){
-           player.getWorld().spawnParticle(Particle.SPELL_MOB, player.getLocation(), 2, 0.3, 0.3,0.3);
-       }
-
-
-
    }
-
-
-
 }

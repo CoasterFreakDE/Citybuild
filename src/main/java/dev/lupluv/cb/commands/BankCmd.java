@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-@RegisterCommand(name = "bank", permission = "cb.bank", description = "Öffnet das Bankmenü")
+@RegisterCommand(name = "bank", permission = "cb.bank.use", description = "Öffnet das Bankmenü")
 public class BankCmd implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
